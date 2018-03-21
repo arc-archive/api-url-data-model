@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <title>api-url-data-model demo</title>
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../api-url-data-model.html">
+  <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../../paper-item/paper-item.html">
+  <link rel="import" href="../../paper-listbox/paper-listbox.html">
+  <link rel="import" href="../../raml-aware/raml-aware.html">
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        padding: 12px 24px;
+        background-color: #C5E1A5;
+        --iron-icon-fill-color: #3E2723;
+        --paper-input-container-focus-color: #33691E;
+        --paper-input-container-label: {
+          color: #3E2723;
+        };
+      }
+
+      output {
+        display: block;
+        margin-bottom: 24px;
+        white-space: pre-wrap;
+        @apply --paper-font-code1;
+      }
+
+      .main {
+        margin-top: 40px;
+        @apply --shadow-elevation-4dp;
+        padding: 24px;
+        margin-bottom: 40px;
+      }
+    </style>
+  </custom-style>
+</head>
+<body>
+  <dom-bind id="demo">
+    <template is="dom-bind">
+      <header>
+        <paper-dropdown-menu label="Select demo endpoint">
+          <paper-listbox slot="dropdown-content" id="enpointsList" on-selected-changed="_endpointChanged">
+            <template is="dom-repeat" items="[[endpoints]]">
+              <paper-item>[[item]]</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <paper-dropdown-menu label="Select endpoint's method">
+          <paper-listbox slot="dropdown-content" id="operationsList" on-selected-changed="_operationChanged">
+            <template is="dom-repeat" items="[[operations]]">
+              <paper-item>[[item]]</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </header>
+      <section role="main" class="vertical-section-container centered main">
+        <api-url-data-model aware="api-console" api-parameters="{{apiBasePrams}}" api-base-uri="{{baseUri}}"></api-url-data-model>
+        <raml-aware raml="{{amfModel}}" scope="api-console"></raml-aware>
+
+        <output><label>Base URI: </label>[[baseUri]]</output>
+        <output><label>API base parameters: </label>[[_computeApiParams(apiBasePrams)]]</output>
+      </section>
+    </template>
+  </dom-bind>
+  <script>
+    (function(app) {
+      app._load = function() {
+        fetch('./amf-model.json')
+          .then((response) => response.json())
+          .then((data) => {
+            app.amfModel = data;
+            app._setEndpointsList(data);
+          });
+      };
+      app._getAmfValue = function(model) {
+        if (!model || !(model instanceof Array) || !model[0]) {
+          return;
+        }
+        return model[0]['@value'];
+      };
+      app._setEndpointsList = function(data) {
+        data = data[0]['http://raml.org/vocabularies/document#encodes'][0];
+        const endpoints = data['http://raml.org/vocabularies/http#endpoint'];
+        const list = endpoints.map((item) => {
+          return app._getAmfValue(item['http://raml.org/vocabularies/http#path']);
+        });
+        app.endpoints = list;
+      };
+      app._endpointChanged = function(e) {
+        const index = e.detail.value;
+        app._computeOperations(index);
+      };
+      app._computeOperations = function(index) {
+        let data = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
+        data = data['http://raml.org/vocabularies/http#endpoint'][index];
+        const operations = data['http://www.w3.org/ns/hydra/core#supportedOperation'];
+        const list = operations.map((item) => {
+          return app._getAmfValue(item['http://www.w3.org/ns/hydra/core#method']);
+        });
+        const selector = document.getElementById('operationsList');
+        selector.selected = -1;
+        app.operations = list;
+        selector.selected = 0;
+      };
+      app._operationChanged = function(e) {
+        const index = e.detail.value;
+        if (index === -1) {
+          return;
+        }
+        const selector = document.getElementById('enpointsList');
+        app.passAmf(selector.selected, index);
+      };
+      app.passAmf = function(enpointIndex, operationIndex) {
+        debugger;
+        // let data = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
+        // data = data['http://raml.org/vocabularies/http#endpoint'][enpointIndex];
+        // data = data['http://www.w3.org/ns/hydra/core#supportedOperation'][operationIndex];
+        // data = data['http://raml.org/vocabularies/security#security'];
+        // app.securedBy = data;
+      };
+      app._computeApiParams = function(apiPrams) {
+        if (!apiPrams) {
+          return '';
+        }
+        return JSON.stringify(apiPrams, null, 1);
+      };
+      window.addEventListener('WebComponentsReady', () => app._load());
+    })(document.getElementById('demo'));
+  </script>
+</body>
+
+</html>
