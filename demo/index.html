@@ -14,6 +14,7 @@
   <link rel="import" href="../../paper-item/paper-item.html">
   <link rel="import" href="../../paper-listbox/paper-listbox.html">
   <link rel="import" href="../../raml-aware/raml-aware.html">
+  <link rel="import" href="../../neon-animation/web-animations.html">
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
       html,
@@ -60,19 +61,20 @@
           </paper-listbox>
         </paper-dropdown-menu>
         <paper-dropdown-menu label="Select endpoint's method">
-          <paper-listbox slot="dropdown-content" id="operationsList" on-selected-changed="_operationChanged">
+          <paper-listbox slot="dropdown-content" id="operationsList" selected="{{selectedShape}}" attr-for-selected="data-id">
             <template is="dom-repeat" items="[[operations]]">
-              <paper-item>[[item]]</paper-item>
+              <paper-item data-id$="[[item.id]]">[[item.label]]</paper-item>
             </template>
           </paper-listbox>
         </paper-dropdown-menu>
       </header>
       <section role="main" class="vertical-section-container centered main">
-        <api-url-data-model aware="api-console" api-parameters="{{apiBasePrams}}" api-base-uri="{{baseUri}}"></api-url-data-model>
+        <api-url-data-model aware="api-console" api-parameters="{{apiBasePrams}}" api-base-uri="{{baseUri}}" selected="{{selectedShape}}" path-model="{{pathModel}}" query-model="{{queryModel}}"></api-url-data-model>
         <raml-aware raml="{{amfModel}}" scope="api-console"></raml-aware>
-
         <output><label>Base URI: </label>[[baseUri]]</output>
-        <output><label>API base parameters: </label>[[_computeApiParams(apiBasePrams)]]</output>
+        <output><label>API base parameters:<br/></label>[[_computeApiParams(apiBasePrams)]]</output>
+        <output><label>Selected path view model:<br/></label>[[_computeApiParams(pathModel)]]</output>
+        <output><label>Selected path query model:<br/></label>[[_computeApiParams(queryModel)]]</output>
       </section>
     </template>
   </dom-bind>
@@ -108,33 +110,23 @@
         let data = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
         data = data['http://raml.org/vocabularies/http#endpoint'][index];
         const operations = data['http://www.w3.org/ns/hydra/core#supportedOperation'];
-        const list = operations.map((item) => {
-          return app._getAmfValue(item['http://www.w3.org/ns/hydra/core#method']);
-        });
-        const selector = document.getElementById('operationsList');
-        selector.selected = -1;
-        app.operations = list;
-        selector.selected = 0;
-      };
-      app._operationChanged = function(e) {
-        const index = e.detail.value;
-        if (index === -1) {
+        if (!operations) {
+          app.selectedShape = data['@id'];
           return;
         }
-        const selector = document.getElementById('enpointsList');
-        app.passAmf(selector.selected, index);
-      };
-      app.passAmf = function(enpointIndex, operationIndex) {
-        debugger;
-        // let data = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
-        // data = data['http://raml.org/vocabularies/http#endpoint'][enpointIndex];
-        // data = data['http://www.w3.org/ns/hydra/core#supportedOperation'][operationIndex];
-        // data = data['http://raml.org/vocabularies/security#security'];
-        // app.securedBy = data;
+        const list = operations.map((item) => {
+          return {
+            id: item['@id'],
+            label: app._getAmfValue(item['http://www.w3.org/ns/hydra/core#method'])
+          };
+        });
+        app.selectedShape = undefined;
+        app.operations = list;
+        app.selectedShape = data['@id'];
       };
       app._computeApiParams = function(apiPrams) {
         if (!apiPrams) {
-          return '';
+          return 'none';
         }
         return JSON.stringify(apiPrams, null, 1);
       };
