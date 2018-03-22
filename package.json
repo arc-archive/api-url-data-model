@@ -2,6 +2,7 @@
   "name": "@api-components/api-url-data-model",
   "version": "2.0.0-preview",
   "license": "Apache-2.0",
+  "description": "An element to generate view model for api-url-editor and api-url-params-editor elements from AMF model",
   "authors": [
     "pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
