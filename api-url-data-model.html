@@ -107,6 +107,8 @@
        * Clears computed base values of the API.
        */
       _resetBaseValues() {
+        this.__apiParamsPromise = undefined;
+        this.__endpointQueryPromise = undefined;
         this._setApiBaseUri(undefined);
         this._setApiParameters(undefined);
       }
@@ -171,8 +173,8 @@
         if (!params) {
           return;
         }
-        return this.$.transformer
-        .computeViewModel(params)
+        this.__apiParamsPromise = this.$.transformer.computeViewModel(params);
+        this.__apiParamsPromise
         .then((data) => this._setApiParameters(data));
       }
 
@@ -315,15 +317,17 @@
        * @return {Promise}
        */
       _setupPathViewModel(params) {
-        const apiParams = this.apiParameters;
         if (!params || !params.length) {
-          if (apiParams) {
-            this._setPathModel(Array.from(apiParams));
-          }
-          return Promise.resolve();
+          return this.__apiParamsPromise
+          .then((apiParams) => {
+            if (apiParams) {
+              this._setPathModel(Array.from(apiParams));
+            }
+          });
         }
-        return this.$.transformer.computeViewModel(params)
-        .then((data) => {
+        this.__endpointQueryPromise = this.$.transformer.computeViewModel(params);
+        return this.__endpointQueryPromise.then((data) => {
+          const apiParams = this.apiParameters;
           if (apiParams) {
             data = Array.from(apiParams).concat(data);
           }
