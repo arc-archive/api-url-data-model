@@ -69,9 +69,17 @@
         </paper-dropdown-menu>
       </header>
       <section role="main" class="vertical-section-container centered main">
-        <api-url-data-model aware="api-console" api-parameters="{{apiBasePrams}}" api-base-uri="{{baseUri}}" selected="{{selectedShape}}" path-model="{{pathModel}}" query-model="{{queryModel}}"></api-url-data-model>
+        <api-url-data-model
+          aware="api-console"
+          api-parameters="{{apiBasePrams}}"
+          endpoint-uri="{{endpointUri}}"
+          api-base-uri="{{baseUri}}"
+          selected="{{selectedShape}}"
+          path-model="{{pathModel}}"
+          query-model="{{queryModel}}"></api-url-data-model>
         <raml-aware raml="{{amfModel}}" scope="api-console"></raml-aware>
         <output><label>Base URI: </label>[[baseUri]]</output>
+        <output><label>Endpoint URI: </label>[[endpointUri]]</output>
         <output><label>API base parameters:<br/></label>[[_computeApiParams(apiBasePrams)]]</output>
         <output><label>Selected path view model:<br/></label>[[_computeApiParams(pathModel)]]</output>
         <output><label>Selected path query model:<br/></label>[[_computeApiParams(queryModel)]]</output>

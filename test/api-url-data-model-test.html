@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>api-url-data-model test</title>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <script src="amf-loader.js"></script>
+    <link rel="import" href="../api-url-data-model.html">
+  </head>
+  <body>
+
+    <test-fixture id="Basic">
+      <template>
+        <api-url-data-model></api-url-data-model>
+      </template>
+    </test-fixture>
+
+    <script>
+    /* global AmfLoader */
+    suite('Computartions tests', () => {
+      let element;
+      let amf;
+      suiteSetup(() => {
+        return AmfLoader.load()
+        .then((model) => amf = model);
+      });
+
+      suite('Base computations', () => {
+        setup(() => {
+          element = fixture('Basic');
+          element.webApi = amf;
+        });
+
+        test('Computes apiBaseUri', () => {
+          assert.equal(element.apiBaseUri, 'http://domain.api.domain.com:8254/{apiVersion}');
+        });
+
+        test('Eventually computes api uri parameters', (done) => {
+          element.addEventListener('api-parameters-changed', (e) => {
+            assert.typeOf(e.detail.value, 'array');
+            done();
+          });
+        });
+
+        test('queryModel is undefined', () => {
+          assert.isUndefined(element.queryModel);
+        });
+
+        test('pathModel is undefined', () => {
+          assert.isUndefined(element.pathModel);
+        });
+
+        test('endpointUri is undefined', () => {
+          assert.isUndefined(element.endpointUri);
+        });
+
+        test('endpointPath is undefined', () => {
+          assert.isUndefined(element.endpointPath);
+        });
+      });
+
+      suite('Endpoint only computations', () => {
+        const endpoint1id = 'file://raml-examples/url-params/api.raml#/web-api/end-points/%2Fsimple%2F%7BpathParam%7D';
+        setup(() => {
+          element = fixture('Basic');
+          element.webApi = amf;
+        });
+
+        test('Computes endpointUri for an endpoint', () => {
+          element.selected = endpoint1id;
+          assert.equal(element.endpointUri, 'http://domain.api.domain.com:8254/{apiVersion}/simple/{pathParam}');
+        });
+
+        test('Computes endpointPath for an endpoint', () => {
+          element.selected = endpoint1id;
+          assert.equal(element.endpointPath, '/simple/{pathParam}');
+        });
+
+        test('Eventually computes pathModel', (done) => {
+          element.selected = endpoint1id;
+          element.addEventListener('path-model-changed', (e) => {
+            assert.typeOf(e.detail.value, 'array', 'result is an array');
+            done();
+          });
+        });
+
+        test('pathModel contains base api uri parameters', (done) => {
+          element.selected = endpoint1id;
+          element.addEventListener('path-model-changed', (e) => {
+            assert.deepEqual(e.detail.value[0], element.apiParameters[0]);
+            done();
+          });
+        });
+
+        test('pathModel contains endpoint uri parameters', (done) => {
+          element.selected = endpoint1id;
+          element.addEventListener('path-model-changed', (e) => {
+            assert.equal(e.detail.value[1].name, 'pathParam');
+            done();
+          });
+        });
+
+        test('Sets __apiParamsPromise', () => {
+          element.selected = endpoint1id;
+          assert.typeOf(element.__apiParamsPromise.then, 'function');
+        });
+      });
+
+      suite('Method computations', () => {
+        const endpoint1id = 'file://raml-examples/url-params/api.raml#/web-api/end-points/%2Fcomplex%2Fpath%2F%7Bto%7D/get';
+        setup(() => {
+          element = fixture('Basic');
+          element.webApi = amf;
+        });
+
+        test('Computes endpointUri for an endpoint', () => {
+          element.selected = endpoint1id;
+          assert.equal(element.endpointUri, 'http://domain.api.domain.com:8254/{apiVersion}/complex/path/{to}');
+        });
+
+        test('Computes endpointPath for an endpoint', () => {
+          element.selected = endpoint1id;
+          assert.equal(element.endpointPath, '/complex/path/{to}');
+        });
+
+        test('Eventually computes pathModel', (done) => {
+          element.selected = endpoint1id;
+          element.addEventListener('path-model-changed', (e) => {
+            assert.typeOf(e.detail.value, 'array', 'result is an array');
+            assert.lengthOf(e.detail.value, 2, 'result has 2 items');
+            assert.equal(e.detail.value[1].name, 'to');
+            done();
+          });
+        });
+
+        test('Eventually computes queryModel', (done) => {
+          element.selected = endpoint1id;
+          element.addEventListener('query-model-changed', (e) => {
+            assert.typeOf(e.detail.value, 'array', 'result is an array');
+            assert.lengthOf(e.detail.value, 5, 'result has 5 items');
+            done();
+          });
+        });
+
+        test('Sets __endpointQueryPromise', () => {
+          element.selected = endpoint1id;
+          assert.typeOf(element.__endpointQueryPromise.then, 'function');
+        });
+      });
+
+      suite('Missing method', () => {
+        const endpoint1id = 'file://raml-examples/url-params/api.raml#/web-api/end-points/%2Fcomplex/get';
+        setup(() => {
+          element = fixture('Basic');
+          element.webApi = amf;
+        });
+
+        test('Computes endpointUri for an endpoint', () => {
+          element.selected = endpoint1id;
+          assert.equal(element.endpointUri, 'http://domain.api.domain.com:8254/{apiVersion}/complex');
+        });
+
+        test('Computes endpointPath for an endpoint', () => {
+          element.selected = endpoint1id;
+          assert.equal(element.endpointPath, '/complex');
+        });
+
+        test('Eventually computes pathModel', (done) => {
+          element.selected = endpoint1id;
+          element.addEventListener('path-model-changed', (e) => {
+            assert.typeOf(e.detail.value, 'array', 'result is an array');
+            assert.lengthOf(e.detail.value, 1, 'result has 1 items');
+            assert.equal(e.detail.value[0].name, 'apiVersion');
+            done();
+          });
+        });
+
+        test('Does not compute query params', () => {
+          element.selected = endpoint1id;
+          assert.isUndefined(element.__endpointQueryPromise);
+        });
+      });
+    });
+    </script>
+
+  </body>
+</html>
