@@ -15,7 +15,7 @@
     const VOC_DOC = 'http://raml.org/vocabularies/document#';
     const VOC_HTTP = 'http://raml.org/vocabularies/http#';
     const HYD_CORE = 'http://www.w3.org/ns/hydra/core#';
-
+    const SCHEMA = 'http://schema.org/';
     const HTTP_PARAM = VOC_HTTP + 'parameter';
     /**
      * `api-url-data-model`
@@ -129,51 +129,82 @@
           model = model[0];
         }
         if (!this._modelHasType(model, VOC_DOC + 'Document')) {
+          console.warn('Expecting "Document" declaration in AMF model.');
           return;
         }
         const encodes = model[VOC_DOC + 'encodes'];
-        model = encodes.find((item) => this._modelHasType(item, 'http://schema.org/WebAPI'));
-        if (!model) {
+        const api = encodes.find((item) => this._modelHasType(item, 'http://schema.org/WebAPI'));
+        if (!api) {
+          console.warn('Expecting "WebAPI" declaration in AMF model.');
           return;
         }
-        this._computeApiUriParams(model);
-        this._computeApiBaseUri(model);
+        const server = api[VOC_HTTP + 'server'];
+        if (!server) {
+          console.warn('Expecting "server" declaration in AMF model.');
+          return;
+        }
+        const version = this._commputeApiVersion(api);
+        this._computeApiUriParams(server[0], version);
+        this._computeApiBaseUri(server[0], version);
+      }
+      /**
+       * Computes version of the API.
+       *
+       * @param {Object} api http://schema.org/WebAPI declaration
+       * @return {String|undefined} API version
+       */
+      _commputeApiVersion(api) {
+        const node = api && api[SCHEMA + 'version'];
+        if (node) {
+          return node[0]['@value'];
+        }
       }
       /**
        * Computes `apiBaseUri` property when `amfModel` change.
        *
-       * @param {Object} model The `http://schema.org/WebAPI` model
+       * @param {Object} model The `http://raml.org/vocabularies/http#server`
+       * object
+       * @param {?String} version API version number
        */
-      _computeApiBaseUri(model) {
-        let scheme = this._getAmfValue(model[VOC_HTTP + 'scheme']);
-        const host = this._getAmfValue(model[VOC_HTTP + 'host']);
-        const basePath = this._getAmfValue(model[VOC_HTTP + 'basePath']);
-        if (host && !scheme) {
-          scheme = 'http';
-        }
-        if (!scheme || !host) {
+      _computeApiBaseUri(model, version) {
+        let uri = this._getAmfValue(model[VOC_HTTP + 'url']);
+        if (!uri) {
+          console.warn('Expecting "url" in server declaration.');
           return;
         }
-        let result = scheme + '://' + host;
-        if (basePath) {
-          result += basePath;
+        if (version && uri.indexOf('{version}') !== -1) {
+          uri = uri.replace('{version}', version);
         }
-        const len = result.length - 1;
-        if (result[len] === '/') {
-          result = result.substr(0, len);
+        const lastIndex = uri.length - 1;
+        if (uri[lastIndex] === '/') {
+          uri = uri.substr(0, lastIndex);
         }
-        this._setApiBaseUri(result);
+        this._setApiBaseUri(uri);
       }
       /**
-       * Computes uri paramerters lsit for API base
-       * @param {Object} model The `http://schema.org/WebAPI` model
+       * Computes uri paramerters lsit for API base.
+       * If `version` is set it eliminates it from the variables if it's set.
+       *
+       * @param {Object} model The `http://raml.org/vocabularies/http#server`
+       * object
+       * @param {?String} version API version number
        */
-      _computeApiUriParams(model) {
-        let params = model[HTTP_PARAM];
-        if (!params) {
+      _computeApiUriParams(model, version) {
+        let variables = model[VOC_HTTP + 'variable'];
+        if (!variables) {
+          this.__apiParamsPromise = Promise.resolve();
           return;
         }
-        this.__apiParamsPromise = this.$.transformer.computeViewModel(params);
+        if (version) {
+          for (let i = variables.length - 1; i >=0 ; i--) {
+            let name = variables[i][SCHEMA + 'name'];
+            if (name && name[0]['@value'] === 'version') {
+              variables.splice(i, 1);
+              break;
+            }
+          }
+        }
+        this.__apiParamsPromise = this.$.transformer.computeViewModel(variables);
         this.__apiParamsPromise
         .then((data) => this._setApiParameters(data));
       }
@@ -327,11 +358,18 @@
         }
         this.__endpointQueryPromise = this.$.transformer.computeViewModel(params);
         return this.__endpointQueryPromise.then((data) => {
-          const apiParams = this.apiParameters;
-          if (apiParams) {
-            data = Array.from(apiParams).concat(data);
+          return this.__apiParamsPromise.then((path) => {
+            return {
+              base: path,
+              endpoint: data
+            };
+          });
+        })
+        .then((data) => {
+          if (data.base && data.base[0]) {
+            data.endpoint = Array.from(data.base).concat(data.endpoint);
           }
-          this._setPathModel(data);
+          this._setPathModel(data.endpoint);
         });
       }
       /**

@@ -22,6 +22,7 @@
     suite('Computartions tests', () => {
       let element;
       let amf;
+      const API_HOST = 'http://{host}.api.domain.com:8254/{apiVersion}';
       suiteSetup(() => {
         return AmfLoader.load()
         .then((model) => amf = model);
@@ -34,7 +35,7 @@
         });
 
         test('Computes apiBaseUri', () => {
-          assert.equal(element.apiBaseUri, 'http://domain.api.domain.com:8254/{apiVersion}');
+          assert.equal(element.apiBaseUri, API_HOST);
         });
 
         test('Eventually computes api uri parameters', (done) => {
@@ -70,7 +71,7 @@
 
         test('Computes endpointUri for an endpoint', () => {
           element.selected = endpoint1id;
-          assert.equal(element.endpointUri, 'http://domain.api.domain.com:8254/{apiVersion}/simple/{pathParam}');
+          assert.equal(element.endpointUri, API_HOST + '/simple/{pathParam}');
         });
 
         test('Computes endpointPath for an endpoint', () => {
@@ -89,7 +90,7 @@
         test('pathModel contains base api uri parameters', (done) => {
           element.selected = endpoint1id;
           element.addEventListener('path-model-changed', (e) => {
-            assert.deepEqual(e.detail.value[0], element.apiParameters[0]);
+            assert.lengthOf(e.detail.value, 3);
             done();
           });
         });
@@ -97,7 +98,7 @@
         test('pathModel contains endpoint uri parameters', (done) => {
           element.selected = endpoint1id;
           element.addEventListener('path-model-changed', (e) => {
-            assert.equal(e.detail.value[1].name, 'pathParam');
+            assert.equal(e.detail.value[2].name, 'pathParam');
             done();
           });
         });
@@ -117,7 +118,7 @@
 
         test('Computes endpointUri for an endpoint', () => {
           element.selected = endpoint1id;
-          assert.equal(element.endpointUri, 'http://domain.api.domain.com:8254/{apiVersion}/complex/path/{to}');
+          assert.equal(element.endpointUri, API_HOST + '/complex/path/{to}');
         });
 
         test('Computes endpointPath for an endpoint', () => {
@@ -129,8 +130,8 @@
           element.selected = endpoint1id;
           element.addEventListener('path-model-changed', (e) => {
             assert.typeOf(e.detail.value, 'array', 'result is an array');
-            assert.lengthOf(e.detail.value, 2, 'result has 2 items');
-            assert.equal(e.detail.value[1].name, 'to');
+            assert.lengthOf(e.detail.value, 3, 'result has 3 items');
+            assert.equal(e.detail.value[2].name, 'to');
             done();
           });
         });
@@ -159,7 +160,7 @@
 
         test('Computes endpointUri for an endpoint', () => {
           element.selected = endpoint1id;
-          assert.equal(element.endpointUri, 'http://domain.api.domain.com:8254/{apiVersion}/complex');
+          assert.equal(element.endpointUri, API_HOST + '/complex');
         });
 
         test('Computes endpointPath for an endpoint', () => {
@@ -171,8 +172,8 @@
           element.selected = endpoint1id;
           element.addEventListener('path-model-changed', (e) => {
             assert.typeOf(e.detail.value, 'array', 'result is an array');
-            assert.lengthOf(e.detail.value, 1, 'result has 1 items');
-            assert.equal(e.detail.value[0].name, 'apiVersion');
+            assert.lengthOf(e.detail.value, 2, 'result has 2 items');
+            assert.equal(e.detail.value[0].name, 'host');
             done();
           });
         });
