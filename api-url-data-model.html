@@ -243,13 +243,10 @@
        * @param {Object} api The document model
        */
       _selectedChanged(id, api) {
-        if (!id || !api) {
+        if (!id || !api || !this.__apiParamsPromise) {
           return;
         }
         this._resetObjectValues();
-        if (!api) {
-          return;
-        }
         const endpointId = this.computeEndpointId(id);
         const endpoint = this.findEndpoint(endpointId, api);
         if (!endpoint) {
