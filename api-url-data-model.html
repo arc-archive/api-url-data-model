@@ -149,6 +149,9 @@
         const version = this._commputeApiVersion(api);
         this._computeApiUriParams(server[0], version);
         this._computeApiBaseUri(server[0], version);
+        if (this.selected) {
+          this._selectedChanged(this.selected, model);
+        }
       }
       /**
        * Computes version of the API.
