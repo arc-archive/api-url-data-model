@@ -8,7 +8,7 @@
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{webApi}}" scope="[[aware]]"></raml-aware>
     </template>
-    <api-view-model-transformer id="transformer"></api-view-model-transformer>
+    <api-view-model-transformer amf-model="[[webApi]]" id="transformer"></api-view-model-transformer>
   </template>
   <script>
   (function() {
