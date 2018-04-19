@@ -86,18 +86,31 @@ declare class ApiUrlDataModel extends Polymer.Element {
   _webApiChanged(model: object|null): void;
 
   /**
-   * Computes `apiBaseUri` property when `amfModel` change.
+   * Computes version of the API.
    *
-   * @param model The `http://schema.org/WebAPI` model
+   * @param api http://schema.org/WebAPI declaration
+   * @returns API version
    */
-  _computeApiBaseUri(model: object|null): void;
+  _commputeApiVersion(api: object|null): String|null|undefined;
 
   /**
-   * Computes uri paramerters lsit for API base
+   * Computes `apiBaseUri` property when `amfModel` change.
    *
-   * @param model The `http://schema.org/WebAPI` model
+   * @param model The `http://raml.org/vocabularies/http#server`
+   * object
+   * @param version API version number
    */
-  _computeApiUriParams(model: object|null): void;
+  _computeApiBaseUri(model: object|null, version: String|null): void;
+
+  /**
+   * Computes uri paramerters lsit for API base.
+   * If `version` is set it eliminates it from the variables if it's set.
+   *
+   * @param model The `http://raml.org/vocabularies/http#server`
+   * object
+   * @param version API version number
+   */
+  _computeApiUriParams(model: object|null, version: String|null): void;
 
   /**
    * Checks if a model has a type.
@@ -119,8 +132,9 @@ declare class ApiUrlDataModel extends Polymer.Element {
    * Computes model for URI and query parameters from selected endpoint.
    *
    * @param id The `@id` property of selected object.
+   * @param api The document model
    */
-  _selectedChanged(id: String|null): void;
+  _selectedChanged(id: String|null, api: object|null): void;
 
   /**
    * Computes endpoint `@id` for given `id`.
