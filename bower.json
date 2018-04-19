@@ -31,8 +31,5 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.1.0",
     "web-animations-js": "web-animations/web-animations-js#^2.2.0",
     "arc-polyfills": "advanced-rest-client/arc-polyfills#^0.1.11"
-  },
-  "resolutions": {
-    "polymer": "^2.0.0"
   }
 }
