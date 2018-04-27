@@ -95,6 +95,13 @@
   </dom-bind>
   <script>
     (function(app) {
+      app._computeApiParams = function(apiPrams) {
+        if (!apiPrams) {
+          return 'none';
+        }
+        return JSON.stringify(apiPrams, null, 1);
+      };
+
       app._load = function() {
         document.getElementById('apiList').selected = 0;
       };
@@ -147,12 +154,7 @@
         app.operations = list;
         app.selectedShape = data['@id'];
       };
-      app._computeApiParams = function(apiPrams) {
-        if (!apiPrams) {
-          return 'none';
-        }
-        return JSON.stringify(apiPrams, null, 1);
-      };
+
       window.addEventListener('WebComponentsReady', () => app._load());
     })(document.getElementById('demo'));
   </script>

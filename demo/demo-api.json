@@ -27,19 +27,19 @@
         ],
         "http://raml.org/vocabularies/http#server": [
           {
-            "@id": "file://demo/demo-api/demo-api.raml#/web-api/http%3A%2F%2F%7Binstance%7D.domain.com%2F",
+            "@id": "file://demo/demo-api/demo-api.raml#/web-api/api.%7Binstance%7D.domain.com%3A8254%2F%7Bversion%7D%2F",
             "@type": [
               "http://raml.org/vocabularies/http#Server",
               "http://raml.org/vocabularies/document#DomainElement"
             ],
             "http://raml.org/vocabularies/http#url": [
               {
-                "@value": "http://{instance}.domain.com/"
+                "@value": "api.{instance}.domain.com:8254/{version}/"
               }
             ],
             "http://raml.org/vocabularies/http#variable": [
               {
-                "@id": "file://demo/demo-api/demo-api.raml#/web-api/http%3A%2F%2F%7Binstance%7D.domain.com%2F/parameter/instance",
+                "@id": "file://demo/demo-api/demo-api.raml#/web-api/api.%7Binstance%7D.domain.com%3A8254%2F%7Bversion%7D%2F/parameter/instance",
                 "@type": [
                   "http://raml.org/vocabularies/http#Parameter",
                   "http://raml.org/vocabularies/document#DomainElement"
@@ -71,7 +71,7 @@
                 ],
                 "http://raml.org/vocabularies/http#schema": [
                   {
-                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/http%3A%2F%2F%7Binstance%7D.domain.com%2F/parameter/instance/scalar/schema",
+                    "@id": "file://demo/demo-api/demo-api.raml#/web-api/api.%7Binstance%7D.domain.com%3A8254%2F%7Bversion%7D%2F/parameter/instance/scalar/schema",
                     "@type": [
                       "http://raml.org/vocabularies/shapes#ScalarShape",
                       "http://www.w3.org/ns/shacl#Shape",
@@ -100,7 +100,7 @@
                     ],
                     "http://www.w3.org/ns/shacl#defaultValue": [
                       {
-                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/http%3A%2F%2F%7Binstance%7D.domain.com%2F/parameter/instance/scalar/schema/scalar_1",
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/api.%7Binstance%7D.domain.com%3A8254%2F%7Bversion%7D%2F/parameter/instance/scalar/schema/scalar_1",
                         "@type": [
                           "http://raml.org/vocabularies/data#Scalar"
                         ],
@@ -114,7 +114,7 @@
                     ],
                     "http://www.w3.org/ns/shacl#in": [
                       {
-                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/http%3A%2F%2F%7Binstance%7D.domain.com%2F/parameter/instance/scalar/schema/list",
+                        "@id": "file://demo/demo-api/demo-api.raml#/web-api/api.%7Binstance%7D.domain.com%3A8254%2F%7Bversion%7D%2F/parameter/instance/scalar/schema/list",
                         "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
                         "http://www.w3.org/2000/01/rdf-schema#_1": [
                           {
