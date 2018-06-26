@@ -49,12 +49,12 @@
 
         test('_webApi is computed', () => {
           assert.typeOf(element._webApi, 'object');
-          assert.equal(element._webApi['@type'][0], 'http://schema.org/WebAPI');
+          assert.equal(element._webApi['@type'][0], ApiElements.Amf.ns.schema.webApi);
         });
 
         test('_server is computed', () => {
           assert.typeOf(element._server, 'object');
-          assert.equal(element._server['@type'][0], 'http://raml.org/vocabularies/http#Server');
+          assert.equal(element._server['@type'][0], ApiElements.Amf.ns.raml.vocabularies.http + 'Server');
         });
 
         test('_protocols is computed', () => {
@@ -317,7 +317,7 @@
         test('method is computed', () => {
           element.selected = methodId;
           assert.typeOf(element.method, 'object');
-          assert.equal(element.method['@type'][0], 'http://www.w3.org/ns/hydra/core#Operation');
+          assert.equal(element.method['@type'][0], ApiElements.Amf.ns.w3.hydra.core + 'Operation');
         });
 
         test('queryModel is undefined at the moment of assigning value', () => {
