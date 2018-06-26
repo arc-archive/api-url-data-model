@@ -205,7 +205,7 @@
      * @return {String|undefined} API version
      */
     _commputeApiVersion(api) {
-      return this._getValue(api, 'http://schema.org/version');
+      return this._getValue(api, this.ns.schema.name + 'version');
     }
     /**
      * Computes `apiBaseUri` property when `amfModel` change.
@@ -250,7 +250,7 @@
       }
       if (version) {
         for (let i = variables.length - 1; i >=0 ; i--) {
-          const name = this._getValue(variables[i], 'http://schema.org/name');
+          const name = this._getValue(variables[i], this.ns.schema.schemaName);
           if (name === 'version') {
             variables.splice(i, 1);
             break;
@@ -264,7 +264,7 @@
       if (!endpoint) {
         return Promise.resolve();
       }
-      const params = endpoint['http://raml.org/vocabularies/http#parameter'];
+      const params = endpoint[this.ns.raml.vocabularies.http + 'parameter'];
       if (!params || !params.length) {
         return this._apiUriParams;
       }
@@ -291,16 +291,16 @@
       if (!method) {
         return p;
       }
-      const expects = method['http://www.w3.org/ns/hydra/core#expects'];
+      const expects = method[this.ns.w3.hydra.core + 'expects'];
       if (!expects) {
         return p;
       }
-      const request = expects.find((item) => this._hasType(item, 'http://raml.org/vocabularies/http#Request'));
+      const request = expects.find((item) => this._hasType(item, this.ns.raml.vocabularies.http + 'Request'));
       if (!request) {
         console.warn('Expected "Request" declaration. None found.');
         return p;
       }
-      const params = request['http://raml.org/vocabularies/http#parameter'];
+      const params = request[this.ns.raml.vocabularies.http + 'parameter'];
       if (!params) {
         return p;
       }
@@ -308,14 +308,14 @@
     }
 
     _computeEndpointPath(endpoint) {
-      return this._getValue(endpoint, 'http://raml.org/vocabularies/http#path');
+      return this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
     }
 
     _computeMethod(isMethod, selected, endpoint) {
       if (!isMethod || !selected || !endpoint) {
         return;
       }
-      const operations = endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'];
+      const operations = endpoint[this.ns.w3.hydra.supportedOperation];
       if (!operations || !operations.length) {
         return;
       }
@@ -386,16 +386,16 @@
       if (!method) {
         return p;
       }
-      const expects = method['http://www.w3.org/ns/hydra/core#expects'];
+      const expects = method[this.ns.w3.hydra.core + 'expects'];
       if (!expects) {
         return p;
       }
-      const request = expects.find((item) => this._hasType(item, 'http://raml.org/vocabularies/http#Request'));
+      const request = expects.find((item) => this._hasType(item, this.ns.raml.vocabularies.http + 'Request'));
       if (!request) {
         console.warn('Expected "Request" declaration. None found.');
         return p;
       }
-      const params = request['http://raml.org/vocabularies/http#parameter'];
+      const params = request[this.ns.raml.vocabularies.http + 'parameter'];
       if (!params) {
         return p;
       }

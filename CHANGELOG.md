@@ -1,3 +1,29 @@
+<a name="2.0.1"></a>
+## 2.0.1 (2018-06-26)
+
+
+### Breaking
+
+* Updated component to new AMF data model ([7312509266479c6ad7427b1803c20fcf36a86a46](https://github.com/advanced-rest-client/api-url-data-model/commit/7312509266479c6ad7427b1803c20fcf36a86a46))
+
+### Docs
+
+* Added repository index page. ([e0a90a210c3075d2124625bac256f3492fee06df](https://github.com/advanced-rest-client/api-url-data-model/commit/e0a90a210c3075d2124625bac256f3492fee06df))
+* Adding index page with documentation ([a38f3a36916145bff84934a33524c06c66ee9d3a](https://github.com/advanced-rest-client/api-url-data-model/commit/a38f3a36916145bff84934a33524c06c66ee9d3a))
+* Updating component docs ([3e8dcfc4d9a3d34929d9a37560ad6a1c0dad80fc](https://github.com/advanced-rest-client/api-url-data-model/commit/3e8dcfc4d9a3d34929d9a37560ad6a1c0dad80fc))
+
+### Fix
+
+* Fixing tests configuration ([d2fb5a33ba5471f604d7f79dfab88f3e7284e060](https://github.com/advanced-rest-client/api-url-data-model/commit/d2fb5a33ba5471f604d7f79dfab88f3e7284e060))
+* Issue when selection is changed before model is set ([1dee67a539ab78d1ff42336d67b3d79d5ccd73b8](https://github.com/advanced-rest-client/api-url-data-model/commit/1dee67a539ab78d1ff42336d67b3d79d5ccd73b8))
+
+### Update
+
+* Adding promises pointers. ([72f3f74496f3b234126e2755aeffdaf1f38e5c85](https://github.com/advanced-rest-client/api-url-data-model/commit/72f3f74496f3b234126e2755aeffdaf1f38e5c85))
+* Updated Travis configuration to connect to Sauce Labs. ([a032103aaccc0d6e75f80c0a8e2e1a4375d32626](https://github.com/advanced-rest-client/api-url-data-model/commit/a032103aaccc0d6e75f80c0a8e2e1a4375d32626))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-05-21)
 
