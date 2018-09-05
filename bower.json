@@ -31,6 +31,9 @@
     "paper-item": "PolymerElements/paper-item#^2.1.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.1.0",
     "web-animations-js": "web-animations/web-animations-js#^2.2.0",
-    "arc-polyfills": "advanced-rest-client/arc-polyfills#^0.1.11"
+    "arc-polyfills": "advanced-rest-client/arc-polyfills#^0.1.11",
+    "neon-animation": "PolymerElements/neon-animation#^2.2.1",
+    "api-navigation": "advanced-rest-client/api-navigation#^2.0.0",
+    "arc-electron-default-theme": "advanced-rest-client/arc-electron-default-theme#2.0.0-preview"
   }
 }

@@ -7,155 +7,161 @@
   <title>api-url-data-model demo</title>
   <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../shadycss/apply-shim.html">
+  <link rel="import" href="../../polymer/lib/elements/custom-style.html">
+  <link rel="import" href="../../paper-styles/shadow.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../api-url-data-model.html">
   <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
   <link rel="import" href="../../paper-item/paper-item.html">
   <link rel="import" href="../../paper-listbox/paper-listbox.html">
   <link rel="import" href="../../raml-aware/raml-aware.html">
   <link rel="import" href="../../neon-animation/web-animations.html">
+  <link rel="import" href="../../api-navigation/api-navigation.html">
+  <link rel="import" href="../../arc-electron-default-theme/arc-electron-default-theme.html">
+  <link rel="import" href="../api-url-data-model.html">
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
+    html,
+    body {
+      background-color: #e5e5e5;
+      margin: 0;
+      padding: 0;
+    }
 
-      header {
-        padding: 12px 24px;
-        background-color: #C5E1A5;
-        --iron-icon-fill-color: #3E2723;
-        --paper-input-container-focus-color: #33691E;
-        --paper-input-container-label: {
-          color: #3E2723;
-        };
-      }
+    main {
+      @apply --layout-horizontal;
+      margin-right: 20px;
+    }
 
-      output {
-        display: block;
-        margin-bottom: 24px;
-        white-space: pre-wrap;
-        @apply --paper-font-code1;
-      }
+    nav {
+      width: 256px;
+    }
 
-      .main {
-        margin-top: 40px;
-        @apply --shadow-elevation-4dp;
-        padding: 24px;
-        margin-bottom: 40px;
-      }
+    header {
+      padding: 12px 24px;
+      background-color: #C5E1A5;
+      @apply --layout-horizontal;
+      @apply --layout-center;
+      --iron-icon-fill-color: #3E2723;
+      --paper-input-container-focus-color: #33691E;
+      --paper-input-container-label: {
+        color: #3E2723;
+      };
+    }
+
+    .content {
+      @apply --layout-flex;
+      max-width: 700px;
+    }
+
+    .card {
+      @apply --shadow-elevation-4dp;
+      padding: 20px;
+      margin: 20px;
+      box-sizing: border-box;
+      background-color: #fff;
+    }
+
+    output {
+      display: block;
+      margin-bottom: 24px;
+      white-space: pre-wrap;
+      @apply --paper-font-code1;
+    }
     </style>
   </custom-style>
 </head>
 <body>
   <dom-bind id="demo">
     <template is="dom-bind">
+      <raml-aware raml="{{amfModel}}" scope="api-console"></raml-aware>
+      <api-url-data-model
+        aware="api-console"
+        api-parameters="{{apiBasePrams}}"
+        endpoint-uri="{{endpointUri}}"
+        api-base-uri="{{baseUri}}"
+        selected="{{selectedShape}}"
+        path-model="{{pathModel}}"
+        query-model="{{queryModel}}"></api-url-data-model>
+
       <header>
         <paper-dropdown-menu label="Select demo API">
-          <paper-listbox slot="dropdown-content" id="apiList" on-selected-changed="_apiChanged">
-            <paper-item data-file="demo-api.json">ARC demo api</paper-item>
-            <paper-item data-file="loan-microservice.json">Loan microservice api</paper-item>
-          </paper-listbox>
-        </paper-dropdown-menu>
-
-        <paper-dropdown-menu label="Select demo endpoint">
-          <paper-listbox slot="dropdown-content" id="enpointsList" on-selected-changed="_endpointChanged">
-            <template is="dom-repeat" items="[[endpoints]]">
-              <paper-item>[[item]]</paper-item>
-            </template>
-          </paper-listbox>
-        </paper-dropdown-menu>
-        <paper-dropdown-menu label="Select endpoint's method">
-          <paper-listbox slot="dropdown-content" id="operationsList" selected="{{selectedShape}}" attr-for-selected="data-id">
-            <template is="dom-repeat" items="[[operations]]">
-              <paper-item data-id$="[[item.id]]">[[item.label]]</paper-item>
-            </template>
+          <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
+            <paper-item data-src="demo-api.json">ARC demo api</paper-item>
+            <paper-item data-src="demo-api-compact.json">ARC demo api - compact model</paper-item>
+            <paper-item data-src="loan-microservice.json">Loan microservice api</paper-item>
+            <paper-item data-src="loan-microservice-compact.json">Loan microservice api - compact model</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
       </header>
-      <section role="main" class="vertical-section-container centered main">
-        <api-url-data-model
-          aware="api-console"
-          api-parameters="{{apiBasePrams}}"
-          endpoint-uri="{{endpointUri}}"
-          api-base-uri="{{baseUri}}"
-          selected="{{selectedShape}}"
-          path-model="{{pathModel}}"
-          query-model="{{queryModel}}"></api-url-data-model>
-        <raml-aware raml="{{amfModel}}" scope="api-console"></raml-aware>
-        <output><label>Base URI: </label>[[baseUri]]</output>
-        <output><label>Endpoint URI: </label>[[endpointUri]]</output>
-        <output><label>API base parameters:<br/></label>[[_computeApiParams(apiBasePrams)]]</output>
-        <output><label>Selected path view model:<br/></label>[[_computeApiParams(pathModel)]]</output>
-        <output><label>Selected path query model:<br/></label>[[_computeApiParams(queryModel)]]</output>
-      </section>
+      <main role="main">
+        <nav>
+          <api-navigation amf-model="[[amfModel]]" endpoints-opened></api-navigation>
+        </nav>
+
+        <template is="dom-if" if="[[!hasData]]">
+          <section class="intro">
+            <p class="usage-info">Select a HTTP method in the navigation</p>
+          </section>
+        </template>
+
+        <template is="dom-if" if="[[hasData]]">
+          <section class="content">
+            <div class="log card">
+              <h3>Output</h3>
+              <output><label>Base URI: </label>[[baseUri]]</output>
+              <output><label>Endpoint URI: </label>[[endpointUri]]</output>
+              <output><label>API base parameters:<br/></label>[[_computeApiParams(apiBasePrams)]]</output>
+              <output><label>Selected path view model:<br/></label>[[_computeApiParams(pathModel)]]</output>
+              <output><label>Selected path query model:<br/></label>[[_computeApiParams(queryModel)]]</output>
+            </div>
+          </section>
+        </template>
+      </main>
     </template>
   </dom-bind>
   <script>
     (function(app) {
-      app._computeApiParams = function(apiPrams) {
-        if (!apiPrams) {
-          return 'none';
-        }
-        return JSON.stringify(apiPrams, null, 1);
-      };
+    app._load = function() {
+      document.getElementById('apisList').selected = 0;
+    };
 
-      app._load = function() {
-        document.getElementById('apiList').selected = 0;
-      };
+    app._loadFile = function(file) {
+      fetch('./' + file)
+      .then((response) => response.json())
+      .then((data) => {
+        app.amfModel = data;
+      });
+    };
 
-      app._apiChanged = function(e) {
-        const file = e.target.selectedItem.dataset.file;
-        app._loadFile(file);
-      };
-      app._loadFile = function(file) {
-        fetch('./' + file)
-          .then((response) => response.json())
-          .then((data) => {
-            app.amfModel = data;
-            app._setEndpointsList(data);
-          });
-      };
-      app._getAmfValue = function(model) {
-        if (!model || !(model instanceof Array) || !model[0]) {
-          return;
-        }
-        return model[0]['@value'];
-      };
-      app._setEndpointsList = function(data) {
-        data = data[0][ApiElements.Amf.ns.raml.vocabularies.document + 'encodes'][0];
-        const endpoints = data[ApiElements.Amf.ns.raml.vocabularies.http + 'endpoint'];
-        const list = endpoints.map((item) => {
-          return app._getAmfValue(item[ApiElements.Amf.ns.raml.vocabularies.http + 'path']);
-        });
-        app.endpoints = list;
-      };
-      app._endpointChanged = function(e) {
-        const index = e.detail.value;
-        app._computeOperations(index);
-      };
-      app._computeOperations = function(index) {
-        let data = app.amfModel[0][ApiElements.Amf.ns.raml.vocabularies.document + 'encodes'][0];
-        data = data[ApiElements.Amf.ns.raml.vocabularies.http + 'endpoint'][index];
-        const operations = data[ApiElements.Amf.ns.w3.hydra.supportedOperation];
-        if (!operations) {
-          app.selectedShape = data['@id'];
-          return;
-        }
-        const list = operations.map((item) => {
-          return {
-            id: item['@id'],
-            label: app._getAmfValue(item[ApiElements.Amf.ns.w3.hydra.core + 'method'])
-          };
-        });
-        app.selectedShape = undefined;
-        app.operations = list;
-        app.selectedShape = data['@id'];
-      };
+    app._apiChanged = function(e) {
+      const file = e.target.selectedItem.dataset.src;
+      app._loadFile(file);
+    };
 
-      window.addEventListener('WebComponentsReady', () => app._load());
+    app._navChanged = function(e) {
+      const type = e.detail.type;
+      if (type === 'method') {
+        app.setData(e.detail.selected);
+        app.hasData = true;
+      } else {
+        app.security = undefined;
+        app.hasData = false;
+      }
+    };
+
+    app._computeApiParams = function(apiPrams) {
+      if (!apiPrams) {
+        return 'none';
+      }
+      return JSON.stringify(apiPrams, null, 1);
+    };
+
+    app.setData = function(selected) {
+      app.selectedShape = selected;
+    };
+    window.addEventListener('WebComponentsReady', app._load);
+    window.addEventListener('api-navigation-selection-changed', app._navChanged);
     })(document.getElementById('demo'));
   </script>
 </body>

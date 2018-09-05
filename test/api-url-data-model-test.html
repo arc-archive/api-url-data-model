@@ -20,371 +20,186 @@
 
     <script>
     /* global AmfLoader */
-    suite('Computartions tests', () => {
-      let element;
-      let amf;
-      const API_HOST = 'http://api.{instance}.domain.com:8254/v1';
-      suiteSetup(() => {
-        return AmfLoader.load()
-        .then((model) => amf = model);
-      });
-
-      suite('Base computations', () => {
-        setup(() => {
-          element = fixture('Basic');
-          element.amfModel = amf;
+    [
+      ['Full data model', false],
+      ['Compact data model', true]
+    ].forEach((setupItem) => {
+      suite(setupItem[0], () => {
+        let element;
+        let amf;
+        const API_HOST = 'http://api.{instance}.domain.com:8254/v1';
+        suiteSetup(() => {
+          return AmfLoader.load(setupItem[0])
+          .then((model) => amf = model);
         });
+        suite('Base computations', () => {
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+          });
 
-        test('Computes apiBaseUri', () => {
-          assert.equal(element.apiBaseUri, API_HOST);
-        });
+          test('Computes apiBaseUri', () => {
+            assert.equal(element.apiBaseUri, API_HOST);
+          });
 
-        test('Eventually computes api uri parameters', (done) => {
-          element.addEventListener('api-parameters-changed', (e) => {
-            console.log(e.detail.value);
-            assert.typeOf(e.detail.value, 'array');
-            done();
+          test('Computes api uri parameters', () => {
+            const result = element.apiParameters;
+            assert.typeOf(result, 'array');
+            assert.lengthOf(result, 1);
+          });
+
+          test('_webApi is computed', () => {
+            const key = element._getAmfKey(ApiElements.Amf.ns.schema.webApi);
+            assert.typeOf(element._webApi, 'object');
+            assert.equal(element._webApi['@type'][0], key);
+          });
+
+          test('_server is computed', () => {
+            const key = element._getAmfKey(ApiElements.Amf.ns.raml.vocabularies.http + 'Server');
+            assert.typeOf(element._server, 'object');
+            assert.equal(element._server['@type'][0], key);
+          });
+
+          test('_protocols is computed', () => {
+            assert.typeOf(element._protocols, 'array');
+            assert.deepEqual(element._protocols, ['HTTP', 'HTTPS']);
+          });
+
+          test('version is computed', () => {
+            assert.equal(element.version, 'v1');
+          });
+
+          test('queryModel is undefined', () => {
+            assert.isUndefined(element.queryModel);
+          });
+
+          test('pathModel is undefined', () => {
+            assert.isUndefined(element.pathModel);
+          });
+
+          test('endpointUri is computed', () => {
+            assert.equal(element.endpointUri, API_HOST);
+          });
+
+          test('endpointPath is undefined', () => {
+            assert.isUndefined(element.endpointPath);
+          });
+
+          test('endpoint is undefined', () => {
+            assert.isUndefined(element.endpoint);
+          });
+
+          test('method is undefined', () => {
+            assert.isUndefined(element.method);
           });
         });
 
-        test('_webApi is computed', () => {
-          assert.typeOf(element._webApi, 'object');
-          assert.equal(element._webApi['@type'][0], ApiElements.Amf.ns.schema.webApi);
-        });
+        suite('Endpoint only computations', () => {
+          let endpointId;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            const webApi = element._computeWebApi(amf);
+            const endpoint = element._computeEndpointByPath(webApi, '/test-parameters/{feature}');
+            endpointId = endpoint['@id'];
+          });
 
-        test('_server is computed', () => {
-          assert.typeOf(element._server, 'object');
-          assert.equal(element._server['@type'][0], ApiElements.Amf.ns.raml.vocabularies.http + 'Server');
-        });
+          test('Computes endpointUri for an endpoint', () => {
+            element.selected = endpointId;
+            assert.equal(element.endpointUri, API_HOST + '/test-parameters/{feature}');
+          });
 
-        test('_protocols is computed', () => {
-          assert.typeOf(element._protocols, 'array');
-          assert.deepEqual(element._protocols, ['HTTP', 'HTTPS']);
-        });
+          test('Computes endpointPath for an endpoint', () => {
+            element.selected = endpointId;
+            assert.equal(element.endpointPath, '/test-parameters/{feature}');
+          });
 
-        test('version is computed', () => {
-          assert.equal(element.version, 'v1');
-        });
+          test('Computes pathModel', () => {
+            element.selected = endpointId;
+            const result = element.pathModel;
+            assert.typeOf(result, 'array', 'pathModel is an array');
+          });
 
-        test('_apiUriParams is computed', () => {
-          assert.typeOf(element._apiUriParams.then, 'function');
-        });
+          test('pathModel contains base api uri parameters', () => {
+            element.selected = endpointId;
+            const result = element.pathModel;
+            assert.deepEqual(result[0], element.apiParameters[0]);
+          });
 
-        test('_apiUriParams results to data model', () => {
-          return element._apiUriParams
-          .then((data) => {
-            assert.typeOf(data, 'array');
+          test('pathModel contains endpoint uri parameters', () => {
+            element.selected = endpointId;
+            const result = element.pathModel;
+            assert.equal(result[1].name, 'feature');
+          });
+
+          test('method is undefined', () => {
+            element.selected = endpointId;
+            assert.isUndefined(element.method);
+          });
+
+          test('queryModel is undefined', () => {
+            element.selected = endpointId;
+            assert.isUndefined(element.queryModel);
           });
         });
 
-        test('_pathUriParams is computed', () => {
-          assert.typeOf(element._pathUriParams.then, 'function');
-        });
-
-        test('_pathUriParams results to undefined', () => {
-          return element._pathUriParams
-          .then((data) => {
-            assert.isUndefined(data);
+        suite('Method computations', () => {
+          let endpointId;
+          let methodId;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            const webApi = element._computeWebApi(amf);
+            const endpoint = element._computeEndpointByPath(webApi, '/test-parameters/{feature}');
+            endpointId = endpoint['@id'];
+            const method = element._computeOperations(webApi, endpointId)[0];
+            methodId = method['@id'];
           });
-        });
 
-        test('_methodQueryParams is computed', () => {
-          assert.typeOf(element._methodQueryParams.then, 'function');
-        });
-
-        test('_methodQueryParams results to undefined', () => {
-          return element._methodQueryParams
-          .then((data) => {
-            assert.isUndefined(data);
+          test('Computes endpointUri for an endpoint', () => {
+            element.selected = methodId;
+            assert.equal(element.endpointUri, API_HOST + '/test-parameters/{feature}');
           });
-        });
 
-        test('queryModel is undefined', () => {
-          assert.isUndefined(element.queryModel);
-        });
-
-        test('pathModel is undefined', () => {
-          assert.isUndefined(element.pathModel);
-        });
-
-        test('endpointUri is computed', () => {
-          assert.equal(element.endpointUri, API_HOST);
-        });
-
-        test('endpointPath is undefined', () => {
-          assert.isUndefined(element.endpointPath);
-        });
-
-        test('_endpointId is undefined', () => {
-          assert.isUndefined(element._endpointId);
-        });
-
-        test('endpoint is undefined', () => {
-          assert.isUndefined(element.endpoint);
-        });
-
-        test('isMethod is undefined', () => {
-          assert.isUndefined(element.isMethod);
-        });
-
-        test('method is undefined', () => {
-          assert.isUndefined(element.method);
-        });
-
-        test('apiParameters is undefined', () => {
-          assert.isUndefined(element.apiParameters);
-        });
-      });
-
-      suite('Endpoint only computations', () => {
-        const endpointId = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Ftest-parameters%2F%7Bfeature%7D';
-        setup(() => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-        });
-
-        test('Computes endpointUri for an endpoint', () => {
-          element.selected = endpointId;
-          assert.equal(element.endpointUri, API_HOST + '/test-parameters/{feature}');
-        });
-
-        test('Computes endpointPath for an endpoint', () => {
-          element.selected = endpointId;
-          assert.equal(element.endpointPath, '/test-parameters/{feature}');
-        });
-
-        test('Eventually computes pathModel', (done) => {
-          element.selected = endpointId;
-          element.addEventListener('path-model-changed', (e) => {
-            assert.typeOf(e.detail.value, 'array', 'result is an array');
-            done();
+          test('Computes endpointPath for an endpoint', () => {
+            element.selected = methodId;
+            assert.equal(element.endpointPath, '/test-parameters/{feature}');
           });
-        });
 
-        test('pathModel contains base api uri parameters', (done) => {
-          element.selected = endpointId;
-          element.addEventListener('path-model-changed', (e) => {
-            assert.lengthOf(e.detail.value, 2);
-            done();
+          test('Computes pathModel', () => {
+            element.selected = methodId;
+            const result = element.pathModel;
+            assert.typeOf(result, 'array', 'result is an array');
+            assert.lengthOf(result, 2, 'result has 2 items');
+            assert.equal(result[1].name, 'feature');
           });
-        });
 
-        test('pathModel contains endpoint uri parameters', (done) => {
-          element.selected = endpointId;
-          element.addEventListener('path-model-changed', (e) => {
-            assert.equal(e.detail.value[1].name, 'feature');
-            done();
+          test('Computes queryModel', () => {
+            element.selected = methodId;
+            const result = element.queryModel;
+            assert.typeOf(result, 'array', 'result is an array');
+            assert.lengthOf(result, 3, 'result has 3 items');
           });
-        });
 
-        test('_endpointId is computed', () => {
-          element.selected = endpointId;
-          assert.equal(element._endpointId, endpointId);
-        });
-
-        test('_pathUriParams is computed', () => {
-          element.selected = endpointId;
-          assert.typeOf(element._pathUriParams.then, 'function');
-        });
-
-        test('_pathUriParams results to data model', () => {
-          element.selected = endpointId;
-          return element._pathUriParams
-          .then((data) => {
-            assert.typeOf(data, 'array');
-            assert.lengthOf(data, 2);
+          test('method is computed', () => {
+            const key = element._getAmfKey(ApiElements.Amf.ns.w3.hydra.core + 'Operation');
+            element.selected = methodId;
+            assert.typeOf(element.method, 'object');
+            assert.equal(element.method['@type'][0], key);
           });
-        });
 
-        test('isMethod is false', () => {
-          element.selected = endpointId;
-          assert.isFalse(element.isMethod);
-        });
-
-        test('method is undefined', () => {
-          element.selected = endpointId;
-          assert.isUndefined(element.method);
-        });
-
-        test('_methodQueryParams is computed', () => {
-          element.selected = endpointId;
-          assert.typeOf(element._methodQueryParams.then, 'function');
-        });
-
-        test('_methodQueryParams results to undefined', () => {
-          element.selected = endpointId;
-          return element._methodQueryParams
-          .then((data) => {
-            assert.isUndefined(data);
+          test('queryModel is set when promise resolves', () => {
+            element.selected = methodId;
+            const result = element.queryModel;
+            assert.typeOf(result, 'array');
+            assert.lengthOf(result, 3);
           });
-        });
 
-        test('queryModel is undefined', () => {
-          element.selected = endpointId;
-          assert.isUndefined(element.queryModel);
-        });
-
-        test('pathModel is undefined at the moment of assigning value', () => {
-          element.selected = endpointId;
-          assert.isUndefined(element.pathModel);
-        });
-
-        test('pathModel is set when promise resolves', () => {
-          element.selected = endpointId;
-          return element._pathUriParams
-          .then(() => {
+          test('pathModel is set when promise resolves', () => {
+            element.selected = methodId;
             assert.typeOf(element.pathModel, 'array');
             assert.lengthOf(element.pathModel, 2);
           });
-        });
-      });
-
-      suite('Method computations', () => {
-        const endpointId = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Ftest-parameters%2F%7Bfeature%7D';
-        const methodId = endpointId + '/get';
-        setup(() => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-        });
-
-        test('Computes endpointUri for an endpoint', () => {
-          element.selected = methodId;
-          assert.equal(element.endpointUri, API_HOST + '/test-parameters/{feature}');
-        });
-
-        test('Computes endpointPath for an endpoint', () => {
-          element.selected = methodId;
-          assert.equal(element.endpointPath, '/test-parameters/{feature}');
-        });
-
-        test('Eventually computes pathModel', (done) => {
-          element.selected = methodId;
-          element.addEventListener('path-model-changed', (e) => {
-            assert.typeOf(e.detail.value, 'array', 'result is an array');
-            assert.lengthOf(e.detail.value, 2, 'result has 2 items');
-            assert.equal(e.detail.value[1].name, 'feature');
-            done();
-          });
-        });
-
-        test('Eventually computes queryModel', (done) => {
-          element.selected = methodId;
-          element.addEventListener('query-model-changed', (e) => {
-            assert.typeOf(e.detail.value, 'array', 'result is an array');
-            assert.lengthOf(e.detail.value, 3, 'result has 3 items');
-            done();
-          });
-        });
-
-        test('_endpointId is computed', () => {
-          element.selected = methodId;
-          assert.equal(element._endpointId, endpointId);
-        });
-
-        test('_pathUriParams is computed', () => {
-          element.selected = methodId;
-          assert.typeOf(element._pathUriParams.then, 'function');
-        });
-
-        test('_pathUriParams results to data model', () => {
-          element.selected = methodId;
-          return element._pathUriParams
-          .then((data) => {
-            assert.typeOf(data, 'array');
-            assert.lengthOf(data, 2);
-          });
-        });
-
-        test('_methodQueryParams is computed', () => {
-          element.selected = methodId;
-          assert.typeOf(element._methodQueryParams.then, 'function');
-        });
-
-        test('_methodQueryParams results to query model', () => {
-          element.selected = methodId;
-          return element._methodQueryParams
-          .then((data) => {
-            assert.typeOf(data, 'array');
-            assert.lengthOf(data, 3);
-          });
-        });
-
-        test('isMethod is true', () => {
-          element.selected = methodId;
-          assert.isTrue(element.isMethod);
-        });
-
-        test('method is computed', () => {
-          element.selected = methodId;
-          assert.typeOf(element.method, 'object');
-          assert.equal(element.method['@type'][0], ApiElements.Amf.ns.w3.hydra.core + 'Operation');
-        });
-
-        test('queryModel is undefined at the moment of assigning value', () => {
-          element.selected = methodId;
-          assert.isUndefined(element.queryModel);
-        });
-
-        test('queryModel is set when promise resolves', () => {
-          element.selected = methodId;
-          return element._methodQueryParams
-          .then(() => {
-            assert.typeOf(element.queryModel, 'array');
-            assert.lengthOf(element.queryModel, 3);
-          });
-        });
-
-        test('pathModel is undefined at the moment of assigning value', () => {
-          element.selected = methodId;
-          assert.isUndefined(element.pathModel);
-        });
-
-        test('pathModel is set when promise resolves', () => {
-          element.selected = methodId;
-          return element._pathUriParams
-          .then(() => {
-            assert.typeOf(element.pathModel, 'array');
-            assert.lengthOf(element.pathModel, 2);
-          });
-        });
-      });
-
-      suite('Missing method', () => {
-        const endpointId = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Ftest-parameters%2F%7Bfeature%7D';
-        const methodId = endpointId + '/post';
-        setup(() => {
-          element = fixture('Basic');
-          element.amfModel = amf;
-        });
-
-        test('Computes endpointUri for an endpoint', () => {
-          element.selected = methodId;
-          assert.equal(element.endpointUri, API_HOST + '/test-parameters/{feature}');
-        });
-
-        test('Computes endpointPath for an endpoint', () => {
-          element.selected = methodId;
-          assert.equal(element.endpointPath, '/test-parameters/{feature}');
-        });
-
-        test('Eventually computes pathModel', (done) => {
-          element.selected = methodId;
-          element.addEventListener('path-model-changed', (e) => {
-            assert.typeOf(e.detail.value, 'array', 'result is an array');
-            assert.lengthOf(e.detail.value, 2, 'result has 2 items');
-            assert.equal(e.detail.value[0].name, 'instance');
-            done();
-          });
-        });
-
-        test('isMethod is false', () => {
-          element.selected = endpointId;
-          assert.isFalse(element.isMethod);
-        });
-
-        test('method is undefined', () => {
-          element.selected = endpointId;
-          assert.isUndefined(element.method);
         });
       });
     });
