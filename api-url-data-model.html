@@ -24,7 +24,7 @@
    * @memberof ApiElements
    */
   class ApiUrlDataModel extends ApiElements.AmfHelperMixin(Polymer.Element) {
-    static get is() { return 'api-url-data-model'; }
+    static get is() {return 'api-url-data-model';}
     static get properties() {
       return {
         /**
@@ -60,59 +60,7 @@
          */
         version: {
           type: String,
-          computed: '_commputeApiVersion(_webApi)'
-        },
-        /**
-         * A promise that always results to API's (server's) URI (path)
-         * variables model.
-         *
-         * @type {Promise<Array|undefined>}
-         */
-        _apiUriParams: {
-          type: Object,
-          computed: '_computeApiUriParams(_server, version)',
-          value: function() {
-            return Promise.resolve();
-          },
-          observer: '_setApiParametersPromise'
-        },
-        /**
-         * A promise that always results to combined list of server's and
-         * selected endpoint URI (path) variables model.
-         *
-         * @type {Promise<Array|undefined>}
-         */
-        _pathUriParams: {
-          type: Object,
-          computed: '_computePathUriParams(endpoint)',
-          value: function() {
-            return Promise.resolve();
-          },
-          observer: '_setPathModelPromise'
-        },
-        /**
-         * A promise that always results to selected method query
-         * parameters model. It may return `undefined` if selected is not
-         * `supportedOperation` shape.
-         *
-         * @type {Promise<Array|undefined>}
-         */
-        _methodQueryParams: {
-          type: Object,
-          computed: '_computeMethodQueryParams(method)',
-          value: function() {
-            return Promise.resolve();
-          },
-          observer: '_setQueryModelPromise'
-        },
-        /**
-         * Computed value of endpoint from `selected` property.
-         * It is the same if selected is an endpoint. It matters when selected
-         * is method (supported operation)
-         */
-        _endpointId: {
-          type: String,
-          computed: '_computeEndpointId(selected)'
+          computed: '_computeApiVersion(amfModel)'
         },
         /**
          * The `@id` property of selected endpoint and method to compute
@@ -124,22 +72,14 @@
          */
         endpoint: {
           type: Object,
-          computed: '_computeEndpointModel(_webApi, _endpointId)'
-        },
-        /**
-         * Computed value if `selected` is a `supportedOperation`
-         * schape.
-         */
-        isMethod: {
-          type: Boolean,
-          computed: '_computeIsMethod(selected, _endpointId)'
+          computed: '_computeModelEndpointModel(_webApi, selected)'
         },
         /**
          * Computed model of HTTP method.
          */
         method: {
           type: Object,
-          computed: '_computeMethod(isMethod, selected, endpoint)'
+          computed: '_computeMethodModel(_webApi, selected)'
         },
         /**
          * Computed view model for API uri parameters.
@@ -147,7 +87,7 @@
         apiParameters: {
           type: Array,
           notify: true,
-          readOnly: true
+          computed: '_computeApiParameters(_server, version)'
         },
         /**
          * A property to set to override AMF's model base URI information.
@@ -167,7 +107,7 @@
          */
         queryModel: {
           type: Array,
-          readOnly: true,
+          computed: '_computeQueryModel(method)',
           notify: true
         },
         /**
@@ -177,7 +117,7 @@
          */
         pathModel: {
           type: Array,
-          readOnly: true,
+          computed: '_computePathModel(endpoint)',
           notify: true
         },
         /**
@@ -186,7 +126,7 @@
         endpointUri: {
           type: String,
           notify: true,
-          computed: '_computeEndpointUri(apiBaseUri, endpointPath)'
+          computed: '_computeEndpointUri(_server, endpoint, baseUri, version)'
         },
         /**
          * Selected endponit relative path.
@@ -197,15 +137,6 @@
           computed: '_computeEndpointPath(endpoint)'
         }
       };
-    }
-    /**
-     * Computes version of the API.
-     *
-     * @param {Object} api http://schema.org/WebAPI declaration
-     * @return {String|undefined} API version
-     */
-    _commputeApiVersion(api) {
-      return this._getValue(api, this.ns.schema.name + 'version');
     }
     /**
      * Computes `apiBaseUri` property when `amfModel` change.
@@ -219,7 +150,6 @@
     _computeApiBaseUri(server, version, protocols, baseUri) {
       let uri = this._getBaseUri(baseUri, server, protocols);
       if (!uri) {
-        console.warn('Expecting "url" in server declaration.');
         return;
       }
       if (version && uri.indexOf('{version}') !== -1) {
@@ -238,15 +168,15 @@
      * @param {Object} server The `http://raml.org/vocabularies/http#server`
      * object
      * @param {?String} version API version number
-     * @return {Promise<Array<Object>>} Promise resolved to a view model.
+     * @return {Array<Object>} A view model.
      */
-    _computeApiUriParams(server, version) {
+    _computeApiParameters(server, version) {
       if (!server) {
-        return Promise.resolve();
+        return [];
       }
       const variables = this._computeServerVariables(server);
       if (!variables || !variables.length) {
-        return Promise.resolve();
+        return [];
       }
       if (version) {
         for (let i = variables.length - 1; i >=0 ; i--) {
@@ -257,196 +187,94 @@
           }
         }
       }
-      return this.$.transformer.computeViewModel(variables);
+      this.$.transformer.amfModel = this.amfModel;
+      let model = this.$.transformer.computeViewModel(variables);
+      if (model && model.length) {
+        model = Array.from(model);
+      } else {
+        model = undefined;
+      }
+      return model;
     }
-
-    _computePathUriParams(endpoint) {
+    /**
+     * Computes combined list of path parameters from server definition
+     * (RAML's base URI) and current path variables.
+     * @param {Object} endpoint Endpoint model
+     * @return {Array<Object>}
+     */
+    _computePathModel(endpoint) {
       if (!endpoint) {
-        return Promise.resolve();
+        return;
       }
-      const params = endpoint[this.ns.raml.vocabularies.http + 'parameter'];
+      const apip = this.apiParameters;
+      const params = this._computeQueryParameters(endpoint);
       if (!params || !params.length) {
-        return this._apiUriParams;
+        return apip;
       }
-      return this.$.transformer.computeViewModel(params)
-      .then((data) => {
-        return this._apiUriParams
-        .then((path) => {
-          return {
-            base: path,
-            endpoint: data
-          };
-        });
-      })
-      .then((data) => {
-        if (data.base && data.base[0]) {
-          data.endpoint = Array.from(data.base).concat(data.endpoint);
-        }
-        return data.endpoint;
-      });
+      this.$.transformer.amfModel = this.amfModel;
+      let model = this.$.transformer.computeViewModel(params);
+      if (!model) {
+        model = [];
+      }
+      if (apip && apip[0]) {
+        model = Array.from(apip).concat(model);
+      }
+      return model;
     }
-
-    _computeMethodQueryParams(method) {
-      const p = Promise.resolve();
+    /**
+     * Computes value for `queryModel` property.
+     *
+     * @param {Object} method Supported operation model
+     * @return {Array<Object>}
+     */
+    _computeQueryModel(method) {
       if (!method) {
-        return p;
+        return [];
       }
-      const expects = method[this.ns.w3.hydra.core + 'expects'];
-      if (!expects) {
-        return p;
-      }
-      const request = expects.find((item) => this._hasType(item, this.ns.raml.vocabularies.http + 'Request'));
+      const request = this._computeExpects(method);
       if (!request) {
-        console.warn('Expected "Request" declaration. None found.');
-        return p;
+        return [];
       }
-      const params = request[this.ns.raml.vocabularies.http + 'parameter'];
+      const params = this._computeQueryParameters(request);
       if (!params) {
-        return p;
+        return [];
       }
-      return this.$.transformer.computeViewModel(params);
+      let data = this.$.transformer.computeViewModel(params);
+      if (data && data.length) {
+        data = Array.from(data);
+      } else {
+        data = [];
+      }
+      return data;
     }
-
+    /**
+     * Computes endpoint's path value
+     * @param {Object} endpoint Endpoint model
+     * @return {String}
+     */
     _computeEndpointPath(endpoint) {
       return this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
     }
-
-    _computeMethod(isMethod, selected, endpoint) {
-      if (!isMethod || !selected || !endpoint) {
-        return;
-      }
-      const operations = endpoint[this.ns.w3.hydra.supportedOperation];
-      if (!operations || !operations.length) {
-        return;
-      }
-      return operations.find((item) => item['@id'] === selected);
-    }
     /**
-     * Computes endpoint `@id` for given `id`.
-     * On a base level it subrtacts the last part after `/` which
-     * is a delimiter between endpoint identifier and method name.
+     * Computes value of endpoint model.
      *
-     * @param {String} id Object ID. Can be operation's or endpoint's ID.
-     * @return {String} Endpoint id. It may return the same value if passed
-     * id is endpoint ID.
-     */
-    _computeEndpointId(id) {
-      if (!id) {
-        return;
-      }
-      const parts = id.split('/');
-      if (parts[parts.length - 1][0] === '%') {
-        return id;
-      }
-      parts.pop();
-      return parts.join('/');
-    }
-    /**
-     * Finds a method definition on the list of operations for an endpoint.
+     * The selection (id) can be for endpoint or for a method.
+     * This tries endpoint first and then method.
      *
-     * @param {String} id ID of the operation (method)
-     * @param {Array<Object>} operations List of endpoint's operations.
-     * @return {Object|undefined} Method definition.
+     * @param {Object} webApi A WebApi amf shape.
+     * @param {String} id Endpoint/method selection
+     * @return {Object|undefined} Endpoint model.
      */
-    findMethod(id, operations) {
-      if (!id || !operations || !operations.length) {
+    _computeModelEndpointModel(webApi, id) {
+      let model = this._computeEndpointModel(webApi, id);
+      if (model) {
+        return model;
+      }
+      model = this._computeMethodModel(webApi, id);
+      if (!model) {
         return;
       }
-      return operations.find((item) => item['@id'] === id);
-    }
-    /**
-     * Computes endpoint full URI by combining `apiBaseUri` with `path`.
-     *
-     * @param {String} path Endpoint's path
-     * @param {?String} apiBaseUri Current value of `apiBaseUri`
-     * @return {String} Endpoint's full uri.
-     */
-    _computeEndpointUri(apiBaseUri, path) {
-      let result = '';
-      if (apiBaseUri) {
-        result = apiBaseUri;
-      }
-      if (path) {
-        result += path;
-      }
-      return result;
-    }
-
-    _computeIsMethod(selected, _endpointId) {
-      return selected !== _endpointId;
-    }
-    /**
-     * Produces view model for query parameters.
-     *
-     * @param {Object} method Method definition in the endpoint model.
-     * @return {Promise}
-     */
-    _setupQueryViewModel(method) {
-      const p = Promise.resolve();
-      if (!method) {
-        return p;
-      }
-      const expects = method[this.ns.w3.hydra.core + 'expects'];
-      if (!expects) {
-        return p;
-      }
-      const request = expects.find((item) => this._hasType(item, this.ns.raml.vocabularies.http + 'Request'));
-      if (!request) {
-        console.warn('Expected "Request" declaration. None found.');
-        return p;
-      }
-      const params = request[this.ns.raml.vocabularies.http + 'parameter'];
-      if (!params) {
-        return p;
-      }
-      return p
-      .then(() => this.$.transformer.computeViewModel(params))
-      .then((data) => this._setQueryModel(data));
-    }
-
-    _setApiParametersPromise(promise) {
-      if (!promise) {
-        this._setApiParameters(undefined);
-        return;
-      }
-      promise.then((data) => {
-        if (data && data.length) {
-          data = Array.from(data);
-        } else {
-          data = undefined;
-        }
-        this._setApiParameters(data);
-      });
-    }
-
-    _setPathModelPromise(promise) {
-      if (!promise) {
-        this._setPathModel(undefined);
-        return;
-      }
-      promise.then((data) => {
-        if (data && data.length) {
-          data = Array.from(data);
-        } else {
-          data = undefined;
-        }
-        this._setPathModel(data);
-      });
-    }
-
-    _setQueryModelPromise(promise) {
-      if (!promise) {
-        this._setQueryModel(undefined);
-        return;
-      }
-      promise.then((data) => {
-        if (data && data.length) {
-          data = Array.from(data);
-        } else {
-          data = undefined;
-        }
-        this._setQueryModel(data);
-      });
+      return this._computeMethodEndpoint(webApi, model['@id']);
     }
   }
   window.customElements.define(ApiUrlDataModel.is, ApiUrlDataModel);
