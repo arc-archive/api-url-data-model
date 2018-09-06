@@ -2040,7 +2040,7 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 204,
+              "line": 205,
               "column": 4
             },
             "end": {
@@ -2054,6 +2054,11 @@
               "name": "endpoint",
               "type": "Object",
               "description": "Endpoint model"
+            },
+            {
+              "name": "apiParameters",
+              "type": "?Array.<Object>",
+              "description": "Current value of API parameters"
             }
           ],
           "return": {

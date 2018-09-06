@@ -130,8 +130,9 @@ declare namespace ApiElements {
      * (RAML's base URI) and current path variables.
      *
      * @param endpoint Endpoint model
+     * @param apiParameters Current value of API parameters
      */
-    _computePathModel(endpoint: object|null): Array<object|null>|null;
+    _computePathModel(endpoint: object|null, apiParameters: Array<object|null>|null): Array<object|null>|null;
 
     /**
      * Computes value for `queryModel` property.
