@@ -1,7 +1,7 @@
 {
   "name": "api-url-data-model",
   "description": "An element to generate view model for api-url-editor and api-url-params-editor elements from AMF model",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "Apache-2.0",
   "authors": [
     "Pawel Psztyc",
