@@ -117,7 +117,7 @@
          */
         pathModel: {
           type: Array,
-          computed: '_computePathModel(endpoint)',
+          computed: '_computePathModel(endpoint, apiParameters)',
           notify: true
         },
         /**
@@ -200,24 +200,24 @@
      * Computes combined list of path parameters from server definition
      * (RAML's base URI) and current path variables.
      * @param {Object} endpoint Endpoint model
+     * @param {?Array<Object>} apiParameters Current value of API parameters
      * @return {Array<Object>}
      */
-    _computePathModel(endpoint) {
+    _computePathModel(endpoint, apiParameters) {
       if (!endpoint) {
         return;
       }
-      const apip = this.apiParameters;
       const params = this._computeQueryParameters(endpoint);
       if (!params || !params.length) {
-        return apip;
+        return apiParameters;
       }
       this.$.transformer.amfModel = this.amfModel;
       let model = this.$.transformer.computeViewModel(params);
       if (!model) {
         model = [];
       }
-      if (apip && apip[0]) {
-        model = Array.from(apip).concat(model);
+      if (apiParameters && apiParameters[0]) {
+        model = Array.from(apiParameters).concat(model);
       }
       return model;
     }
