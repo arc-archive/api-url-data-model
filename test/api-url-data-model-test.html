@@ -18,6 +18,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="Other">
+      <template>
+        <api-url-data-model></api-url-data-model>
+      </template>
+    </test-fixture>
+
     <script>
     /* global AmfLoader */
     [
@@ -25,17 +31,25 @@
       ['Compact data model', true]
     ].forEach((setupItem) => {
       suite(setupItem[0], () => {
-        let element;
-        let amf;
         const API_HOST = 'http://api.{instance}.domain.com:8254/v1';
-        suiteSetup(() => {
-          return AmfLoader.load(setupItem[0])
-          .then((model) => amf = model);
-        });
         suite('Base computations', () => {
+          let element;
+          let amf;
+          let endpointId;
+          let methodId;
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[0])
+            .then((model) => amf = model);
+          });
+
           setup(() => {
             element = fixture('Basic');
             element.amfModel = amf;
+            const webApi = element._computeWebApi(amf);
+            const endpoint = element._computeEndpointByPath(webApi, '/test-parameters/{feature}');
+            endpointId = endpoint['@id'];
+            const method = element._computeOperations(webApi, endpointId)[0];
+            methodId = method['@id'];
           });
 
           test('Computes apiBaseUri', () => {
@@ -92,9 +106,63 @@
           test('method is undefined', () => {
             assert.isUndefined(element.method);
           });
+
+          test('Computes query parameters when initializing the element', (done) => {
+            const element = fixture('Other');
+            flush(() => {
+              element.selected = methodId;
+              element.amfModel = amf;
+              assert.typeOf(element.queryModel, 'array');
+              assert.lengthOf(element.queryModel, 3);
+              element.queryModel.forEach((item) => {
+                assert.equal(item.binding, 'query');
+              });
+              assert.equal(element.queryModel[0].name, 'testRepeatable');
+              assert.equal(element.queryModel[1].name, 'numericRepeatable');
+              assert.equal(element.queryModel[2].name, 'notRequiredRepeatable');
+              done();
+            });
+          });
+
+          test('Computes path parameters when initializing the element', (done) => {
+            const element = fixture('Other');
+            flush(() => {
+              element.selected = methodId;
+              element.amfModel = amf;
+              assert.typeOf(element.pathModel, 'array');
+              assert.lengthOf(element.pathModel, 2);
+              element.pathModel.forEach((item) => {
+                assert.equal(item.binding, 'path');
+              });
+              assert.equal(element.pathModel[0].name, 'instance');
+              assert.equal(element.pathModel[1].name, 'feature');
+              done();
+            });
+          });
+
+          test('Computes API server parameters when initializing the element', (done) => {
+            const element = fixture('Other');
+            flush(() => {
+              element.selected = methodId;
+              element.amfModel = amf;
+              assert.typeOf(element.apiParameters, 'array');
+              assert.lengthOf(element.apiParameters, 1);
+              element.apiParameters.forEach((item) => {
+                assert.equal(item.binding, 'path');
+              });
+              assert.equal(element.apiParameters[0].name, 'instance');
+              done();
+            });
+          });
         });
 
         suite('Endpoint only computations', () => {
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[0])
+            .then((model) => amf = model);
+          });
           let endpointId;
           setup(() => {
             element = fixture('Basic');
@@ -144,6 +212,12 @@
         });
 
         suite('Method computations', () => {
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[0])
+            .then((model) => amf = model);
+          });
           let endpointId;
           let methodId;
           setup(() => {
@@ -188,17 +262,58 @@
             assert.equal(element.method['@type'][0], key);
           });
 
-          test('queryModel is set when promise resolves', () => {
-            element.selected = methodId;
-            const result = element.queryModel;
-            assert.typeOf(result, 'array');
-            assert.lengthOf(result, 3);
-          });
-
           test('pathModel is set when promise resolves', () => {
             element.selected = methodId;
             assert.typeOf(element.pathModel, 'array');
             assert.lengthOf(element.pathModel, 2);
+          });
+        });
+
+        suite('_computeQueryModel()', function() {
+          let method;
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[0])
+            .then((model) => amf = model);
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            const webApi = element._computeWebApi(amf);
+            const endpoint = element._computeEndpointByPath(webApi, '/test-parameters/{feature}');
+            const endpointId = endpoint['@id'];
+            method = element._computeOperations(webApi, endpointId)[0];
+          });
+
+          test('Returns empty array when no model', () => {
+            const result = element._computeQueryModel();
+            assert.typeOf(result, 'array');
+            assert.lengthOf(result, 0);
+          });
+
+          test('Returns empty array when invalid model', () => {
+            const result = element._computeQueryModel({});
+            assert.typeOf(result, 'array');
+            assert.lengthOf(result, 0);
+          });
+
+          test('Returns query parameters model', () => {
+            const result = element._computeQueryModel(method);
+            assert.typeOf(result, 'array');
+            assert.lengthOf(result, 3);
+          });
+
+          test('Computes model when setting up the element', (done) => {
+            const element = fixture('Other');
+            flush(() => {
+              element.amfModel = amf;
+              const result = element._computeQueryModel(method);
+              assert.typeOf(result, 'array');
+              assert.lengthOf(result, 3);
+              done();
+            });
           });
         });
       });
