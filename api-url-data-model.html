@@ -239,6 +239,7 @@
       if (!params) {
         return [];
       }
+      this.$.transformer.amfModel = this.amfModel;
       let data = this.$.transformer.computeViewModel(params);
       if (data && data.length) {
         data = Array.from(data);
