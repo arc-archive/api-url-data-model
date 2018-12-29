@@ -8,6 +8,10 @@
  *   api-url-data-model.html
  */
 
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
 /// <reference path="../polymer/types/polymer-element.d.ts" />
 /// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
 /// <reference path="../raml-aware/raml-aware.d.ts" />
@@ -108,11 +112,12 @@ declare namespace ApiElements {
     /**
      * Computes `apiBaseUri` property when `amfModel` change.
      *
+     * @param server Server definition model
      * @param version API version number
      * @param protocols List of supported protocols.
      * @param baseUri A uri to override APIs base uri
      */
-    _computeApiBaseUri(server: any, version: String|null, protocols: Array<String|null>|null, baseUri: String|null): any;
+    _computeApiBaseUri(server: object|null, version: String|null, protocols: Array<String|null>|null, baseUri: String|null): String|null;
 
     /**
      * Computes uri paramerters lsit for API base.
@@ -130,9 +135,17 @@ declare namespace ApiElements {
      * (RAML's base URI) and current path variables.
      *
      * @param endpoint Endpoint model
+     * @param method Method model
      * @param apiParameters Current value of API parameters
      */
-    _computePathModel(endpoint: object|null, apiParameters: Array<object|null>|null): Array<object|null>|null;
+    _computePathModel(endpoint: object|null, method: object|null, apiParameters: Array<object|null>|null): Array<object|null>|null;
+
+    /**
+     * Finds URI parameters in method definition.
+     *
+     * @param method Method model
+     */
+    _uriParamsFromMethod(method: object|null): Array<object|null>|null|undefined;
 
     /**
      * Computes value for `queryModel` property.

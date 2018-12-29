@@ -38,7 +38,7 @@
           let endpointId;
           let methodId;
           suiteSetup(() => {
-            return AmfLoader.load(setupItem[0])
+            return AmfLoader.load(setupItem[1])
             .then((model) => amf = model);
           });
 
@@ -160,9 +160,10 @@
           let element;
           let amf;
           suiteSetup(() => {
-            return AmfLoader.load(setupItem[0])
+            return AmfLoader.load(setupItem[1])
             .then((model) => amf = model);
           });
+
           let endpointId;
           setup(() => {
             element = fixture('Basic');
@@ -215,7 +216,7 @@
           let element;
           let amf;
           suiteSetup(() => {
-            return AmfLoader.load(setupItem[0])
+            return AmfLoader.load(setupItem[1])
             .then((model) => amf = model);
           });
           let endpointId;
@@ -274,7 +275,7 @@
           let element;
           let amf;
           suiteSetup(() => {
-            return AmfLoader.load(setupItem[0])
+            return AmfLoader.load(setupItem[1])
             .then((model) => amf = model);
           });
 
@@ -314,6 +315,218 @@
               assert.lengthOf(result, 3);
               done();
             });
+          });
+        });
+      });
+    });
+
+    [
+      ['full data model', false, 'petstore'],
+      ['compact data model', true, 'petstore']
+    ].forEach((setupItem) => {
+      suite('OAS ' + setupItem[0], () => {
+        suite('Base computations', () => {
+          let element;
+          let amf;
+          let endpointId;
+          let methodId;
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1], setupItem[2])
+            .then((model) => amf = model);
+          });
+
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            const webApi = element._computeWebApi(amf);
+            const endpoint = element._computeEndpointByPath(webApi, '/pets/{id}');
+            endpointId = endpoint['@id'];
+            const method = element._computeOperations(webApi, endpointId)[0];
+            methodId = method['@id'];
+          });
+
+          test('Computes apiBaseUri', () => {
+            assert.equal(element.apiBaseUri,
+              'https://qax.anypoint.mulesoft.com/mocking/api/v1/links/784699fb-6f73-474f-8c7a-96d2384539e7/api');
+          });
+
+          test('Computes api uri parameters', () => {
+            const result = element.apiParameters;
+            assert.typeOf(result, 'array');
+            assert.lengthOf(result, 0);
+          });
+
+          test('_webApi is computed', () => {
+            const key = element._getAmfKey(ApiElements.Amf.ns.schema.webApi);
+            assert.typeOf(element._webApi, 'object');
+            assert.equal(element._webApi['@type'][0], key);
+          });
+
+          test('_server is computed', () => {
+            const key = element._getAmfKey(ApiElements.Amf.ns.raml.vocabularies.http + 'Server');
+            assert.typeOf(element._server, 'object');
+            assert.equal(element._server['@type'][0], key);
+          });
+
+          test('_protocols is computed', () => {
+            assert.typeOf(element._protocols, 'array');
+            assert.deepEqual(element._protocols, ['http']);
+          });
+
+          test('version is computed', () => {
+            assert.equal(element.version, '4.1.0');
+          });
+
+          test('queryModel is undefined', () => {
+            assert.isUndefined(element.queryModel);
+          });
+
+          test('pathModel is undefined', () => {
+            assert.isUndefined(element.pathModel);
+          });
+
+          test('endpointUri is computed', () => {
+            assert.equal(element.endpointUri,
+              'https://qax.anypoint.mulesoft.com/mocking/api/v1/links/784699fb-6f73-474f-8c7a-96d2384539e7/api');
+          });
+
+          test('endpointPath is undefined', () => {
+            assert.isUndefined(element.endpointPath);
+          });
+
+          test('endpoint is undefined', () => {
+            assert.isUndefined(element.endpoint);
+          });
+
+          test('method is undefined', () => {
+            assert.isUndefined(element.method);
+          });
+
+          test('Computes query parameters when initializing the element', (done) => {
+            const element = fixture('Other');
+            flush(() => {
+              element.selected = methodId;
+              element.amfModel = amf;
+              assert.typeOf(element.queryModel, 'array');
+              assert.lengthOf(element.queryModel, 2);
+              element.queryModel.forEach((item) => {
+                assert.equal(item.binding, 'query');
+              });
+              assert.equal(element.queryModel[0].name, 'tags');
+              assert.equal(element.queryModel[1].name, 'limit');
+              done();
+            });
+          });
+
+          test('Computes path parameters when initializing the element', (done) => {
+            const element = fixture('Other');
+            flush(() => {
+              element.selected = methodId;
+              element.amfModel = amf;
+              assert.typeOf(element.pathModel, 'array');
+              assert.lengthOf(element.pathModel, 1);
+              element.pathModel.forEach((item) => {
+                assert.equal(item.binding, 'path');
+              });
+              assert.equal(element.pathModel[0].name, 'id');
+              done();
+            });
+          });
+
+          test('Computes API server parameters when initializing the element', (done) => {
+            const element = fixture('Other');
+            flush(() => {
+              element.selected = methodId;
+              element.amfModel = amf;
+              assert.typeOf(element.apiParameters, 'array');
+              assert.lengthOf(element.apiParameters, 0);
+              element.apiParameters.forEach((item) => {
+                assert.equal(item.binding, 'path');
+              });
+              done();
+            });
+          });
+        });
+
+        suite('URI parameters computation', () => {
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1], setupItem[2])
+            .then((model) => amf = model);
+          });
+
+          let webApi;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            webApi = element._computeWebApi(amf);
+          });
+
+          test('pathModel is empty for an endpoint', () => {
+            const endpoint = element._computeEndpointByPath(webApi, '/pets/{id}');
+            element.selected = endpoint['@id'];
+            const result = element.pathModel;
+            assert.typeOf(result, 'array', 'pathModel is an array');
+            assert.lengthOf(result, 0, 'pathModel has no elements');
+          });
+
+          test('pathModel is set for a method', () => {
+            const endpoint = element._computeEndpointByPath(webApi, '/pets/{id}');
+            const method = element._computeOperations(webApi, endpoint['@id'])[0];
+            element.selected = method['@id'];
+            const result = element.pathModel;
+            assert.typeOf(result, 'array', 'pathModel is an array');
+            assert.lengthOf(result, 1, 'pathModel has 1 element');
+          });
+
+          test('pathModel is empty when no parameters', () => {
+            const endpoint = element._computeEndpointByPath(webApi, '/pets');
+            const method = element._computeOperations(webApi, endpoint['@id'])[0];
+            element.selected = method['@id'];
+            const result = element.pathModel;
+            assert.typeOf(result, 'array', 'pathModel is an array');
+            assert.lengthOf(result, 0, 'pathModel has no elements');
+          });
+        });
+
+        suite('_uriParamsFromMethod()', () => {
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(setupItem[1], setupItem[2])
+            .then((model) => amf = model);
+          });
+
+          let webApi;
+          setup(() => {
+            element = fixture('Basic');
+            element.amfModel = amf;
+            webApi = element._computeWebApi(amf);
+          });
+
+          test('Returns undefined when no argument', () => {
+            const result = element._uriParamsFromMethod();
+            assert.isUndefined(result);
+          });
+
+          test('Returns undefined when no request model', () => {
+            const result = element._uriParamsFromMethod({});
+            assert.isUndefined(result);
+          });
+
+          test('Returns undefined when method has no parameters', () => {
+            const endpoint = element._computeEndpointByPath(webApi, '/pets');
+            const method = element._computeOperations(webApi, endpoint['@id'])[0];
+            const result = element._uriParamsFromMethod(method);
+            assert.isUndefined(result);
+          });
+
+          test('Computes parameters for a method', () => {
+            const endpoint = element._computeEndpointByPath(webApi, '/pets/{id}');
+            const method = element._computeOperations(webApi, endpoint['@id'])[0];
+            const result = element._uriParamsFromMethod(method);
+            assert.typeOf(result, 'array');
           });
         });
       });
