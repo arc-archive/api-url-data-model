@@ -24,7 +24,9 @@
    * @memberof ApiElements
    */
   class ApiUrlDataModel extends ApiElements.AmfHelperMixin(Polymer.Element) {
-    static get is() {return 'api-url-data-model';}
+    static get is() {
+      return 'api-url-data-model';
+    }
     static get properties() {
       return {
         /**
@@ -117,7 +119,7 @@
          */
         pathModel: {
           type: Array,
-          computed: '_computePathModel(endpoint, apiParameters)',
+          computed: '_computePathModel(endpoint, method, apiParameters)',
           notify: true
         },
         /**
@@ -141,11 +143,11 @@
     /**
      * Computes `apiBaseUri` property when `amfModel` change.
      *
-     * @param {Object} model The `http://raml.org/vocabularies/http#server`
-     * object
+     * @param {Object} server Server definition model
      * @param {?String} version API version number
      * @param {?Array<String>} protocols List of supported protocols.
      * @param {?String} baseUri A uri to override APIs base uri
+     * @return {String}
      */
     _computeApiBaseUri(server, version, protocols, baseUri) {
       let uri = this._getBaseUri(baseUri, server, protocols);
@@ -179,7 +181,7 @@
         return [];
       }
       if (version) {
-        for (let i = variables.length - 1; i >=0 ; i--) {
+        for (let i = variables.length - 1; i >=0; i--) {
           const name = this._getValue(variables[i], this.ns.schema.schemaName);
           if (name === 'version') {
             variables.splice(i, 1);
@@ -200,16 +202,20 @@
      * Computes combined list of path parameters from server definition
      * (RAML's base URI) and current path variables.
      * @param {Object} endpoint Endpoint model
+     * @param {Object} method Method model
      * @param {?Array<Object>} apiParameters Current value of API parameters
      * @return {Array<Object>}
      */
-    _computePathModel(endpoint, apiParameters) {
+    _computePathModel(endpoint, method, apiParameters) {
       if (!endpoint) {
         return;
       }
-      const params = this._computeQueryParameters(endpoint);
+      let params = this._computeQueryParameters(endpoint);
       if (!params || !params.length) {
-        return apiParameters;
+        params = this._uriParamsFromMethod(method);
+        if (!params) {
+          return apiParameters;
+        }
       }
       this.$.transformer.amfModel = this.amfModel;
       let model = this.$.transformer.computeViewModel(params);
@@ -220,6 +226,23 @@
         model = Array.from(apiParameters).concat(model);
       }
       return model;
+    }
+    /**
+     * Finds URI parameters in method definition.
+     * @param {Object} method Method model
+     * @return {Array<Object>|undefined}
+     */
+    _uriParamsFromMethod(method) {
+      if (!method) {
+        return;
+      }
+      const request = this._computeExpects(method);
+      if (!request) {
+        return;
+      }
+      const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'uriParameter');
+      const params = this._ensureArray(request[key]);
+      return params && params.length ? params : undefined;
     }
     /**
      * Computes value for `queryModel` property.
