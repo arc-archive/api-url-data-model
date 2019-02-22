@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>api-url-data-model test</title>
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="amf-loader.js"></script>
-    <link rel="import" href="../../arc-polyfills/arc-polyfills.html">
-    <link rel="import" href="../api-url-data-model.html">
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+
+    <script src="./amf-loader.js"></script>
   </head>
   <body>
 
@@ -24,7 +27,9 @@
       </template>
     </test-fixture>
 
-    <script>
+    <script type="module">
+    import {ns} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+    import '../api-url-data-model.js';
     /* global AmfLoader */
     [
       ['Full data model', false],
@@ -63,13 +68,13 @@
           });
 
           test('_webApi is computed', () => {
-            const key = element._getAmfKey(ApiElements.Amf.ns.schema.webApi);
+            const key = element._getAmfKey(ns.schema.webApi);
             assert.typeOf(element._webApi, 'object');
             assert.equal(element._webApi['@type'][0], key);
           });
 
           test('_server is computed', () => {
-            const key = element._getAmfKey(ApiElements.Amf.ns.raml.vocabularies.http + 'Server');
+            const key = element._getAmfKey(ns.raml.vocabularies.http + 'Server');
             assert.typeOf(element._server, 'object');
             assert.equal(element._server['@type'][0], key);
           });
@@ -257,7 +262,7 @@
           });
 
           test('method is computed', () => {
-            const key = element._getAmfKey(ApiElements.Amf.ns.w3.hydra.core + 'Operation');
+            const key = element._getAmfKey(ns.w3.hydra.core + 'Operation');
             element.selected = methodId;
             assert.typeOf(element.method, 'object');
             assert.equal(element.method['@type'][0], key);
@@ -357,13 +362,13 @@
           });
 
           test('_webApi is computed', () => {
-            const key = element._getAmfKey(ApiElements.Amf.ns.schema.webApi);
+            const key = element._getAmfKey(ns.schema.webApi);
             assert.typeOf(element._webApi, 'object');
             assert.equal(element._webApi['@type'][0], key);
           });
 
           test('_server is computed', () => {
-            const key = element._getAmfKey(ApiElements.Amf.ns.raml.vocabularies.http + 'Server');
+            const key = element._getAmfKey(ns.raml.vocabularies.http + 'Server');
             assert.typeOf(element._server, 'object');
             assert.equal(element._server['@type'][0], key);
           });
@@ -532,6 +537,5 @@
       });
     });
     </script>
-
   </body>
 </html>
