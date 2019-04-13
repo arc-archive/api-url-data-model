@@ -1,9 +1,9 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-import '@polymer/polymer/lib/elements/dom-if.js';
-import '@api-components/raml-aware/raml-aware.js';
-import '@api-components/api-view-model-transformer/api-view-model-transformer.js';
-import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import '../../@polymer/polymer/lib/elements/dom-if.js';
+import '../../@api-components/raml-aware/raml-aware.js';
+import '../../@api-components/api-view-model-transformer/api-view-model-transformer.js';
+import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
 
 /**
  * `api-url-data-model`
