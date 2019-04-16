@@ -23,13 +23,9 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
     </template>
-    <api-view-model-transformer amf-model="[[amfModel]]" id="transformer"></api-view-model-transformer>
-`;
+    <api-view-model-transformer amf-model="[[amfModel]]" id="transformer"></api-view-model-transformer>`;
   }
 
-  static get is() {
-    return 'api-url-data-model';
-  }
   static get properties() {
     return {
       /**
@@ -304,4 +300,4 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
     return this._computeMethodEndpoint(webApi, model['@id']);
   }
 }
-window.customElements.define(ApiUrlDataModel.is, ApiUrlDataModel);
+window.customElements.define('api-url-data-model', ApiUrlDataModel);
