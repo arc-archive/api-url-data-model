@@ -3,12 +3,18 @@ import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
 import '../../@polymer/polymer/lib/elements/dom-if.js';
 import '../../@api-components/raml-aware/raml-aware.js';
 import '../../@api-components/api-view-model-transformer/api-view-model-transformer.js';
-import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
-
+import {AmfHelperMixin, ns} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
 /**
  * `api-url-data-model`
  * An element to generate view model for api-url-editor and api-url-params-editor
  * elements from AMF model
+ *
+ * The component computes all required values from AMF's WebApi model.
+ *
+ * When using partial query model the `server`, `protocols`, and `version`
+ * model must be set manually as partial model won't have this information.
+ *
+ * After reseting the model to full AMF WebApi model the values are updated.
  *
  * @customElement
  * @polymer
@@ -35,34 +41,27 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
        */
       aware: String,
       /**
-       * Computed value of WebApi amf shape.
+       * Computed value of server definition from the AMF model.
+       *
+       * The value can be set manually but then the `amfModel` property chnage to
+       * an AMF WebApi shape it will be computed from the model.
        */
-      _webApi: {
-        type: Object,
-        computed: '_computeWebApi(amfModel)'
-      },
-      /**
-       * Computed value pof server definition from the AMF model.
-       */
-      _server: {
-        type: Object,
-        computed: '_computeServer(amfModel)'
-      },
+      server: {type: Object},
       /**
        * List of supported protocols.
        * Required to compute base URI in some cases.
+       *
+       * The value can be set manually but then the `amfModel` property chnage to
+       * an AMF WebApi shape it will be computed from the model.
        */
-      _protocols: {
-        type: Object,
-        computed: '_computeProtocols(amfModel)'
-      },
+      protocols: {type: Object},
       /**
-       * API version name
+       * API version name.
+       *
+       * The value can be set manually but then the `amfModel` property chnage to
+       * an AMF WebApi shape it will be computed from the model.
        */
-      version: {
-        type: String,
-        computed: '_computeApiVersion(amfModel)'
-      },
+      version: {type: String},
       /**
        * The `@id` property of selected endpoint and method to compute
        * data models for.
@@ -73,14 +72,14 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
        */
       endpoint: {
         type: Object,
-        computed: '_computeModelEndpointModel(_webApi, selected)'
+        computed: '_computeModelEndpointModel(amfModel, selected)'
       },
       /**
        * Computed model of HTTP method.
        */
       method: {
         type: Object,
-        computed: '_computeMethodModel(_webApi, selected)'
+        computed: '_computeMethodAmfModel(amfModel, selected)'
       },
       /**
        * Computed view model for API uri parameters.
@@ -88,7 +87,7 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
       apiParameters: {
         type: Array,
         notify: true,
-        computed: '_computeApiParameters(_server, version)'
+        computed: '_computeApiParameters(server, version)'
       },
       /**
        * A property to set to override AMF's model base URI information.
@@ -101,7 +100,7 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
       apiBaseUri: {
         type: String,
         notify: true,
-        computed: '_computeApiBaseUri(_server, version, _protocols, baseUri)'
+        computed: '_computeApiBaseUri(server, version, protocols, baseUri)'
       },
       /**
        * Generated view model for query parameters.
@@ -127,7 +126,7 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
       endpointUri: {
         type: String,
         notify: true,
-        computed: '_computeEndpointUri(_server, endpoint, baseUri, version)'
+        computed: '_computeEndpointUri(server, endpoint, baseUri, version)'
       },
       /**
        * Selected endponit relative path.
@@ -138,6 +137,28 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
         computed: '_computeEndpointPath(endpoint)'
       }
     };
+  }
+
+  static get observers() {
+    return [
+      '_amfModelChnaged(amfModel)'
+    ];
+  }
+  /**
+   * Computes values for `server`, `version`, and `protocol` properties if the
+   * model is a web api model.
+   * @param {Object} model The AMF model.
+   */
+  _amfModelChnaged(model) {
+    if (model instanceof Array) {
+      model = model[0];
+    }
+    if (!model || !this._hasType(model, ns.raml.vocabularies.document + 'Document')) {
+      return;
+    }
+    this.server = this._computeServer(model);
+    this.protocols = this._computeProtocols(model);
+    this.version = this._computeApiVersion(model);
   }
   /**
    * Computes `apiBaseUri` property when `amfModel` change.
@@ -284,11 +305,24 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
    * The selection (id) can be for endpoint or for a method.
    * This tries endpoint first and then method.
    *
-   * @param {Object} webApi A WebApi amf shape.
+   * @param {Object} api WebApi or EndPoint AMF shape.
    * @param {String} id Endpoint/method selection
    * @return {Object|undefined} Endpoint model.
    */
-  _computeModelEndpointModel(webApi, id) {
+  _computeModelEndpointModel(api, id) {
+    if (!api) {
+      return;
+    }
+    if (api instanceof Array) {
+      api = api[0];
+    }
+    if (this._hasType(api, ns.raml.vocabularies.http + 'EndPoint')) {
+      return api;
+    }
+    const webApi = this._computeWebApi(api);
+    if (!webApi || !id) {
+      return;
+    }
     let model = this._computeEndpointModel(webApi, id);
     if (model) {
       return model;
@@ -298,6 +332,29 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
       return;
     }
     return this._computeMethodEndpoint(webApi, model['@id']);
+  }
+
+  _computeMethodAmfModel(model, selected) {
+    if (!model || !selected) {
+      return;
+    }
+    if (model instanceof Array) {
+      model = model[0];
+    }
+    if (this._hasType(model, ns.raml.vocabularies.document + 'Document')) {
+      const webApi = this._computeWebApi(model);
+      return this._computeMethodModel(webApi, selected);
+    }
+    const key = this._getAmfKey(ns.w3.hydra.supportedOperation);
+    const methods = this._ensureArray(model[key]);
+    if (!methods) {
+      return;
+    }
+    for (let i = 0; i < methods.length; i++) {
+      if (methods[i]['@id'] === selected) {
+        return methods[i];
+      }
+    }
   }
 }
 window.customElements.define('api-url-data-model', ApiUrlDataModel);

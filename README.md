@@ -13,6 +13,14 @@ data model.
 This component creates a view model used in request forms from selected endpoint
 or HTTP method.
 
+
+The component computes all required values from AMF's WebApi model.
+
+When using partial query model the `server`, `protocols`, and `version`
+model must be set manually as partial model won't have this information.
+
+After reseting the model to full AMF WebApi model the values are updated.
+
 ### API components
 
 This components is a part of API components ecosystem: https://elements.advancedrestclient.com/

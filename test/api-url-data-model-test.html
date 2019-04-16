@@ -67,21 +67,15 @@
             assert.lengthOf(result, 1);
           });
 
-          test('_webApi is computed', () => {
-            const key = element._getAmfKey(ns.schema.webApi);
-            assert.typeOf(element._webApi, 'object');
-            assert.equal(element._webApi['@type'][0], key);
-          });
-
-          test('_server is computed', () => {
+          test('server is computed', () => {
             const key = element._getAmfKey(ns.raml.vocabularies.http + 'Server');
-            assert.typeOf(element._server, 'object');
-            assert.equal(element._server['@type'][0], key);
+            assert.typeOf(element.server, 'object');
+            assert.equal(element.server['@type'][0], key);
           });
 
-          test('_protocols is computed', () => {
-            assert.typeOf(element._protocols, 'array');
-            assert.deepEqual(element._protocols, ['HTTP', 'HTTPS']);
+          test('protocols is computed', () => {
+            assert.typeOf(element.protocols, 'array');
+            assert.deepEqual(element.protocols, ['HTTP', 'HTTPS']);
           });
 
           test('version is computed', () => {
@@ -361,21 +355,15 @@
             assert.lengthOf(result, 0);
           });
 
-          test('_webApi is computed', () => {
-            const key = element._getAmfKey(ns.schema.webApi);
-            assert.typeOf(element._webApi, 'object');
-            assert.equal(element._webApi['@type'][0], key);
-          });
-
-          test('_server is computed', () => {
+          test('server is computed', () => {
             const key = element._getAmfKey(ns.raml.vocabularies.http + 'Server');
-            assert.typeOf(element._server, 'object');
-            assert.equal(element._server['@type'][0], key);
+            assert.typeOf(element.server, 'object');
+            assert.equal(element.server['@type'][0], key);
           });
 
-          test('_protocols is computed', () => {
-            assert.typeOf(element._protocols, 'array');
-            assert.deepEqual(element._protocols, ['http']);
+          test('protocols is computed', () => {
+            assert.typeOf(element.protocols, 'array');
+            assert.deepEqual(element.protocols, ['http']);
           });
 
           test('version is computed', () => {
@@ -533,6 +521,59 @@
             const result = element._uriParamsFromMethod(method);
             assert.typeOf(result, 'array');
           });
+        });
+      });
+    });
+
+    suite('Partial model', () => {
+      let element;
+      let amf;
+      suiteSetup(() => {
+        return AmfLoader.load(false, 'partial-model/endpoint')
+        .then((model) => amf = model);
+      });
+
+      setup(() => {
+        element = fixture('Basic');
+        element.amfModel = amf;
+        element.selected = '#69';
+      });
+
+      test('server is undefined', () => {
+        assert.isUndefined(element.server);
+      });
+
+      test('server can be set', () => {
+        return AmfLoader.load(false, 'partial-model/summary')
+        .then((summary) => {
+          element.server = element._computeServer(summary);
+          assert.typeOf(element.queryModel, 'array');
+          assert.lengthOf(element.queryModel, 7);
+        });
+      });
+
+      test('server can be set', () => {
+        return AmfLoader.load(false, 'partial-model/summary')
+        .then((summary) => {
+          element.server = element._computeServer(summary);
+          assert.typeOf(element.queryModel, 'array');
+          assert.lengthOf(element.queryModel, 7);
+        });
+      });
+
+      test('apiBaseUri is computed from server property', () => {
+        return AmfLoader.load(false, 'partial-model/summary')
+        .then((summary) => {
+          element.server = element._computeServer(summary);
+          assert.equal(element.apiBaseUri, 'http://petstore.swagger.io/v2');
+        });
+      });
+
+      test('endpointUri is computed from server property', () => {
+        return AmfLoader.load(false, 'partial-model/summary')
+        .then((summary) => {
+          element.server = element._computeServer(summary);
+          assert.equal(element.endpointUri, 'http://petstore.swagger.io/v2/api/user');
         });
       });
     });
