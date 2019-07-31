@@ -5,18 +5,12 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   api-url-data-model.html
+ *   api-url-data-model.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
-
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
-/// <reference path="../raml-aware/raml-aware.d.ts" />
-/// <reference path="../api-view-model-transformer/api-view-model-transformer.d.ts" />
-/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
 
 declare namespace ApiElements {
 
@@ -24,9 +18,16 @@ declare namespace ApiElements {
    * `api-url-data-model`
    * An element to generate view model for api-url-editor and api-url-params-editor
    * elements from AMF model
+   *
+   * The component computes all required values from AMF's WebApi model.
+   *
+   * When using partial query model the `server`, `protocols`, and `version`
+   * model must be set manually as partial model won't have this information.
+   *
+   * After reseting the model to full AMF WebApi model the values are updated.
    */
   class ApiUrlDataModel extends
-    ApiElements.AmfHelperMixin(
+    AmfHelperMixin(
     Object) {
 
     /**
@@ -37,25 +38,29 @@ declare namespace ApiElements {
     aware: string|null|undefined;
 
     /**
-     * Computed value of WebApi amf shape.
+     * Computed value of server definition from the AMF model.
+     *
+     * The value can be set manually but then the `amfModel` property chnage to
+     * an AMF WebApi shape it will be computed from the model.
      */
-    readonly _webApi: object|null|undefined;
-
-    /**
-     * Computed value pof server definition from the AMF model.
-     */
-    readonly _server: object|null|undefined;
+    server: object|null|undefined;
 
     /**
      * List of supported protocols.
      * Required to compute base URI in some cases.
+     *
+     * The value can be set manually but then the `amfModel` property chnage to
+     * an AMF WebApi shape it will be computed from the model.
      */
-    readonly _protocols: object|null|undefined;
+    protocols: object|null|undefined;
 
     /**
-     * API version name
+     * API version name.
+     *
+     * The value can be set manually but then the `amfModel` property chnage to
+     * an AMF WebApi shape it will be computed from the model.
      */
-    readonly version: string|null|undefined;
+    version: string|null|undefined;
 
     /**
      * The `@id` property of selected endpoint and method to compute
@@ -108,6 +113,14 @@ declare namespace ApiElements {
      * Selected endponit relative path.
      */
     readonly endpointPath: string|null|undefined;
+
+    /**
+     * Computes values for `server`, `version`, and `protocol` properties if the
+     * model is a web api model.
+     *
+     * @param model The AMF model.
+     */
+    _amfModelChnaged(model: object|null): void;
 
     /**
      * Computes `apiBaseUri` property when `amfModel` change.
@@ -167,14 +180,20 @@ declare namespace ApiElements {
      * The selection (id) can be for endpoint or for a method.
      * This tries endpoint first and then method.
      *
-     * @param webApi A WebApi amf shape.
+     * @param api WebApi or EndPoint AMF shape.
      * @param id Endpoint/method selection
      * @returns Endpoint model.
      */
-    _computeModelEndpointModel(webApi: object|null, id: String|null): object|null|undefined;
+    _computeModelEndpointModel(api: object|null, id: String|null): object|null|undefined;
+    _computeMethodAmfModel(model: any, selected: any): any;
   }
 }
 
-interface HTMLElementTagNameMap {
-  "api-url-data-model": ApiElements.ApiUrlDataModel;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "api-url-data-model": ApiElements.ApiUrlDataModel;
+  }
 }
+
+export {};

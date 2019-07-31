@@ -140,49 +140,13 @@
 "@type": "rdfs:Seq",
 "rdfs:_1": [
 {
-"@id": "#737",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "development",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#737/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#737"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(23,11)-(23,22)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"rdfs:_2": [
-{
 "@id": "#738",
 "@type": [
 "data:Scalar"
 ],
 "data:value": [
 {
-"@value": "staging",
+"@value": "development",
 "@type": "xsd:string"
 }
 ],
@@ -201,7 +165,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(23,24)-(23,31)]"
+"@value": "[(23,11)-(23,22)]"
 }
 ]
 }
@@ -210,7 +174,7 @@
 ]
 }
 ],
-"rdfs:_3": [
+"rdfs:_2": [
 {
 "@id": "#739",
 "@type": [
@@ -218,7 +182,7 @@
 ],
 "data:value": [
 {
-"@value": "qa",
+"@value": "staging",
 "@type": "xsd:string"
 }
 ],
@@ -237,7 +201,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(23,33)-(23,35)]"
+"@value": "[(23,24)-(23,31)]"
 }
 ]
 }
@@ -246,7 +210,7 @@
 ]
 }
 ],
-"rdfs:_4": [
+"rdfs:_3": [
 {
 "@id": "#740",
 "@type": [
@@ -254,7 +218,7 @@
 ],
 "data:value": [
 {
-"@value": "production",
+"@value": "qa",
 "@type": "xsd:string"
 }
 ],
@@ -269,6 +233,42 @@
 "sourcemaps:element": [
 {
 "@value": "amf://id#740"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,33)-(23,35)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"rdfs:_4": [
+{
+"@id": "#741",
+"@type": [
+"data:Scalar"
+],
+"data:value": [
+{
+"@value": "production",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#741/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#741"
 }
 ],
 "sourcemaps:value": [
@@ -423,7 +423,7 @@
 ]
 },
 {
-"@id": "#741",
+"@id": "#742",
 "@type": [
 "raml-http:Parameter",
 "doc:DomainElement"
@@ -445,7 +445,7 @@
 ],
 "raml-http:schema": [
 {
-"@id": "#742",
+"@id": "#743",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -466,7 +466,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#741/source-map",
+"@id": "#742/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -474,7 +474,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#741"
+"@value": "amf://id#742"
 }
 ],
 "sourcemaps:value": [
@@ -553,7 +553,7 @@
 ],
 "schema-org:documentation": [
 {
-"@id": "#743",
+"@id": "#744",
 "@type": [
 "schema-org:CreativeWork",
 "doc:DomainElement"
@@ -570,7 +570,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#743/source-map",
+"@id": "#744/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -590,7 +590,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#743"
+"@value": "amf://id#744"
 }
 ],
 "sourcemaps:value": [
@@ -3077,7 +3077,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(17,4)-(18,0)]"
+"@value": "[(17,4)-(17,8)]"
 }
 ]
 }
@@ -3091,7 +3091,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,4)-(23,0)]"
+"@value": "[(22,4)-(22,15)]"
 }
 ]
 },
@@ -3103,7 +3103,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(19,4)-(20,0)]"
+"@value": "[(19,4)-(19,16)]"
 }
 ]
 },
@@ -3115,7 +3115,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(17,4)-(18,0)]"
+"@value": "[(17,4)-(17,16)]"
 }
 ]
 },
@@ -3127,7 +3127,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(16,2)-(24,0)]"
+"@value": "[(16,2)-(23,19)]"
 }
 ]
 },
@@ -3139,7 +3139,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(20,4)-(21,0)]"
+"@value": "[(20,4)-(20,14)]"
 }
 ]
 },
@@ -3151,7 +3151,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,4)-(19,0)]"
+"@value": "[(18,4)-(18,43)]"
 }
 ]
 }
@@ -3175,7 +3175,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(23,4)-(24,0)]"
+"@value": "[(23,4)-(23,19)]"
 }
 ]
 },
@@ -3187,7 +3187,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(16,2)-(24,0)]"
+"@value": "[(16,2)-(23,19)]"
 }
 ]
 },
@@ -3199,7 +3199,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,4)-(19,0)]"
+"@value": "[(18,4)-(18,43)]"
 }
 ]
 }
@@ -3440,7 +3440,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(25,4)-(26,0)]"
+"@value": "[(25,4)-(25,8)]"
 }
 ]
 }
@@ -3454,7 +3454,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(29,4)-(30,0)]"
+"@value": "[(29,4)-(29,14)]"
 }
 ]
 },
@@ -3466,7 +3466,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(27,4)-(28,0)]"
+"@value": "[(27,4)-(27,14)]"
 }
 ]
 },
@@ -3478,7 +3478,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(24,2)-(31,0)]"
+"@value": "[(24,2)-(30,19)]"
 }
 ]
 },
@@ -3490,7 +3490,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(25,4)-(26,0)]"
+"@value": "[(25,4)-(25,16)]"
 }
 ]
 },
@@ -3502,7 +3502,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(26,4)-(27,0)]"
+"@value": "[(26,4)-(26,44)]"
 }
 ]
 }
@@ -3526,7 +3526,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(30,4)-(31,0)]"
+"@value": "[(30,4)-(30,19)]"
 }
 ]
 },
@@ -3538,7 +3538,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(24,2)-(31,0)]"
+"@value": "[(24,2)-(30,19)]"
 }
 ]
 },
@@ -3550,7 +3550,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(26,4)-(27,0)]"
+"@value": "[(26,4)-(26,44)]"
 }
 ]
 }
@@ -3750,7 +3750,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(32,4)-(33,0)]"
+"@value": "[(32,4)-(32,8)]"
 }
 ]
 }
@@ -3776,7 +3776,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(32,4)-(33,0)]"
+"@value": "[(32,4)-(32,16)]"
 }
 ]
 },
@@ -3788,7 +3788,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(31,2)-(40,0)]"
+"@value": "[(31,2)-(39,19)]"
 }
 ]
 },
@@ -3800,7 +3800,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(38,4)-(39,0)]"
+"@value": "[(38,4)-(38,27)]"
 }
 ]
 }
@@ -3824,7 +3824,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(39,4)-(40,0)]"
+"@value": "[(39,4)-(39,19)]"
 }
 ]
 },
@@ -3836,7 +3836,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(31,2)-(40,0)]"
+"@value": "[(31,2)-(39,19)]"
 }
 ]
 },
@@ -4374,7 +4374,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(54,12)-(55,0)]"
+"@value": "[(54,12)-(54,16)]"
 }
 ]
 }
@@ -4388,7 +4388,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(56,12)-(57,0)]"
+"@value": "[(56,12)-(56,68)]"
 }
 ]
 },
@@ -4400,7 +4400,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(53,10)-(58,0)]"
+"@value": "[(53,10)-(57,35)]"
 }
 ]
 }
@@ -4434,7 +4434,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(55,12)-(56,0)]"
+"@value": "[(55,12)-(55,26)]"
 }
 ]
 },
@@ -4446,7 +4446,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(53,10)-(58,0)]"
+"@value": "[(53,10)-(57,35)]"
 }
 ]
 }
@@ -4608,7 +4608,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(59,12)-(60,0)]"
+"@value": "[(59,12)-(59,16)]"
 }
 ]
 }
@@ -4646,7 +4646,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(59,12)-(60,0)]"
+"@value": "[(59,12)-(59,24)]"
 }
 ]
 }
@@ -4680,7 +4680,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(60,12)-(61,0)]"
+"@value": "[(60,12)-(60,26)]"
 }
 ]
 },
@@ -4721,7 +4721,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(51,8)-(52,0)]"
+"@value": "[(51,8)-(51,12)]"
 }
 ]
 }
@@ -5005,7 +5005,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(75,12)-(76,0)]"
+"@value": "[(75,12)-(75,16)]"
 }
 ]
 }
@@ -5019,7 +5019,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(78,12)-(79,0)]"
+"@value": "[(78,12)-(78,63)]"
 }
 ]
 },
@@ -5031,7 +5031,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(74,10)-(79,0)]"
+"@value": "[(74,10)-(78,63)]"
 }
 ]
 },
@@ -5043,7 +5043,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(75,12)-(76,0)]"
+"@value": "[(75,12)-(75,25)]"
 }
 ]
 }
@@ -5077,7 +5077,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(76,12)-(77,0)]"
+"@value": "[(76,12)-(76,26)]"
 }
 ]
 },
@@ -5089,7 +5089,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(74,10)-(79,0)]"
+"@value": "[(74,10)-(78,63)]"
 }
 ]
 }
@@ -5251,7 +5251,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(80,12)-(81,0)]"
+"@value": "[(80,12)-(80,16)]"
 }
 ]
 }
@@ -5265,7 +5265,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(81,12)-(82,0)]"
+"@value": "[(81,12)-(81,69)]"
 }
 ]
 },
@@ -5277,7 +5277,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(79,10)-(84,0)]"
+"@value": "[(79,10)-(83,26)]"
 }
 ]
 },
@@ -5289,7 +5289,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(80,12)-(81,0)]"
+"@value": "[(80,12)-(80,24)]"
 }
 ]
 }
@@ -5323,7 +5323,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(83,12)-(84,0)]"
+"@value": "[(83,12)-(83,26)]"
 }
 ]
 },
@@ -5335,7 +5335,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(79,10)-(84,0)]"
+"@value": "[(79,10)-(83,26)]"
 }
 ]
 }
@@ -5369,7 +5369,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(72,8)-(73,0)]"
+"@value": "[(72,8)-(72,12)]"
 }
 ]
 }
@@ -5383,7 +5383,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(71,8)-(72,0)]"
+"@value": "[(71,8)-(71,28)]"
 }
 ]
 },
@@ -5395,7 +5395,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(70,6)-(84,0)]"
+"@value": "[(70,6)-(83,26)]"
 }
 ]
 }
@@ -5419,7 +5419,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(70,6)-(84,0)]"
+"@value": "[(70,6)-(83,26)]"
 }
 ]
 }
@@ -5455,7 +5455,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(65,2)-(84,0)]"
+"@value": "[(65,2)-(83,26)]"
 }
 ]
 }
@@ -5742,7 +5742,7 @@
 ]
 },
 {
-"@id": "#293",
+"@id": "#244",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5755,7 +5755,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#294",
+"@id": "#245",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -5779,7 +5779,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#294/source-map",
+"@id": "#245/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5787,7 +5787,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#294"
+"@value": "amf://id#245"
 }
 ],
 "sourcemaps:value": [
@@ -5813,7 +5813,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#294"
+"@value": "amf://id#245"
 }
 ],
 "sourcemaps:value": [
@@ -5851,7 +5851,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#293/source-map",
+"@id": "#244/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -5859,7 +5859,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#293"
+"@value": "amf://id#244"
 }
 ],
 "sourcemaps:value": [
@@ -5873,7 +5873,7 @@
 ]
 },
 {
-"@id": "#295",
+"@id": "#246",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -5886,7 +5886,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#296",
+"@id": "#247",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6018,7 +6018,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#296/source-map",
+"@id": "#247/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6026,7 +6026,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#296"
+"@value": "amf://id#247"
 }
 ],
 "sourcemaps:value": [
@@ -6064,7 +6064,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#296"
+"@value": "amf://id#247"
 }
 ],
 "sourcemaps:value": [
@@ -6102,7 +6102,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#295/source-map",
+"@id": "#246/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6122,7 +6122,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#295"
+"@value": "amf://id#246"
 }
 ],
 "sourcemaps:value": [
@@ -6136,7 +6136,7 @@
 ]
 },
 {
-"@id": "#297",
+"@id": "#249",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6149,7 +6149,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#298",
+"@id": "#250",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6173,7 +6173,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#298/source-map",
+"@id": "#250/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6181,7 +6181,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#298"
+"@value": "amf://id#250"
 }
 ],
 "sourcemaps:value": [
@@ -6207,7 +6207,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#298"
+"@value": "amf://id#250"
 }
 ],
 "sourcemaps:value": [
@@ -6245,7 +6245,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#297/source-map",
+"@id": "#249/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6253,7 +6253,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#297"
+"@value": "amf://id#249"
 }
 ],
 "sourcemaps:value": [
@@ -6267,7 +6267,7 @@
 ]
 },
 {
-"@id": "#301",
+"@id": "#253",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6280,7 +6280,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#302",
+"@id": "#254",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6304,7 +6304,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#302/source-map",
+"@id": "#254/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6324,7 +6324,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#302"
+"@value": "amf://id#254"
 }
 ],
 "sourcemaps:value": [
@@ -6350,7 +6350,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#301/source-map",
+"@id": "#253/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6358,7 +6358,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#301"
+"@value": "amf://id#253"
 }
 ],
 "sourcemaps:value": [
@@ -6372,7 +6372,7 @@
 ]
 },
 {
-"@id": "#299",
+"@id": "#251",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6385,7 +6385,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#300",
+"@id": "#252",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6409,7 +6409,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#300/source-map",
+"@id": "#252/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6417,7 +6417,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#300"
+"@value": "amf://id#252"
 }
 ],
 "sourcemaps:value": [
@@ -6443,7 +6443,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#300"
+"@value": "amf://id#252"
 }
 ],
 "sourcemaps:value": [
@@ -6481,7 +6481,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#299/source-map",
+"@id": "#251/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6489,7 +6489,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#299"
+"@value": "amf://id#251"
 }
 ],
 "sourcemaps:value": [
@@ -6503,7 +6503,7 @@
 ]
 },
 {
-"@id": "#303",
+"@id": "#255",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6516,7 +6516,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#304",
+"@id": "#256",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -6540,7 +6540,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#304/source-map",
+"@id": "#256/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6548,7 +6548,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#304"
+"@value": "amf://id#256"
 }
 ],
 "sourcemaps:value": [
@@ -6574,7 +6574,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#304"
+"@value": "amf://id#256"
 }
 ],
 "sourcemaps:value": [
@@ -6612,7 +6612,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#303/source-map",
+"@id": "#255/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -6620,7 +6620,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#303"
+"@value": "amf://id#255"
 }
 ],
 "sourcemaps:value": [
@@ -6634,7 +6634,7 @@
 ]
 },
 {
-"@id": "#305",
+"@id": "#257",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -6647,552 +6647,21 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#195",
+"@id": "#195/linked_5",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
 ],
-"shacl:closed": [
+"doc:link-target": [
 {
-"@value": false
+"@id": "#195"
 }
 ],
-"shacl:property": [
+"doc:link-label": [
 {
-"@id": "#196",
-"@type": [
-"shacl:PropertyShape",
-"shacl:Shape",
-"raml-shapes:Shape"
-],
-"shacl:path": [
-{
-"@id": "http://a.ml/vocabularies/data#url"
-}
-],
-"raml-shapes:range": [
-{
-"@id": "#197",
-"@type": [
-"raml-shapes:ScalarShape",
-"shacl:Shape",
-"raml-shapes:Shape",
-"doc:DomainElement"
-],
-"shacl:datatype": [
-{
-"@id": "http://www.w3.org/2001/XMLSchema#string"
-}
-],
-"shacl:name": [
-{
-"@value": "url"
-}
-],
-"schema-org:description": [
-{
-"@value": "The URL of the image.\nTo resize the image and crop it to a square, append the query string **?sz=x**, where x is the dimension in pixels of each side.\n"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#197/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:type-property-lexical-info": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#197"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(12,4)-(12,8)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(13,4)-(16,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#197"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(11,2)-(16,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "shacl:datatype"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(12,4)-(13,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:minCount": [
-{
-"@value": 1
-}
-],
-"shacl:name": [
-{
-"@value": "url"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#196/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#196"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(11,2)-(16,0)]"
-}
-]
-}
-]
-}
-]
-},
-{
-"@id": "#198",
-"@type": [
-"shacl:PropertyShape",
-"shacl:Shape",
-"raml-shapes:Shape"
-],
-"shacl:path": [
-{
-"@id": "http://a.ml/vocabularies/data#thumb"
-}
-],
-"raml-shapes:range": [
-{
-"@id": "#199",
-"@type": [
-"raml-shapes:ScalarShape",
-"shacl:Shape",
-"raml-shapes:Shape",
-"doc:DomainElement"
-],
-"shacl:datatype": [
-{
-"@id": "http://www.w3.org/2001/XMLSchema#string"
-}
-],
-"shacl:name": [
-{
-"@value": "thumb"
-}
-],
-"schema-org:name": [
-{
-"@value": "Thumbnail"
-}
-],
-"schema-org:description": [
-{
-"@value": "An URL to the thumbnail of the image. Thumbnails are 60x60px cropped images of the original image.\n"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#199/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:type-property-lexical-info": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#199"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(17,4)-(17,8)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(19,4)-(21,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "shacl:datatype"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(17,4)-(18,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#199"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(16,2)-(21,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:name"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(18,4)-(19,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:minCount": [
-{
-"@value": 1
-}
-],
-"shacl:name": [
-{
-"@value": "thumb"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#198/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#198"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(16,2)-(21,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:name": [
-{
-"@value": "type"
-}
-],
-"schema-org:description": [
-{
-"@value": "An image object representing an image object strored in the file store.\nThe image can be only included in the response. It has no effect if the Image appear in the\nrequest. Endpoint handles image creation on it's own and clients can't process images\nexcept of sending image data.\n"
-}
-],
-"doc:examples": [
-{
-"@id": "#200",
-"@type": [
-"doc:Example",
-"doc:DomainElement"
-],
-"doc:strict": [
-{
-"@value": true
-}
-],
-"doc:structuredValue": [
-{
-"@id": "#200",
-"@type": [
-"data:Object"
-],
-"data:thumb": [
-{
-"@id": "#201",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "https://domain.com/profile/pawel.psztyc/image/thumb",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#201/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#201"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(23,9)-(23,60)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:url": [
-{
-"@id": "#202",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "https://domain.com/profile/pawel.psztyc/image",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#202/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#202"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,7)-(22,52)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#200/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#200"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,0)-(24,0)]"
-}
-]
-}
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#200"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "url->[(22,2)-(23,0)]#thumb->[(23,2)-(24,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:raw": [
-{
-"@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#200/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:synthesized-field": [
-{
-"sourcemaps:element": [
-{
-"@value": "doc:strict"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "true"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "shacl:raw"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,0)-(24,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#200"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,0)-(24,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#195/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:source-vendor": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#195"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "RAML 1.0"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,0)-(9,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#195"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,0)-(24,0)]"
-}
-]
-}
-],
-"sourcemaps:type-property-lexical-info": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#195"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(9,0)-(9,4)]"
-}
-]
-}
-]
+"@value": "amf_inline_type_2"
 }
 ]
 }
@@ -7209,7 +6678,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#305/source-map",
+"@id": "#257/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7217,7 +6686,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#305"
+"@value": "amf://id#257"
 }
 ],
 "sourcemaps:value": [
@@ -7231,7 +6700,7 @@
 ]
 },
 {
-"@id": "#306",
+"@id": "#258",
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
@@ -7244,7 +6713,7 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#307",
+"@id": "#259",
 "@type": [
 "raml-shapes:ScalarShape",
 "shacl:Shape",
@@ -7268,7 +6737,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#307/source-map",
+"@id": "#259/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7276,7 +6745,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#307"
+"@value": "amf://id#259"
 }
 ],
 "sourcemaps:value": [
@@ -7302,7 +6771,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#307"
+"@value": "amf://id#259"
 }
 ],
 "sourcemaps:value": [
@@ -7340,7 +6809,7 @@
 ],
 "sourcemaps:sources": [
 {
-"@id": "#306/source-map",
+"@id": "#258/source-map",
 "@type": [
 "sourcemaps:SourceMap"
 ],
@@ -7348,7 +6817,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#306"
+"@value": "amf://id#258"
 }
 ],
 "sourcemaps:value": [
@@ -7847,7 +7316,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(201,33)-(201,35)]"
+"@value": "[(11,17)-(11,19)]"
 }
 ]
 }
@@ -7876,7 +7345,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(199,22)-(199,28)]"
+"@value": "[(9,6)-(9,12)]"
 }
 ]
 }
@@ -7890,7 +7359,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(201,22)-(201,33)]"
+"@value": "[(11,6)-(11,17)]"
 }
 ]
 },
@@ -7902,7 +7371,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(199,22)-(199,30)]"
+"@value": "[(9,6)-(9,14)]"
 }
 ]
 },
@@ -7914,7 +7383,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(197,20)-(197,26)]"
+"@value": "[(7,4)-(7,10)]"
 }
 ]
 },
@@ -7926,7 +7395,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(200,22)-(200,31)]"
+"@value": "[(10,6)-(10,15)]"
 }
 ]
 }
@@ -7960,7 +7429,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(197,20)-(197,26)]"
+"@value": "[(7,4)-(7,10)]"
 }
 ]
 }
@@ -8031,7 +7500,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(210,33)-(210,35)]"
+"@value": "[(20,17)-(20,19)]"
 }
 ]
 }
@@ -8060,7 +7529,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(208,22)-(208,28)]"
+"@value": "[(18,6)-(18,12)]"
 }
 ]
 }
@@ -8074,7 +7543,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(210,22)-(210,33)]"
+"@value": "[(20,6)-(20,17)]"
 }
 ]
 },
@@ -8086,7 +7555,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(208,22)-(208,30)]"
+"@value": "[(18,6)-(18,14)]"
 }
 ]
 },
@@ -8098,7 +7567,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(206,20)-(206,28)]"
+"@value": "[(16,4)-(16,12)]"
 }
 ]
 },
@@ -8110,7 +7579,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(209,22)-(209,31)]"
+"@value": "[(19,6)-(19,15)]"
 }
 ]
 }
@@ -8144,7 +7613,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(206,20)-(206,28)]"
+"@value": "[(16,4)-(16,12)]"
 }
 ]
 }
@@ -8215,7 +7684,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(219,33)-(219,35)]"
+"@value": "[(29,17)-(29,19)]"
 }
 ]
 }
@@ -8244,7 +7713,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(217,22)-(217,28)]"
+"@value": "[(27,6)-(27,12)]"
 }
 ]
 }
@@ -8258,7 +7727,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(219,22)-(219,33)]"
+"@value": "[(29,6)-(29,17)]"
 }
 ]
 },
@@ -8270,7 +7739,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(217,22)-(217,30)]"
+"@value": "[(27,6)-(27,14)]"
 }
 ]
 },
@@ -8282,7 +7751,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(215,20)-(215,32)]"
+"@value": "[(25,4)-(25,16)]"
 }
 ]
 },
@@ -8294,7 +7763,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(218,22)-(218,31)]"
+"@value": "[(28,6)-(28,15)]"
 }
 ]
 }
@@ -8328,7 +7797,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(215,20)-(215,32)]"
+"@value": "[(25,4)-(25,16)]"
 }
 ]
 }
@@ -8399,7 +7868,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(228,33)-(228,35)]"
+"@value": "[(38,17)-(38,19)]"
 }
 ]
 }
@@ -8428,7 +7897,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(226,22)-(226,28)]"
+"@value": "[(36,6)-(36,12)]"
 }
 ]
 }
@@ -8442,7 +7911,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(228,22)-(228,33)]"
+"@value": "[(38,6)-(38,17)]"
 }
 ]
 },
@@ -8454,7 +7923,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(226,22)-(226,30)]"
+"@value": "[(36,6)-(36,14)]"
 }
 ]
 },
@@ -8466,7 +7935,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(224,20)-(224,30)]"
+"@value": "[(34,4)-(34,14)]"
 }
 ]
 },
@@ -8478,7 +7947,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(227,22)-(227,31)]"
+"@value": "[(37,6)-(37,15)]"
 }
 ]
 }
@@ -8512,7 +7981,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(224,20)-(224,30)]"
+"@value": "[(34,4)-(34,14)]"
 }
 ]
 }
@@ -8583,7 +8052,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(237,33)-(237,35)]"
+"@value": "[(47,17)-(47,19)]"
 }
 ]
 }
@@ -8612,7 +8081,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(235,22)-(235,28)]"
+"@value": "[(45,6)-(45,12)]"
 }
 ]
 }
@@ -8626,7 +8095,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(237,22)-(237,33)]"
+"@value": "[(47,6)-(47,17)]"
 }
 ]
 },
@@ -8638,7 +8107,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(235,22)-(235,30)]"
+"@value": "[(45,6)-(45,14)]"
 }
 ]
 },
@@ -8650,7 +8119,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(233,20)-(233,27)]"
+"@value": "[(43,4)-(43,11)]"
 }
 ]
 },
@@ -8662,7 +8131,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(236,22)-(236,31)]"
+"@value": "[(46,6)-(46,15)]"
 }
 ]
 }
@@ -8696,7 +8165,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(233,20)-(233,27)]"
+"@value": "[(43,4)-(43,11)]"
 }
 ]
 }
@@ -8794,7 +8263,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(250,37)-(250,39)]"
+"@value": "[(60,21)-(60,23)]"
 }
 ]
 }
@@ -8823,7 +8292,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(248,26)-(248,32)]"
+"@value": "[(58,10)-(58,16)]"
 }
 ]
 }
@@ -8837,7 +8306,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(250,26)-(250,37)]"
+"@value": "[(60,10)-(60,21)]"
 }
 ]
 },
@@ -8849,7 +8318,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(248,26)-(248,34)]"
+"@value": "[(58,10)-(58,18)]"
 }
 ]
 },
@@ -8861,7 +8330,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(246,24)-(246,31)]"
+"@value": "[(56,8)-(56,15)]"
 }
 ]
 },
@@ -8873,7 +8342,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(249,26)-(249,35)]"
+"@value": "[(59,10)-(59,19)]"
 }
 ]
 }
@@ -8907,7 +8376,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(246,24)-(246,31)]"
+"@value": "[(56,8)-(56,15)]"
 }
 ]
 }
@@ -8978,7 +8447,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(259,37)-(259,39)]"
+"@value": "[(69,21)-(69,23)]"
 }
 ]
 }
@@ -9007,7 +8476,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(257,26)-(257,32)]"
+"@value": "[(67,10)-(67,16)]"
 }
 ]
 }
@@ -9021,7 +8490,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(259,26)-(259,37)]"
+"@value": "[(69,10)-(69,21)]"
 }
 ]
 },
@@ -9033,7 +8502,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(257,26)-(257,34)]"
+"@value": "[(67,10)-(67,18)]"
 }
 ]
 },
@@ -9045,7 +8514,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(255,24)-(255,33)]"
+"@value": "[(65,8)-(65,17)]"
 }
 ]
 },
@@ -9057,7 +8526,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(258,26)-(258,35)]"
+"@value": "[(68,10)-(68,19)]"
 }
 ]
 }
@@ -9091,7 +8560,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(255,24)-(255,33)]"
+"@value": "[(65,8)-(65,17)]"
 }
 ]
 }
@@ -9120,7 +8589,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(244,22)-(244,28)]"
+"@value": "[(54,6)-(54,12)]"
 }
 ]
 }
@@ -9134,7 +8603,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(242,20)-(242,29)]"
+"@value": "[(52,4)-(52,13)]"
 }
 ]
 }
@@ -9168,7 +8637,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(242,20)-(242,29)]"
+"@value": "[(52,4)-(52,13)]"
 }
 ]
 }
@@ -9239,7 +8708,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(270,33)-(270,35)]"
+"@value": "[(80,17)-(80,19)]"
 }
 ]
 }
@@ -9268,7 +8737,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(268,22)-(268,28)]"
+"@value": "[(78,6)-(78,12)]"
 }
 ]
 }
@@ -9282,7 +8751,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(270,22)-(270,33)]"
+"@value": "[(80,6)-(80,17)]"
 }
 ]
 },
@@ -9294,7 +8763,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(268,22)-(268,30)]"
+"@value": "[(78,6)-(78,14)]"
 }
 ]
 },
@@ -9306,7 +8775,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(266,20)-(266,31)]"
+"@value": "[(76,4)-(76,15)]"
 }
 ]
 },
@@ -9318,7 +8787,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(269,22)-(269,31)]"
+"@value": "[(79,6)-(79,15)]"
 }
 ]
 }
@@ -9352,7 +8821,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(266,20)-(266,31)]"
+"@value": "[(76,4)-(76,15)]"
 }
 ]
 }
@@ -9423,7 +8892,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(279,33)-(279,35)]"
+"@value": "[(89,17)-(89,19)]"
 }
 ]
 }
@@ -9452,7 +8921,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(277,22)-(277,28)]"
+"@value": "[(87,6)-(87,12)]"
 }
 ]
 }
@@ -9466,7 +8935,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(279,22)-(279,33)]"
+"@value": "[(89,6)-(89,17)]"
 }
 ]
 },
@@ -9478,7 +8947,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(277,22)-(277,30)]"
+"@value": "[(87,6)-(87,14)]"
 }
 ]
 },
@@ -9490,7 +8959,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(275,20)-(275,32)]"
+"@value": "[(85,4)-(85,16)]"
 }
 ]
 },
@@ -9502,7 +8971,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(278,22)-(278,31)]"
+"@value": "[(88,6)-(88,15)]"
 }
 ]
 }
@@ -9536,7 +9005,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(275,20)-(275,32)]"
+"@value": "[(85,4)-(85,16)]"
 }
 ]
 }
@@ -9607,7 +9076,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(288,33)-(288,35)]"
+"@value": "[(98,17)-(98,19)]"
 }
 ]
 }
@@ -9636,7 +9105,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(286,22)-(286,28)]"
+"@value": "[(96,6)-(96,12)]"
 }
 ]
 }
@@ -9650,7 +9119,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(288,22)-(288,33)]"
+"@value": "[(98,6)-(98,17)]"
 }
 ]
 },
@@ -9662,7 +9131,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(286,22)-(286,30)]"
+"@value": "[(96,6)-(96,14)]"
 }
 ]
 },
@@ -9674,7 +9143,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(284,20)-(284,28)]"
+"@value": "[(94,4)-(94,12)]"
 }
 ]
 },
@@ -9686,7 +9155,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(287,22)-(287,31)]"
+"@value": "[(97,6)-(97,15)]"
 }
 ]
 }
@@ -9720,7 +9189,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(284,20)-(284,28)]"
+"@value": "[(94,4)-(94,12)]"
 }
 ]
 }
@@ -10294,7 +9763,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(294,17)]"
+"@value": "[(1,0)-(189,22)]"
 }
 ]
 }
@@ -10308,7 +9777,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(193,18)-(193,24)]"
+"@value": "[(3,2)-(3,8)]"
 }
 ]
 }
@@ -10639,7 +10108,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(204,20)-(204,24)]"
+"@value": "[(204,14)-(205,0)]"
 }
 ]
 },
@@ -10771,7 +10240,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(205,26)-(205,36)]"
+"@value": "[(205,14)-(206,0)]"
 }
 ]
 },
@@ -10970,7 +10439,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(201,33)-(201,35)]"
+"@value": "[(11,17)-(11,19)]"
 }
 ]
 }
@@ -10999,7 +10468,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(199,22)-(199,28)]"
+"@value": "[(9,6)-(9,12)]"
 }
 ]
 }
@@ -11013,7 +10482,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(201,22)-(201,33)]"
+"@value": "[(11,6)-(11,17)]"
 }
 ]
 },
@@ -11025,7 +10494,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(199,22)-(199,30)]"
+"@value": "[(9,6)-(9,14)]"
 }
 ]
 },
@@ -11037,7 +10506,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(197,20)-(197,26)]"
+"@value": "[(7,4)-(7,10)]"
 }
 ]
 },
@@ -11049,7 +10518,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(200,22)-(200,31)]"
+"@value": "[(10,6)-(10,15)]"
 }
 ]
 }
@@ -11083,7 +10552,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(197,20)-(197,26)]"
+"@value": "[(7,4)-(7,10)]"
 }
 ]
 }
@@ -11154,7 +10623,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(210,33)-(210,35)]"
+"@value": "[(20,17)-(20,19)]"
 }
 ]
 }
@@ -11183,7 +10652,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(208,22)-(208,28)]"
+"@value": "[(18,6)-(18,12)]"
 }
 ]
 }
@@ -11197,7 +10666,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(210,22)-(210,33)]"
+"@value": "[(20,6)-(20,17)]"
 }
 ]
 },
@@ -11209,7 +10678,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(208,22)-(208,30)]"
+"@value": "[(18,6)-(18,14)]"
 }
 ]
 },
@@ -11221,7 +10690,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(206,20)-(206,28)]"
+"@value": "[(16,4)-(16,12)]"
 }
 ]
 },
@@ -11233,7 +10702,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(209,22)-(209,31)]"
+"@value": "[(19,6)-(19,15)]"
 }
 ]
 }
@@ -11267,7 +10736,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(206,20)-(206,28)]"
+"@value": "[(16,4)-(16,12)]"
 }
 ]
 }
@@ -11338,7 +10807,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(219,33)-(219,35)]"
+"@value": "[(29,17)-(29,19)]"
 }
 ]
 }
@@ -11367,7 +10836,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(217,22)-(217,28)]"
+"@value": "[(27,6)-(27,12)]"
 }
 ]
 }
@@ -11381,7 +10850,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(219,22)-(219,33)]"
+"@value": "[(29,6)-(29,17)]"
 }
 ]
 },
@@ -11393,7 +10862,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(217,22)-(217,30)]"
+"@value": "[(27,6)-(27,14)]"
 }
 ]
 },
@@ -11405,7 +10874,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(215,20)-(215,32)]"
+"@value": "[(25,4)-(25,16)]"
 }
 ]
 },
@@ -11417,7 +10886,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(218,22)-(218,31)]"
+"@value": "[(28,6)-(28,15)]"
 }
 ]
 }
@@ -11451,7 +10920,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(215,20)-(215,32)]"
+"@value": "[(25,4)-(25,16)]"
 }
 ]
 }
@@ -11522,7 +10991,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(228,33)-(228,35)]"
+"@value": "[(38,17)-(38,19)]"
 }
 ]
 }
@@ -11551,7 +11020,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(226,22)-(226,28)]"
+"@value": "[(36,6)-(36,12)]"
 }
 ]
 }
@@ -11565,7 +11034,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(228,22)-(228,33)]"
+"@value": "[(38,6)-(38,17)]"
 }
 ]
 },
@@ -11577,7 +11046,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(226,22)-(226,30)]"
+"@value": "[(36,6)-(36,14)]"
 }
 ]
 },
@@ -11589,7 +11058,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(224,20)-(224,30)]"
+"@value": "[(34,4)-(34,14)]"
 }
 ]
 },
@@ -11601,7 +11070,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(227,22)-(227,31)]"
+"@value": "[(37,6)-(37,15)]"
 }
 ]
 }
@@ -11635,7 +11104,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(224,20)-(224,30)]"
+"@value": "[(34,4)-(34,14)]"
 }
 ]
 }
@@ -11706,7 +11175,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(237,33)-(237,35)]"
+"@value": "[(47,17)-(47,19)]"
 }
 ]
 }
@@ -11735,7 +11204,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(235,22)-(235,28)]"
+"@value": "[(45,6)-(45,12)]"
 }
 ]
 }
@@ -11749,7 +11218,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(237,22)-(237,33)]"
+"@value": "[(47,6)-(47,17)]"
 }
 ]
 },
@@ -11761,7 +11230,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(235,22)-(235,30)]"
+"@value": "[(45,6)-(45,14)]"
 }
 ]
 },
@@ -11773,7 +11242,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(233,20)-(233,27)]"
+"@value": "[(43,4)-(43,11)]"
 }
 ]
 },
@@ -11785,7 +11254,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(236,22)-(236,31)]"
+"@value": "[(46,6)-(46,15)]"
 }
 ]
 }
@@ -11819,7 +11288,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(233,20)-(233,27)]"
+"@value": "[(43,4)-(43,11)]"
 }
 ]
 }
@@ -11917,7 +11386,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(250,37)-(250,39)]"
+"@value": "[(60,21)-(60,23)]"
 }
 ]
 }
@@ -11946,7 +11415,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(248,26)-(248,32)]"
+"@value": "[(58,10)-(58,16)]"
 }
 ]
 }
@@ -11960,7 +11429,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(250,26)-(250,37)]"
+"@value": "[(60,10)-(60,21)]"
 }
 ]
 },
@@ -11972,7 +11441,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(248,26)-(248,34)]"
+"@value": "[(58,10)-(58,18)]"
 }
 ]
 },
@@ -11984,7 +11453,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(246,24)-(246,31)]"
+"@value": "[(56,8)-(56,15)]"
 }
 ]
 },
@@ -11996,7 +11465,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(249,26)-(249,35)]"
+"@value": "[(59,10)-(59,19)]"
 }
 ]
 }
@@ -12030,7 +11499,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(246,24)-(246,31)]"
+"@value": "[(56,8)-(56,15)]"
 }
 ]
 }
@@ -12101,7 +11570,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(259,37)-(259,39)]"
+"@value": "[(69,21)-(69,23)]"
 }
 ]
 }
@@ -12130,7 +11599,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(257,26)-(257,32)]"
+"@value": "[(67,10)-(67,16)]"
 }
 ]
 }
@@ -12144,7 +11613,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(259,26)-(259,37)]"
+"@value": "[(69,10)-(69,21)]"
 }
 ]
 },
@@ -12156,7 +11625,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(257,26)-(257,34)]"
+"@value": "[(67,10)-(67,18)]"
 }
 ]
 },
@@ -12168,7 +11637,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(255,24)-(255,33)]"
+"@value": "[(65,8)-(65,17)]"
 }
 ]
 },
@@ -12180,7 +11649,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(258,26)-(258,35)]"
+"@value": "[(68,10)-(68,19)]"
 }
 ]
 }
@@ -12214,7 +11683,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(255,24)-(255,33)]"
+"@value": "[(65,8)-(65,17)]"
 }
 ]
 }
@@ -12243,7 +11712,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(244,22)-(244,28)]"
+"@value": "[(54,6)-(54,12)]"
 }
 ]
 }
@@ -12257,7 +11726,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(242,20)-(242,29)]"
+"@value": "[(52,4)-(52,13)]"
 }
 ]
 }
@@ -12291,7 +11760,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(242,20)-(242,29)]"
+"@value": "[(52,4)-(52,13)]"
 }
 ]
 }
@@ -12362,7 +11831,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(270,33)-(270,35)]"
+"@value": "[(80,17)-(80,19)]"
 }
 ]
 }
@@ -12391,7 +11860,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(268,22)-(268,28)]"
+"@value": "[(78,6)-(78,12)]"
 }
 ]
 }
@@ -12405,7 +11874,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(270,22)-(270,33)]"
+"@value": "[(80,6)-(80,17)]"
 }
 ]
 },
@@ -12417,7 +11886,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(268,22)-(268,30)]"
+"@value": "[(78,6)-(78,14)]"
 }
 ]
 },
@@ -12429,7 +11898,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(266,20)-(266,31)]"
+"@value": "[(76,4)-(76,15)]"
 }
 ]
 },
@@ -12441,7 +11910,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(269,22)-(269,31)]"
+"@value": "[(79,6)-(79,15)]"
 }
 ]
 }
@@ -12475,7 +11944,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(266,20)-(266,31)]"
+"@value": "[(76,4)-(76,15)]"
 }
 ]
 }
@@ -12546,7 +12015,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(279,33)-(279,35)]"
+"@value": "[(89,17)-(89,19)]"
 }
 ]
 }
@@ -12575,7 +12044,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(277,22)-(277,28)]"
+"@value": "[(87,6)-(87,12)]"
 }
 ]
 }
@@ -12589,7 +12058,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(279,22)-(279,33)]"
+"@value": "[(89,6)-(89,17)]"
 }
 ]
 },
@@ -12601,7 +12070,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(277,22)-(277,30)]"
+"@value": "[(87,6)-(87,14)]"
 }
 ]
 },
@@ -12613,7 +12082,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(275,20)-(275,32)]"
+"@value": "[(85,4)-(85,16)]"
 }
 ]
 },
@@ -12625,7 +12094,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(278,22)-(278,31)]"
+"@value": "[(88,6)-(88,15)]"
 }
 ]
 }
@@ -12659,7 +12128,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(275,20)-(275,32)]"
+"@value": "[(85,4)-(85,16)]"
 }
 ]
 }
@@ -12730,7 +12199,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(288,33)-(288,35)]"
+"@value": "[(98,17)-(98,19)]"
 }
 ]
 }
@@ -12759,7 +12228,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(286,22)-(286,28)]"
+"@value": "[(96,6)-(96,12)]"
 }
 ]
 }
@@ -12773,7 +12242,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(288,22)-(288,33)]"
+"@value": "[(98,6)-(98,17)]"
 }
 ]
 },
@@ -12785,7 +12254,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(286,22)-(286,30)]"
+"@value": "[(96,6)-(96,14)]"
 }
 ]
 },
@@ -12797,7 +12266,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(284,20)-(284,28)]"
+"@value": "[(94,4)-(94,12)]"
 }
 ]
 },
@@ -12809,7 +12278,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(287,22)-(287,31)]"
+"@value": "[(97,6)-(97,15)]"
 }
 ]
 }
@@ -12843,7 +12312,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(284,20)-(284,28)]"
+"@value": "[(94,4)-(94,12)]"
 }
 ]
 }
@@ -13417,7 +12886,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(294,17)]"
+"@value": "[(1,0)-(189,22)]"
 }
 ]
 }
@@ -13431,7 +12900,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(193,18)-(193,24)]"
+"@value": "[(3,2)-(3,8)]"
 }
 ]
 }
@@ -15342,7 +14811,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(74,14)-(75,0)]"
+"@value": "[(74,14)-(74,18)]"
 }
 ]
 }
@@ -15368,7 +14837,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(72,12)-(75,0)]"
+"@value": "[(72,12)-(74,33)]"
 }
 ]
 },
@@ -15380,7 +14849,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(73,14)-(74,0)]"
+"@value": "[(73,14)-(73,45)]"
 }
 ]
 }
@@ -15404,7 +14873,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(72,12)-(75,0)]"
+"@value": "[(72,12)-(74,33)]"
 }
 ]
 }
@@ -15548,7 +15017,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(76,14)-(77,0)]"
+"@value": "[(76,14)-(76,45)]"
 }
 ]
 },
@@ -15560,7 +15029,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(79,0)]"
+"@value": "[(1,0)-(78,21)]"
 }
 ]
 }
@@ -15584,7 +15053,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(79,0)]"
+"@value": "[(1,0)-(78,21)]"
 }
 ]
 }
@@ -15608,7 +15077,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(79,0)]"
+"@value": "[(1,0)-(78,21)]"
 }
 ]
 }
@@ -22039,7 +21508,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "                id: \"12345\"\n                onCall:\n                  firstname: nico\n                  lastname: ark\n                  kind: AcmeAdmin\n                  clearanceLevel: low\n                  phone: \"12321\"\n                Head:\n                  firstname: nico\n                  lastname: ark\n                  kind: AcmeManager\n                  reports:\n                    -\n                      firstname: nico\n                      lastname: ark\n                      kind: admin\n                  phone: \"123-23\"\n"
+"@value": "\n                id: \"12345\"\n                onCall:\n                  firstname: nico\n                  lastname: ark\n                  kind: AcmeAdmin\n                  clearanceLevel: low\n                  phone: \"12321\"\n                Head:\n                  firstname: nico\n                  lastname: ark\n                  kind: AcmeManager\n                  reports:\n                    -\n                      firstname: nico\n                      lastname: ark\n                      kind: admin\n                  phone: \"123-23\"\n"
 }
 ],
 "sourcemaps:sources": [
@@ -22083,7 +21552,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(340,0)-(357,0)]"
+"@value": "[(339,14)-(357,0)]"
 }
 ]
 }
@@ -22968,7 +22437,7 @@
 ],
 "doc:link-label": [
 {
-"@value": "amf_inline_type_2"
+"@value": "amf_inline_type_3"
 }
 ]
 }
@@ -23914,7 +23383,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(16,8)-(17,0)]"
+"@value": "[(16,8)-(16,12)]"
 }
 ]
 }
@@ -23928,7 +23397,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(17,8)-(18,0)]"
+"@value": "[(17,8)-(17,22)]"
 }
 ]
 },
@@ -23940,7 +23409,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(15,8)-(16,0)]"
+"@value": "[(15,8)-(15,47)]"
 }
 ]
 },
@@ -23952,7 +23421,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(14,6)-(19,0)]"
+"@value": "[(14,6)-(18,94)]"
 }
 ]
 },
@@ -23964,7 +23433,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(16,8)-(17,0)]"
+"@value": "[(16,8)-(16,21)]"
 }
 ]
 },
@@ -23976,7 +23445,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,8)-(19,0)]"
+"@value": "[(18,8)-(18,94)]"
 }
 ]
 }
@@ -24000,7 +23469,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,8)-(19,0)]"
+"@value": "[(18,8)-(18,94)]"
 }
 ]
 },
@@ -24012,7 +23481,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(14,6)-(19,0)]"
+"@value": "[(14,6)-(18,94)]"
 }
 ]
 }
@@ -24037,7 +23506,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(13,4)-(19,0)]"
+"@value": "[(13,4)-(18,94)]"
 }
 ]
 },
@@ -24049,7 +23518,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(12,2)-(19,0)]"
+"@value": "[(12,2)-(18,94)]"
 }
 ]
 }
@@ -25907,7 +25376,7 @@
 ],
 "doc:link-label": [
 {
-"@value": "amf_inline_type_3"
+"@value": "amf_inline_type_4"
 }
 ]
 }
@@ -27915,7 +27384,7 @@
 ],
 "doc:link-label": [
 {
-"@value": "amf_inline_type_4"
+"@value": "amf_inline_type_5"
 }
 ]
 }
@@ -28453,7 +27922,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(432,22)-(432,66)]"
+"@value": "[(432,12)-(433,0)]"
 }
 ]
 },
@@ -28730,7 +28199,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(16,8)-(17,0)]"
+"@value": "[(16,8)-(16,12)]"
 }
 ]
 }
@@ -28744,7 +28213,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(17,8)-(18,0)]"
+"@value": "[(17,8)-(17,22)]"
 }
 ]
 },
@@ -28756,7 +28225,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(15,8)-(16,0)]"
+"@value": "[(15,8)-(15,47)]"
 }
 ]
 },
@@ -28768,7 +28237,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(14,6)-(19,0)]"
+"@value": "[(14,6)-(18,94)]"
 }
 ]
 },
@@ -28780,7 +28249,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(16,8)-(17,0)]"
+"@value": "[(16,8)-(16,21)]"
 }
 ]
 },
@@ -28792,7 +28261,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,8)-(19,0)]"
+"@value": "[(18,8)-(18,94)]"
 }
 ]
 }
@@ -28816,7 +28285,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,8)-(19,0)]"
+"@value": "[(18,8)-(18,94)]"
 }
 ]
 },
@@ -28828,7 +28297,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(14,6)-(19,0)]"
+"@value": "[(14,6)-(18,94)]"
 }
 ]
 }
@@ -28853,7 +28322,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(13,4)-(19,0)]"
+"@value": "[(13,4)-(18,94)]"
 }
 ]
 },
@@ -28865,7 +28334,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(12,2)-(19,0)]"
+"@value": "[(12,2)-(18,94)]"
 }
 ]
 }
@@ -31218,7 +30687,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
+"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
 }
 ],
 "sourcemaps:sources": [
@@ -31262,7 +30731,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(46,0)-(53,0)]"
+"@value": "[(45,0)-(53,0)]"
 }
 ]
 }
@@ -34023,7 +33492,7 @@
 ],
 "shacl:name": [
 {
-"@value": "amf_inline_type_3"
+"@value": "amf_inline_type_4"
 }
 ],
 "schema-org:description": [
@@ -38045,7 +37514,7 @@
 ],
 "shacl:name": [
 {
-"@value": "type"
+"@value": "amf_inline_type_2"
 }
 ],
 "schema-org:description": [
@@ -38183,7 +37652,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+"@value": "\n  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
 }
 ],
 "sourcemaps:sources": [
@@ -38227,7 +37696,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,0)-(24,0)]"
+"@value": "[(21,0)-(24,0)]"
 }
 ]
 }
@@ -38242,7 +37711,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:source-vendor": [
+"sourcemaps:inline-element": [
 {
 "sourcemaps:element": [
 {
@@ -38251,7 +37720,21 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "RAML 1.0"
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#195"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(9,0)-(9,4)]"
 }
 ]
 }
@@ -38282,7 +37765,7 @@
 ]
 }
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:source-vendor": [
 {
 "sourcemaps:element": [
 {
@@ -38291,7 +37774,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(9,0)-(9,4)]"
+"@value": "RAML 1.0"
 }
 ]
 }
@@ -39680,7 +39163,7 @@
 ],
 "shacl:name": [
 {
-"@value": "amf_inline_type_4"
+"@value": "amf_inline_type_5"
 }
 ],
 "schema-org:description": [
@@ -41001,552 +40484,21 @@
 ],
 "raml-shapes:range": [
 {
-"@id": "#195",
+"@id": "#195/linked_6",
 "@type": [
 "shacl:NodeShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
 ],
-"shacl:closed": [
+"doc:link-target": [
 {
-"@value": false
+"@id": "#195"
 }
 ],
-"shacl:property": [
+"doc:link-label": [
 {
-"@id": "#196",
-"@type": [
-"shacl:PropertyShape",
-"shacl:Shape",
-"raml-shapes:Shape"
-],
-"shacl:path": [
-{
-"@id": "http://a.ml/vocabularies/data#url"
-}
-],
-"raml-shapes:range": [
-{
-"@id": "#197",
-"@type": [
-"raml-shapes:ScalarShape",
-"shacl:Shape",
-"raml-shapes:Shape",
-"doc:DomainElement"
-],
-"shacl:datatype": [
-{
-"@id": "http://www.w3.org/2001/XMLSchema#string"
-}
-],
-"shacl:name": [
-{
-"@value": "url"
-}
-],
-"schema-org:description": [
-{
-"@value": "The URL of the image.\nTo resize the image and crop it to a square, append the query string **?sz=x**, where x is the dimension in pixels of each side.\n"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#197/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:type-property-lexical-info": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#197"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(12,4)-(12,8)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(13,4)-(16,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#197"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(11,2)-(16,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "shacl:datatype"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(12,4)-(13,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:minCount": [
-{
-"@value": 1
-}
-],
-"shacl:name": [
-{
-"@value": "url"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#196/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#196"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(11,2)-(16,0)]"
-}
-]
-}
-]
-}
-]
-},
-{
-"@id": "#198",
-"@type": [
-"shacl:PropertyShape",
-"shacl:Shape",
-"raml-shapes:Shape"
-],
-"shacl:path": [
-{
-"@id": "http://a.ml/vocabularies/data#thumb"
-}
-],
-"raml-shapes:range": [
-{
-"@id": "#199",
-"@type": [
-"raml-shapes:ScalarShape",
-"shacl:Shape",
-"raml-shapes:Shape",
-"doc:DomainElement"
-],
-"shacl:datatype": [
-{
-"@id": "http://www.w3.org/2001/XMLSchema#string"
-}
-],
-"shacl:name": [
-{
-"@value": "thumb"
-}
-],
-"schema-org:name": [
-{
-"@value": "Thumbnail"
-}
-],
-"schema-org:description": [
-{
-"@value": "An URL to the thumbnail of the image. Thumbnails are 60x60px cropped images of the original image.\n"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#199/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:type-property-lexical-info": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#199"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(17,4)-(17,8)]"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(19,4)-(21,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "shacl:datatype"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(17,4)-(18,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#199"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(16,2)-(21,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:name"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(18,4)-(19,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:minCount": [
-{
-"@value": 1
-}
-],
-"shacl:name": [
-{
-"@value": "thumb"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#198/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#198"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(16,2)-(21,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:name": [
-{
-"@value": "type"
-}
-],
-"schema-org:description": [
-{
-"@value": "An image object representing an image object strored in the file store.\nThe image can be only included in the response. It has no effect if the Image appear in the\nrequest. Endpoint handles image creation on it's own and clients can't process images\nexcept of sending image data.\n"
-}
-],
-"doc:examples": [
-{
-"@id": "#200",
-"@type": [
-"doc:Example",
-"doc:DomainElement"
-],
-"doc:strict": [
-{
-"@value": true
-}
-],
-"doc:structuredValue": [
-{
-"@id": "#200",
-"@type": [
-"data:Object"
-],
-"data:thumb": [
-{
-"@id": "#201",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "https://domain.com/profile/pawel.psztyc/image/thumb",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#201/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#201"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(23,9)-(23,60)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"data:url": [
-{
-"@id": "#202",
-"@type": [
-"data:Scalar"
-],
-"data:value": [
-{
-"@value": "https://domain.com/profile/pawel.psztyc/image",
-"@type": "xsd:string"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#202/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#202"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,7)-(22,52)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#200/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#200"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,0)-(24,0)]"
-}
-]
-}
-],
-"sourcemaps:data-node-properties": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#200"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "url->[(22,2)-(23,0)]#thumb->[(23,2)-(24,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"shacl:raw": [
-{
-"@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#200/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:synthesized-field": [
-{
-"sourcemaps:element": [
-{
-"@value": "doc:strict"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "true"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "shacl:raw"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,0)-(24,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#200"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(22,0)-(24,0)]"
-}
-]
-}
-]
-}
-]
-}
-],
-"sourcemaps:sources": [
-{
-"@id": "#195/source-map",
-"@type": [
-"sourcemaps:SourceMap"
-],
-"sourcemaps:source-vendor": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#195"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "RAML 1.0"
-}
-]
-}
-],
-"sourcemaps:lexical": [
-{
-"sourcemaps:element": [
-{
-"@value": "schema-org:description"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,0)-(9,0)]"
-}
-]
-},
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#195"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(3,0)-(24,0)]"
-}
-]
-}
-],
-"sourcemaps:type-property-lexical-info": [
-{
-"sourcemaps:element": [
-{
-"@value": "amf://id#195"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(9,0)-(9,4)]"
-}
-]
-}
-]
+"@value": "amf_inline_type_2"
 }
 ]
 }
@@ -42193,7 +41145,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
+"@value": "\n  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
 }
 ],
 "sourcemaps:sources": [
@@ -42237,7 +41189,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(10,0)-(21,0)]"
+"@value": "[(9,0)-(21,0)]"
 }
 ]
 }
@@ -42627,7 +41579,7 @@
 ],
 "shacl:name": [
 {
-"@value": "type"
+"@value": "amf_inline_type_2"
 }
 ],
 "schema-org:description": [
@@ -42765,7 +41717,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+"@value": "\n  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
 }
 ],
 "sourcemaps:sources": [
@@ -42809,7 +41761,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,0)-(24,0)]"
+"@value": "[(21,0)-(24,0)]"
 }
 ]
 }
@@ -42824,7 +41776,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:source-vendor": [
+"sourcemaps:inline-element": [
 {
 "sourcemaps:element": [
 {
@@ -42833,7 +41785,21 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "RAML 1.0"
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#195"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(9,0)-(9,4)]"
 }
 ]
 }
@@ -42864,7 +41830,7 @@
 ]
 }
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:source-vendor": [
 {
 "sourcemaps:element": [
 {
@@ -42873,7 +41839,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(9,0)-(9,4)]"
+"@value": "RAML 1.0"
 }
 ]
 }
@@ -45707,7 +44673,7 @@
 ],
 "shacl:name": [
 {
-"@value": "type"
+"@value": "amf_inline_type_2"
 }
 ],
 "schema-org:description": [
@@ -45845,7 +44811,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+"@value": "\n  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
 }
 ],
 "sourcemaps:sources": [
@@ -45889,7 +44855,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,0)-(24,0)]"
+"@value": "[(21,0)-(24,0)]"
 }
 ]
 }
@@ -45904,7 +44870,7 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:source-vendor": [
+"sourcemaps:inline-element": [
 {
 "sourcemaps:element": [
 {
@@ -45913,7 +44879,21 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "RAML 1.0"
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#195"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(9,0)-(9,4)]"
 }
 ]
 }
@@ -45944,7 +44924,7 @@
 ]
 }
 ],
-"sourcemaps:type-property-lexical-info": [
+"sourcemaps:source-vendor": [
 {
 "sourcemaps:element": [
 {
@@ -45953,7 +44933,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(9,0)-(9,4)]"
+"@value": "RAML 1.0"
 }
 ]
 }
@@ -46604,7 +45584,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
+"@value": "\n  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
 }
 ],
 "sourcemaps:sources": [
@@ -46648,7 +45628,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(10,0)-(21,0)]"
+"@value": "[(9,0)-(21,0)]"
 }
 ]
 }
@@ -48824,7 +47804,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
+"@value": "\n  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"Wd3deef3rgrgf4r\"\n"
 }
 ],
 "sourcemaps:sources": [
@@ -48868,7 +47848,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(46,0)-(53,0)]"
+"@value": "[(45,0)-(53,0)]"
 }
 ]
 }
@@ -49234,7 +48214,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(304,22)-(312,0)]"
+"@value": "[(304,14)-(312,0)]"
 }
 ]
 },
@@ -49640,7 +48620,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(312,27)-(320,0)]"
+"@value": "[(312,14)-(320,0)]"
 }
 ]
 },
@@ -50212,7 +49192,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+"@value": "\n  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
 }
 ],
 "sourcemaps:sources": [
@@ -50256,7 +49236,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(22,0)-(24,0)]"
+"@value": "[(21,0)-(24,0)]"
 }
 ]
 }
@@ -57229,7 +56209,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(142,29)-(142,39)]"
+"@value": "[(142,10)-(143,0)]"
 }
 ]
 },
@@ -57450,7 +56430,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(143,25)-(143,37)]"
+"@value": "[(143,10)-(144,0)]"
 }
 ]
 },
@@ -57529,6 +56509,570 @@
 "sourcemaps:value": [
 {
 "@value": "[(140,8)-(141,0)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#195",
+"@type": [
+"shacl:NodeShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:closed": [
+{
+"@value": false
+}
+],
+"shacl:property": [
+{
+"@id": "#196",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#url"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#197",
+"@type": [
+"raml-shapes:ScalarShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"shacl:name": [
+{
+"@value": "url"
+}
+],
+"schema-org:description": [
+{
+"@value": "The URL of the image.\nTo resize the image and crop it to a square, append the query string **?sz=x**, where x is the dimension in pixels of each side.\n"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#197/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#197"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(12,4)-(12,8)]"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(13,4)-(16,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#197"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(11,2)-(16,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "shacl:datatype"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(12,4)-(13,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "url"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#196/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#196"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(11,2)-(16,0)]"
+}
+]
+}
+]
+}
+]
+},
+{
+"@id": "#198",
+"@type": [
+"shacl:PropertyShape",
+"shacl:Shape",
+"raml-shapes:Shape"
+],
+"shacl:path": [
+{
+"@id": "http://a.ml/vocabularies/data#thumb"
+}
+],
+"raml-shapes:range": [
+{
+"@id": "#199",
+"@type": [
+"raml-shapes:ScalarShape",
+"shacl:Shape",
+"raml-shapes:Shape",
+"doc:DomainElement"
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"shacl:name": [
+{
+"@value": "thumb"
+}
+],
+"schema-org:name": [
+{
+"@value": "Thumbnail"
+}
+],
+"schema-org:description": [
+{
+"@value": "An URL to the thumbnail of the image. Thumbnails are 60x60px cropped images of the original image.\n"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#199/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#199"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(17,4)-(17,8)]"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(19,4)-(21,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "shacl:datatype"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(17,4)-(18,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#199"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(16,2)-(21,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "schema-org:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(18,4)-(19,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:minCount": [
+{
+"@value": 1
+}
+],
+"shacl:name": [
+{
+"@value": "thumb"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#198/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#198"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(16,2)-(21,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:name": [
+{
+"@value": "amf_inline_type_2"
+}
+],
+"schema-org:description": [
+{
+"@value": "An image object representing an image object strored in the file store.\nThe image can be only included in the response. It has no effect if the Image appear in the\nrequest. Endpoint handles image creation on it's own and clients can't process images\nexcept of sending image data.\n"
+}
+],
+"doc:examples": [
+{
+"@id": "#200",
+"@type": [
+"doc:Example",
+"doc:DomainElement"
+],
+"doc:strict": [
+{
+"@value": true
+}
+],
+"doc:structuredValue": [
+{
+"@id": "#200",
+"@type": [
+"data:Object"
+],
+"data:thumb": [
+{
+"@id": "#201",
+"@type": [
+"data:Scalar"
+],
+"data:value": [
+{
+"@value": "https://domain.com/profile/pawel.psztyc/image/thumb",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#201/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#201"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(23,9)-(23,60)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"data:url": [
+{
+"@id": "#202",
+"@type": [
+"data:Scalar"
+],
+"data:value": [
+{
+"@value": "https://domain.com/profile/pawel.psztyc/image",
+"@type": "xsd:string"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#202/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#202"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,7)-(22,52)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#200/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#200"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,0)-(24,0)]"
+}
+]
+}
+],
+"sourcemaps:data-node-properties": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#200"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "url->[(22,2)-(23,0)]#thumb->[(23,2)-(24,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"shacl:raw": [
+{
+"@value": "\n  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#200/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:synthesized-field": [
+{
+"sourcemaps:element": [
+{
+"@value": "doc:strict"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "true"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "shacl:raw"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(22,0)-(24,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#200"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(21,0)-(24,0)]"
+}
+]
+}
+]
+}
+]
+}
+],
+"sourcemaps:sources": [
+{
+"@id": "#195/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:inline-element": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#195"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#195"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(9,0)-(9,4)]"
+}
+]
+}
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "schema-org:description"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(3,0)-(9,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#195"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(3,0)-(24,0)]"
+}
+]
+}
+],
+"sourcemaps:source-vendor": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#195"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "RAML 1.0"
 }
 ]
 }
@@ -58410,7 +57954,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+"@value": "\n      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
 }
 ],
 "sourcemaps:sources": [
@@ -58454,7 +57998,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,0)-(22,0)]"
+"@value": "[(17,4)-(22,0)]"
 }
 ]
 }
@@ -58513,6 +58057,11 @@
 ]
 }
 ]
+}
+],
+"shacl:name": [
+{
+"@value": "reports"
 }
 ],
 "sourcemaps:sources": [
@@ -60076,7 +59625,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+"@value": "\n      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
 }
 ],
 "sourcemaps:sources": [
@@ -60120,7 +59669,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,0)-(22,0)]"
+"@value": "[(17,4)-(22,0)]"
 }
 ]
 }
@@ -60179,6 +59728,11 @@
 ]
 }
 ]
+}
+],
+"shacl:name": [
+{
+"@value": "reports"
 }
 ],
 "sourcemaps:sources": [
@@ -60747,7 +60301,7 @@
 ],
 "shacl:name": [
 {
-"@value": "amf_inline_type_2"
+"@value": "amf_inline_type_3"
 }
 ],
 "sourcemaps:sources": [
@@ -61877,7 +61431,7 @@
 ],
 "shacl:name": [
 {
-"@value": "amf_inline_type_3"
+"@value": "amf_inline_type_4"
 }
 ],
 "schema-org:description": [
@@ -62657,7 +62211,7 @@
 ],
 "shacl:name": [
 {
-"@value": "amf_inline_type_4"
+"@value": "amf_inline_type_5"
 }
 ],
 "schema-org:description": [
@@ -64095,7 +63649,7 @@
 ],
 "shacl:raw": [
 {
-"@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+"@value": "\n      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
 }
 ],
 "sourcemaps:sources": [
@@ -64139,7 +63693,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(18,0)-(22,0)]"
+"@value": "[(17,4)-(22,0)]"
 }
 ]
 }
