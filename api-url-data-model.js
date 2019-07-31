@@ -1,9 +1,7 @@
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
-import '../../@polymer/polymer/lib/elements/dom-if.js';
-import '../../@api-components/raml-aware/raml-aware.js';
-import '../../@api-components/api-view-model-transformer/api-view-model-transformer.js';
-import {AmfHelperMixin, ns} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { LitElement, html, css } from 'lit-element';
+import '@api-components/raml-aware/raml-aware.js';
+import '@api-components/api-view-model-transformer/api-view-model-transformer.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 /**
  * `api-url-data-model`
  * An element to generate view model for api-url-editor and api-url-params-editor
@@ -17,19 +15,21 @@ import {AmfHelperMixin, ns} from '../../@api-components/amf-helper-mixin/amf-hel
  * After reseting the model to full AMF WebApi model the values are updated.
  *
  * @customElement
- * @polymer
  * @demo demo/index.html
  * @appliesMixin AmfHelperMixin
  * @memberof ApiElements
  */
-class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
-  static get template() {
+class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
+  static get styles() {
+    return css`:host {display: none !important;}`;
+  }
+
+  render() {
+    const { aware, amf } = this;
     return html`
-    <style>:host {display: none;}</style>
-    <template is="dom-if" if="[[aware]]">
-      <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
-    </template>
-    <api-view-model-transformer amf-model="[[amfModel]]" id="transformer"></api-view-model-transformer>`;
+    ${aware ?
+      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
+    <api-view-model-transformer .amf="${amf}"></api-view-model-transformer>`;
   }
 
   static get properties() {
@@ -39,138 +39,470 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
        * If this element is used with other aware elements, it updates
        * `webApi` when aware value change.
        */
-      aware: String,
+      aware: { type: String },
       /**
-       * Computed value of server definition from the AMF model.
-       *
-       * The value can be set manually but then the `amfModel` property chnage to
-       * an AMF WebApi shape it will be computed from the model.
+       * A value to override API's base URI.
        */
-      server: {type: Object},
-      /**
-       * List of supported protocols.
-       * Required to compute base URI in some cases.
-       *
-       * The value can be set manually but then the `amfModel` property chnage to
-       * an AMF WebApi shape it will be computed from the model.
-       */
-      protocols: {type: Object},
-      /**
-       * API version name.
-       *
-       * The value can be set manually but then the `amfModel` property chnage to
-       * an AMF WebApi shape it will be computed from the model.
-       */
-      version: {type: String},
+      apiUri: { type: String },
       /**
        * The `@id` property of selected endpoint and method to compute
        * data models for.
        */
-      selected: String,
-      /**
-       * Computed model of selected endpoint
-       */
-      endpoint: {
-        type: Object,
-        computed: '_computeModelEndpointModel(amfModel, selected)'
-      },
-      /**
-       * Computed model of HTTP method.
-       */
-      method: {
-        type: Object,
-        computed: '_computeMethodAmfModel(amfModel, selected)'
-      },
-      /**
-       * Computed view model for API uri parameters.
-       */
-      apiParameters: {
-        type: Array,
-        notify: true,
-        computed: '_computeApiParameters(server, version)'
-      },
-      /**
-       * A property to set to override AMF's model base URI information.
-       * When this property is set, the `endpointUri` property is recalculated.
-       */
-      baseUri: String,
-      /**
-       * Computed value of API base URI.
-       */
-      apiBaseUri: {
-        type: String,
-        notify: true,
-        computed: '_computeApiBaseUri(server, version, protocols, baseUri)'
-      },
-      /**
-       * Generated view model for query parameters.
-       */
-      queryModel: {
-        type: Array,
-        computed: '_computeQueryModel(method)',
-        notify: true
-      },
-      /**
-       * Generated view model for path parameters
-       *
-       * @type {Object}
-       */
-      pathModel: {
-        type: Array,
-        computed: '_computePathModel(endpoint, method, apiParameters)',
-        notify: true
-      },
-      /**
-       * Computed value of full endpoint URI when selection has been made.
-       */
-      endpointUri: {
-        type: String,
-        notify: true,
-        computed: '_computeEndpointUri(server, endpoint, baseUri, version)'
-      },
-      /**
-       * Selected endponit relative path.
-       */
-      endpointPath: {
-        type: String,
-        notify: true,
-        computed: '_computeEndpointPath(endpoint)'
-      }
+      selected: { type: String }
     };
   }
 
-  static get observers() {
-    return [
-      '_amfModelChnaged(amfModel)'
-    ];
+  get _transformer() {
+    return this.shadowRoot.querySelector('api-view-model-transformer');
+  }
+
+  get amf() {
+    return this._amf;
+  }
+
+  set amf(value) {
+    const old = this._amf;
+    if (value === old) {
+      return;
+    }
+    this._amf = value;
+    this.requestUpdate('amf', old);
+    this._computeModelEndpointModel();
+    this._computeMethodAmf();
+    this._amfChanged(value);
+  }
+  /**
+   * Computed value of server definition from the AMF model.
+   *
+   * @return {Object} AMF model part for server
+   */
+  get server() {
+    return this._server;
+  }
+
+  set server(value) {
+    const old = this._server;
+    if (value === old) {
+      return;
+    }
+    this._server = value;
+    this._apiParameters = this._computeApiParameters(value, this.version);
+    this._apiBaseUri = this._computeApiBaseUri(value, this.version, this.protocols, this.apiUri);
+    this._endpointUri = this._computeEndpointUri(value, this.endpoint, this.apiUri, this.version);
+  }
+  /**
+   * List of supported protocols.
+   * Required to compute base URI in some cases.
+   *
+   * This value is computed when AMF model change.
+   *
+   * @return {Array<String>}
+   */
+  get protocols() {
+    return this._protocols;
+  }
+
+  get _protocols() {
+    return this.__protocols;
+  }
+
+  set _protocols(value) {
+    const old = this.__protocols;
+    if (value === old) {
+      return;
+    }
+    this.__protocols = value;
+    this._apiBaseUri = this._computeApiBaseUri(this.server, this.version, value, this.apiUri);
+  }
+  /**
+   * API version name.
+   * Computed when AMF model change
+   *
+   * @return {String}
+   */
+  get version() {
+    return this._version;
+  }
+
+  get _version() {
+    return this.__version;
+  }
+
+  set _version(value) {
+    const old = this.__version;
+    if (value === old) {
+      return;
+    }
+    this.__version = value;
+    this._apiParameters = this._computeApiParameters(this.server, value);
+    this._apiBaseUri = this._computeApiBaseUri(this.server, value, this.protocols, this.apiUri);
+    this._endpointUri = this._computeEndpointUri(this.server, this.endpoint, this.apiUri, value);
+  }
+
+  get selected() {
+    return this._selected;
+  }
+  /**
+   * The `@id` property of selected endpoint and method to compute
+   * data models for.
+   *
+   * @param {String} value
+   */
+  set selected(value) {
+    const old = this._selected;
+    if (value === old) {
+      return;
+    }
+    this._selected = value;
+    this._computeModelEndpointModel();
+    this._computeMethodAmf();
+  }
+  /**
+   * @return {String} previously set `apiUri` value.
+   */
+  get apiUri() {
+    return this._apiUri;
+  }
+  /**
+   * A property to set to override AMF's model base URI information.
+   * When this property is set, the `endpointUri` property is recalculated.
+   *
+   * @param {String} value
+   */
+  set apiUri(value) {
+    const old = this._apiUri;
+    if (value === old) {
+      return;
+    }
+    this._apiUri = value;
+    this._apiBaseUri = this._computeApiBaseUri(this.server, this.version, this.protocols, value);
+    this._endpointUri = this._computeEndpointUri(this.server, this.endpoint, value, this.version);
+  }
+  /**
+   * Computed view model for API uri parameters.
+   *
+   * @return {Array<Object>}
+   */
+  get apiParameters() {
+    return this._apiParameters;
+  }
+
+  get _apiParameters() {
+    return this.__apiParameters;
+  }
+
+  set _apiParameters(value) {
+    const old = this.__apiParameters;
+    if (old === value) {
+      return;
+    }
+    this.__apiParameters = value;
+    this._pathModel = this._computePathModel(this.endpoint, this.method, value);
+    this.dispatchEvent(new CustomEvent('apiparameters-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+  /**
+   * @return {String} Computed value of API base URI.
+   */
+  get apiBaseUri() {
+    return this._apiBaseUri;
+  }
+
+  get _apiBaseUri() {
+    return this.__apiBaseUri;
+  }
+
+  set _apiBaseUri(value) {
+    const old = this.__apiBaseUri;
+    if (old === value) {
+      return;
+    }
+    this.__apiBaseUri = value;
+    this.dispatchEvent(new CustomEvent('apibaseuri-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+  /**
+   * Computed model of HTTP method.
+   *
+   * @return {?Object} AMF's supported operation model for selected method (if any).
+   */
+  get method() {
+    return this._method;
+  }
+
+  get _method() {
+    return this.__method;
+  }
+
+  set _method(value) {
+    const old = this.__method;
+    if (old === value) {
+      return;
+    }
+    this.__method = value;
+    this._queryModel = this._computeQueryModel(value);
+    this._pathModel = this._computePathModel(this.endpoint, value, this.apiParameters);
+  }
+  /**
+   * @return {Array<Object>} Generated view model for query parameters.
+   */
+  get queryModel() {
+    return this._queryModel;
+  }
+
+  get _queryModel() {
+    return this.__queryModel;
+  }
+
+  set _queryModel(value) {
+    const old = this.__queryModel;
+    if (old === value) {
+      return;
+    }
+    this.__queryModel = value;
+    this.dispatchEvent(new CustomEvent('querymodel-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+  /**
+   * @return {Array<Object>} Generated view model for path parameters
+   */
+  get pathModel() {
+    return this._pathModel;
+  }
+
+  get _pathModel() {
+    return this.__pathModel;
+  }
+
+  set _pathModel(value) {
+    const old = this.__pathModel;
+    if (old === value) {
+      return;
+    }
+    this.__pathModel = value;
+    this.dispatchEvent(new CustomEvent('pathmodel-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+  /**
+   * Computed model of selected endpoint.
+   * @return {Object} AMF model part describing an endpoint
+   */
+  get endpoint() {
+    return this._endpoint;
+  }
+
+  get _endpoint() {
+    return this.__endpoint;
+  }
+
+  set _endpoint(value) {
+    const old = this.__endpoint;
+    if (old === value) {
+      return;
+    }
+    this.__endpoint = value;
+    this._pathModel = this._computePathModel(value, this.method, this.apiParameters);
+    this._endpointUri = this._computeEndpointUri(this.server, value, this.apiUri, this.version);
+    this._endpointPath = this._computeEndpointPath(value);
+  }
+  /**
+   * @return {String} Computed value of full endpoint URI when selection has been made.
+   */
+  get endpointUri() {
+    return this._endpointUri;
+  }
+
+  get _endpointUri() {
+    return this.__endpointUri;
+  }
+
+  set _endpointUri(value) {
+    const old = this.__endpointUri;
+    if (old === value) {
+      return;
+    }
+    this.__endpointUri = value;
+    this.dispatchEvent(new CustomEvent('endpointuri-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+  /**
+   * @return {String} Selected endponit relative path.
+   */
+  get endpointPath() {
+    return this._endpointPath;
+  }
+
+  get _endpointPath() {
+    return this.__endpointPath;
+  }
+
+  set _endpointPath(value) {
+    const old = this.__endpointPath;
+    if (old === value) {
+      return;
+    }
+    this.__endpointPath = value;
+    this.dispatchEvent(new CustomEvent('endpointpath-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+  /**
+   * @return {Function} Previously registered handler for `apiparameters-changed` event
+   */
+  get onapiparameters() {
+    return this['_onapiparameters-changed'];
+  }
+  /**
+   * Registers a callback function for `apiparameters-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onapiparameters(value) {
+    this._registerCallback('apiparameters-changed', value);
+  }
+  /**
+   * @return {Function} Previously registered handler for `apibaseuri-changed` event
+   */
+  get onapibaseuri() {
+    return this['_onapibaseuri-changed'];
+  }
+  /**
+   * Registers a callback function for `apibaseuri-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onapibaseuri(value) {
+    this._registerCallback('apibaseuri-changed', value);
+  }
+  /**
+   * @return {Function} Previously registered handler for `querymodel-changed` event
+   */
+  get onquerymodel() {
+    return this['_onquerymodel-changed'];
+  }
+  /**
+   * Registers a callback function for `querymodel-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onquerymodel(value) {
+    this._registerCallback('querymodel-changed', value);
+  }
+  /**
+   * @return {Function} Previously registered handler for `pathmodel-changed` event
+   */
+  get onpathmodel() {
+    return this['_onpathmodel-changed'];
+  }
+  /**
+   * Registers a callback function for `pathmodel-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onpathmodel(value) {
+    this._registerCallback('pathmodel-changed', value);
+  }
+  /**
+   * @return {Function} Previously registered handler for `endpointuri-changed` event
+   */
+  get onendpointuri() {
+    return this['_onendpointuri-changed'];
+  }
+  /**
+   * Registers a callback function for `endpointuri-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onendpointuri(value) {
+    this._registerCallback('endpointuri-changed', value);
+  }
+  /**
+   * @return {Function} Previously registered handler for `endpointpath-changed` event
+   */
+  get onendpointpath() {
+    return this['_onendpointpath-changed'];
+  }
+  /**
+   * Registers a callback function for `endpointpath-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onendpointpath(value) {
+    this._registerCallback('endpointpath-changed', value);
+  }
+
+  connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+    if (!this.hasAttribute('aria-hidden')) {
+      this.setAttribute('aria-hidden', 'true');
+    }
+  }
+  /**
+   * Registers an event handler for given type
+   * @param {String} eventType Event type (name)
+   * @param {Function} value The handler to register
+   */
+  _registerCallback(eventType, value) {
+    const key = `_on${eventType}`;
+    if (this[key]) {
+      this.removeEventListener(eventType, this[key]);
+    }
+    if (typeof value !== 'function') {
+      this[key] = null;
+      return;
+    }
+    this[key] = value;
+    this.addEventListener(eventType, value);
   }
   /**
    * Computes values for `server`, `version`, and `protocol` properties if the
    * model is a web api model.
    * @param {Object} model The AMF model.
    */
-  _amfModelChnaged(model) {
+  _amfChanged(model) {
     if (model instanceof Array) {
       model = model[0];
     }
-    if (!model || !this._hasType(model, ns.raml.vocabularies.document + 'Document')) {
+    if (!model || !this._hasType(model, this.ns.raml.vocabularies.document + 'Document')) {
       return;
     }
-    this.server = this._computeServer(model);
-    this.protocols = this._computeProtocols(model);
-    this.version = this._computeApiVersion(model);
+    const server = this._computeServer(model);
+    const version = this._computeApiVersion(model);
+    const protocols = this._computeProtocols(model);
+    this.server = server;
+    this._protocols = protocols;
+    this._version = version;
   }
   /**
-   * Computes `apiBaseUri` property when `amfModel` change.
+   * Computes `apiBaseUri` property when `amf` change.
    *
    * @param {Object} server Server definition model
    * @param {?String} version API version number
    * @param {?Array<String>} protocols List of supported protocols.
-   * @param {?String} baseUri A uri to override APIs base uri
+   * @param {?String} apiUri A uri to override APIs base uri
    * @return {String}
    */
-  _computeApiBaseUri(server, version, protocols, baseUri) {
-    let uri = this._getBaseUri(baseUri, server, protocols);
+  _computeApiBaseUri(server, version, protocols, apiUri) {
+    let uri = this._getBaseUri(apiUri, server, protocols);
     if (!uri) {
       return;
     }
@@ -209,8 +541,8 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
         }
       }
     }
-    this.$.transformer.amfModel = this.amfModel;
-    let model = this.$.transformer.computeViewModel(variables);
+    this._transformer.amf = this.amf;
+    let model = this._transformer.computeViewModel(variables);
     if (model && model.length) {
       model = Array.from(model);
     } else {
@@ -237,8 +569,8 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
         return apiParameters;
       }
     }
-    this.$.transformer.amfModel = this.amfModel;
-    let model = this.$.transformer.computeViewModel(params);
+    this._transformer.amf = this.amf;
+    let model = this._transformer.computeViewModel(params);
     if (!model) {
       model = [];
     }
@@ -282,8 +614,8 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
     if (!params) {
       return [];
     }
-    this.$.transformer.amfModel = this.amfModel;
-    let data = this.$.transformer.computeViewModel(params);
+    this._transformer.amf = this.amf;
+    let data = this._transformer.computeViewModel(params);
     if (data && data.length) {
       data = Array.from(data);
     } else {
@@ -305,56 +637,78 @@ class ApiUrlDataModel extends AmfHelperMixin(PolymerElement) {
    * The selection (id) can be for endpoint or for a method.
    * This tries endpoint first and then method.
    *
+   * The operation result is set on `_endpoint` property.
+   *
    * @param {Object} api WebApi or EndPoint AMF shape.
    * @param {String} id Endpoint/method selection
-   * @return {Object|undefined} Endpoint model.
    */
-  _computeModelEndpointModel(api, id) {
-    if (!api) {
+  _computeModelEndpointModel() {
+    const { selected } = this;
+    let { amf } = this;
+    if (!amf) {
+      this._endpoint = undefined;
       return;
     }
-    if (api instanceof Array) {
-      api = api[0];
+    if (amf instanceof Array) {
+      amf = amf[0];
     }
-    if (this._hasType(api, ns.raml.vocabularies.http + 'EndPoint')) {
-      return api;
-    }
-    const webApi = this._computeWebApi(api);
-    if (!webApi || !id) {
+    if (this._hasType(amf, this.ns.raml.vocabularies.http + 'EndPoint')) {
+      this._endpoint = amf;
       return;
     }
-    let model = this._computeEndpointModel(webApi, id);
+    const webApi = this._computeWebApi(amf);
+    if (!webApi || !selected) {
+      this._endpoint = undefined;
+      return;
+    }
+    let model = this._computeEndpointModel(webApi, selected);
     if (model) {
-      return model;
-    }
-    model = this._computeMethodModel(webApi, id);
-    if (!model) {
+      this._endpoint = model;
       return;
     }
-    return this._computeMethodEndpoint(webApi, model['@id']);
+    model = this._computeMethodModel(webApi, selected);
+    if (!model) {
+      this._endpoint = undefined;
+      return;
+    }
+    const result = this._computeMethodEndpoint(webApi, model['@id']);
+    this._endpoint = result;
   }
 
-  _computeMethodAmfModel(model, selected) {
-    if (!model || !selected) {
+  _computeMethodAmf() {
+    const { selected } = this;
+    let { amf } = this;
+    if (!amf || !selected) {
+      this._method = undefined;
       return;
     }
-    if (model instanceof Array) {
-      model = model[0];
+    if (amf instanceof Array) {
+      amf = amf[0];
     }
-    if (this._hasType(model, ns.raml.vocabularies.document + 'Document')) {
-      const webApi = this._computeWebApi(model);
-      return this._computeMethodModel(webApi, selected);
+    if (this._hasType(amf, this.ns.raml.vocabularies.document + 'Document')) {
+      const webApi = this._computeWebApi(amf);
+      const model = this._computeMethodModel(webApi, selected);
+      this._method = model;
+      return;
     }
-    const key = this._getAmfKey(ns.w3.hydra.supportedOperation);
-    const methods = this._ensureArray(model[key]);
+    const key = this._getAmfKey(this.ns.w3.hydra.supportedOperation);
+    const methods = this._ensureArray(amf[key]);
     if (!methods) {
+      this._method = undefined;
       return;
     }
     for (let i = 0; i < methods.length; i++) {
       if (methods[i]['@id'] === selected) {
-        return methods[i];
+        this._method = methods[i];
+        return;
       }
     }
+    this._method = undefined;
+  }
+
+  _apiChangedHandler(e) {
+    const { value } = e.detail;
+    this.amf = value;
   }
 }
 window.customElements.define('api-url-data-model', ApiUrlDataModel);

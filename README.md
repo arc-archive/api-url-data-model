@@ -24,7 +24,7 @@ The component computes all required values from AMF's WebApi model.
 ```javascript
 const elm = document.querySelector('api-url-data-model');
 const model = await downloadApiModel();
-elm.amfModel = model;
+elm.amf = model;
 elm.selected = '#123'; // Selected node ID, must be method's ID.
 
 console.log(elm.server); // server definition
@@ -44,7 +44,7 @@ After reseting the model to full AMF WebApi model the values are updated.
 const elm = document.querySelector('api-url-data-model');
 const summaryModel = await downloadPartialApiModelSummary();
 const endpointModel = await downloadPartialApiModelEndpoint();
-elm.amfModel = endpointModel;
+elm.amf = endpointModel;
 elm.selected = '#123'; // Selected node ID, must be method ID that is in endpoint definition.
 elm.server = elm._computeServer(summaryModel); // This is element's inherited method
 elm.version = conputeApiVersion(summaryModel); // Compute version from `server` model.
@@ -55,6 +55,15 @@ console.log(elm.endpointUri); // API base path parameters
 console.log(elm.apiBaseUri); // Computed value of base URI for the API.
 console.log(elm.pathModel); // Endpoint's URI variables (including base URI's variables)
 console.log(elm.queryModel); // Method's query parameters
+```
+
+## Overriding API's base URL
+
+To alter URL data model without changing the AMF or API data simply set `apiUri` proprty. The component then regenrates `apiBaseUri` and `endpointUri`
+to include updated API base uri.
+
+```javascript
+element.apiUri = 'https://proxy.domain.com';
 ```
 
 ### API components
@@ -83,6 +92,48 @@ npm install --save @api-components/api-url-data-model
 </html>
 ```
 
+### In a LitElement template
+
+```js
+import { LitElement, html } from 'lit-element';
+import '@api-components/api-url-data-model/api-url-data-model.js';
+
+class SampleElement extends LitElement {
+  render() {
+    return html`
+    <api-url-data-model
+      .amf="${this.amdModel}"
+      .selected="${this.selectedShape}"
+      @apiparameters-changed="${this._apiBasePramsHandler}"
+      @endpointuri-changed="${this._endpointUriHandler}"
+      @apibaseuri-changed="${this._apiBaseUriHandler}"
+      @pathmodel-changed="${this._pathModelHandler}"
+      @querymodel-changed="${this._queryModelHandler}"></api-url-data-model>`;
+  }
+
+  _apiBasePramsHandler(e) {
+    this.apiParameters = e.target.apiParameters;
+  }
+
+  _endpointUriHandler(e) {
+    this.endpointUri = e.target.endpointUri;
+  }
+
+  _apiBaseUriHandler(e) {
+    this.apiBaseUri = e.target.apiBaseUri;
+  }
+
+  _pathModelHandler(e) {
+    this.pathModel = e.target.pathModel;
+  }
+
+  _queryModelHandler(e) {
+    this.queryModel = e.target.queryModel;
+  }
+}
+customElements.define('sample-element', SampleElement);
+```
+
 ### In a Polymer 3 element
 
 ```js
@@ -91,13 +142,37 @@ import '@api-components/api-url-data-model/api-url-data-model.js';
 
 class SampleElement extends PolymerElement {
   static get template() {
+    // don't use 2-way data binding as setters do not exists.
     return html`
-    <api-url-data-model></api-url-data-model>
+    <api-url-data-model
+      amf="[[amf]]"
+      selected="[[selectedShape]]"
+      on-apiparameters-changed="_apiBasePramsHandler"
+      on-endpointuri-changed="endpointUriHandler"
+      on-apibaseuri-changed="_apiBaseUriHandler"
+      on-pathmodel-changed="_pathModelHandler"
+      on-querymodel-changed="_queryModelHandler"></api-url-data-model>
     `;
   }
 
-  _authChanged(e) {
-    console.log(e.detail);
+  _apiBasePramsHandler(e) {
+    this.apiParameters = e.target.apiParameters;
+  }
+
+  _endpointUriHandler(e) {
+    this.endpointUri = e.target.endpointUri;
+  }
+
+  _apiBaseUriHandler(e) {
+    this.apiBaseUri = e.target.apiBaseUri;
+  }
+
+  _pathModelHandler(e) {
+    this.pathModel = e.target.pathModel;
+  }
+
+  _queryModelHandler(e) {
+    this.queryModel = e.target.queryModel;
   }
 }
 customElements.define('sample-element', SampleElement);
@@ -107,19 +182,18 @@ customElements.define('sample-element', SampleElement);
 
 ```sh
 git clone https://github.com/advanced-rest-client/api-url-data-model
-cd api-url-editor
+cd api-url-data-model
 npm install
-npm install -g polymer-cli
 ```
 
 ### Running the demo locally
 
 ```sh
-polymer serve --npm
-open http://127.0.0.1:<port>/demo/
+npm start
 ```
 
 ### Running the tests
+
 ```sh
-polymer test --npm
+npm test
 ```
