@@ -55,22 +55,6 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
   get _transformer() {
     return this.shadowRoot.querySelector('api-view-model-transformer');
   }
-
-  get amf() {
-    return this._amf;
-  }
-
-  set amf(value) {
-    const old = this._amf;
-    if (value === old) {
-      return;
-    }
-    this._amf = value;
-    this.requestUpdate('amf', old);
-    this._computeModelEndpointModel();
-    this._computeMethodAmf();
-    this._amfChanged(value);
-  }
   /**
    * Computed value of server definition from the AMF model.
    *
@@ -102,16 +86,13 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     return this._protocols;
   }
 
-  get _protocols() {
-    return this.__protocols;
-  }
-
-  set _protocols(value) {
-    const old = this.__protocols;
+  set protocols(value) {
+    // Note, partial model requires this setter to work
+    const old = this._protocols;
     if (value === old) {
       return;
     }
-    this.__protocols = value;
+    this._protocols = value;
     this._apiBaseUri = this._computeApiBaseUri(this.server, this.version, value, this.apiUri);
   }
   /**
@@ -124,16 +105,13 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     return this._version;
   }
 
-  get _version() {
-    return this.__version;
-  }
-
-  set _version(value) {
-    const old = this.__version;
+  set version(value) {
+    // Note, partial model requires this setter to work
+    const old = this._version;
     if (value === old) {
       return;
     }
-    this.__version = value;
+    this._version = value;
     this._apiParameters = this._computeApiParameters(this.server, value);
     this._apiBaseUri = this._computeApiBaseUri(this.server, value, this.protocols, this.apiUri);
     this._endpointUri = this._computeEndpointUri(this.server, this.endpoint, this.apiUri, value);
@@ -473,6 +451,12 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     this[key] = value;
     this.addEventListener(eventType, value);
   }
+  // overrides AmfHelperMixin.__amfChanged
+  __amfChanged(amf) {
+    this._computeModelEndpointModel();
+    this._computeMethodAmf();
+    this._amfChanged(amf);
+  }
   /**
    * Computes values for `server`, `version`, and `protocol` properties if the
    * model is a web api model.
@@ -489,8 +473,8 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     const version = this._computeApiVersion(model);
     const protocols = this._computeProtocols(model);
     this.server = server;
-    this._protocols = protocols;
-    this._version = version;
+    this.protocols = protocols;
+    this.version = version;
   }
   /**
    * Computes `apiBaseUri` property when `amf` change.

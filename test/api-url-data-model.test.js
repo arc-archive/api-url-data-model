@@ -69,14 +69,6 @@ describe('<api-url-data-model>', function() {
       element.amf = value;
       assert.isTrue(spy.called);
     });
-
-    it('ignores the same value', () => {
-      const value = {};
-      element.amf = value;
-      const spy = sinon.spy(element, 'requestUpdate');
-      element.amf = value;
-      assert.isFalse(spy.called);
-    });
   });
 
   describe('server setter / getter', () => {
@@ -99,7 +91,7 @@ describe('<api-url-data-model>', function() {
 
     it('calls _computeApiParameters()', () => {
       const value = {};
-      element._version = 'test-version';
+      element.version = 'test-version';
       const spy = sinon.spy(element, '_computeApiParameters');
       element.server = value;
       assert.deepEqual(spy.args[0][0], value, 'value is passed');
@@ -108,8 +100,8 @@ describe('<api-url-data-model>', function() {
 
     it('calls _computeApiBaseUri()', () => {
       const value = {};
-      element._version = 'test-version';
-      element._protocols = ['test-protocol'];
+      element.version = 'test-version';
+      element.protocols = ['test-protocol'];
       element._apiUri = 'test-uri';
       const spy = sinon.spy(element, '_computeApiBaseUri');
       element.server = value;
@@ -121,7 +113,7 @@ describe('<api-url-data-model>', function() {
 
     it('calls _computeEndpointUri()', () => {
       const value = {};
-      element._version = 'test-version';
+      element.version = 'test-version';
       element._apiUri = 'test-uri';
       element._endpoint = {};
       const spy = sinon.spy(element, '_computeEndpointUri');
@@ -141,29 +133,29 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('_protocols setter / getter', () => {
+  describe('protocols setter / getter', () => {
     const value = ['https', 'custom'];
     let element;
     beforeEach(async () => {
       element = await basicFixture();
     });
 
-    it('_protocols getter has value', () => {
-      element._protocols = value;
-      assert.isTrue(element._protocols === value);
+    it('protocols getter has value', () => {
+      element.protocols = value;
+      assert.isTrue(element.protocols === value);
     });
 
     it('protocols getter has value', () => {
-      element._protocols = value;
+      element.protocols = value;
       assert.isTrue(element.protocols === value);
     });
 
     it('calls _computeApiBaseUri()', () => {
-      element._version = 'test-version';
+      element.version = 'test-version';
       element._apiUri = 'test-uri';
       element._server = {};
       const spy = sinon.spy(element, '_computeApiBaseUri');
-      element._protocols = value;
+      element.protocols = value;
       assert.deepEqual(spy.args[0][0], {}, 'server argument is set');
       assert.equal(spy.args[0][1], 'test-version', 'version argument is set');
       assert.deepEqual(spy.args[0][2], value, 'protocol argument is set');
@@ -171,37 +163,37 @@ describe('<api-url-data-model>', function() {
     });
 
     it('ignores the same value', () => {
-      element._protocols = value;
+      element.protocols = value;
       const spy = sinon.spy(element, '_computeApiBaseUri');
-      element._protocols = value;
+      element.protocols = value;
       assert.isFalse(spy.called);
     });
   });
 
-  describe('_version setter / getter', () => {
+  describe('version setter / getter', () => {
     const value = 'v1.0.0-test';
     let element;
     beforeEach(async () => {
       element = await basicFixture();
     });
 
-    it('_version getter has value', () => {
-      element._version = value;
-      assert.isTrue(element._version === value);
+    it('version getter has value', () => {
+      element.version = value;
+      assert.isTrue(element.version === value);
     });
 
     it('version getter has value', () => {
-      element._version = value;
+      element.version = value;
       assert.isTrue(element.version === value);
     });
 
     it('calls _computeApiBaseUri()', () => {
       element._apiUri = 'test-uri';
       element._server = {};
-      element._protocols = ['test-protocol'];
+      element.protocols = ['test-protocol'];
 
       const spy = sinon.spy(element, '_computeApiBaseUri');
-      element._version = value;
+      element.version = value;
 
       assert.deepEqual(spy.args[0][0], {}, 'server argument is set');
       assert.equal(spy.args[0][1], value, 'version argument is set');
@@ -213,7 +205,7 @@ describe('<api-url-data-model>', function() {
       element._server = {};
 
       const spy = sinon.spy(element, '_computeApiParameters');
-      element._version = value;
+      element.version = value;
 
       assert.deepEqual(spy.args[0][0], {}, 'server argument is set');
       assert.equal(spy.args[0][1], value, 'version argument is set');
@@ -225,7 +217,7 @@ describe('<api-url-data-model>', function() {
       element._endpoint = {};
 
       const spy = sinon.spy(element, '_computeEndpointUri');
-      element._version = value;
+      element.version = value;
 
       assert.deepEqual(spy.args[0][0], {}, 'server argument is set');
       assert.deepEqual(spy.args[0][1], {}, 'endpoint argument is set');
@@ -234,9 +226,9 @@ describe('<api-url-data-model>', function() {
     });
 
     it('ignores the same value', () => {
-      element._version = value;
+      element.version = value;
       const spy = sinon.spy(element, '_computeApiBaseUri');
-      element._version = value;
+      element.version = value;
       assert.isFalse(spy.called);
     });
   });
@@ -298,9 +290,9 @@ describe('<api-url-data-model>', function() {
     });
 
     it('calls _computeApiBaseUri()', () => {
-      element._version = 'test-version';
+      element.version = 'test-version';
       element._server = {};
-      element._protocols = ['x'];
+      element.protocols = ['x'];
 
       const spy = sinon.spy(element, '_computeApiBaseUri');
       element.apiUri = value;
@@ -314,7 +306,7 @@ describe('<api-url-data-model>', function() {
     it('calls _computeEndpointUri()', () => {
       element._server = {};
       element._endpoint = {};
-      element._version = 'v1';
+      element.version = 'v1';
 
       const spy = sinon.spy(element, '_computeEndpointUri');
       element.apiUri = value;
@@ -326,9 +318,9 @@ describe('<api-url-data-model>', function() {
     });
 
     it('ignores the same value', () => {
-      element._protocols = value;
+      element.protocols = value;
       const spy = sinon.spy(element, '_computeApiBaseUri');
-      element._protocols = value;
+      element.protocols = value;
       assert.isFalse(spy.called);
     });
   });
