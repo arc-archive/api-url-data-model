@@ -25,11 +25,10 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
   }
 
   render() {
-    const { aware, amf } = this;
+    const { aware } = this;
     return html`
     ${aware ?
-      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
-    <api-view-model-transformer .amf="${amf}"></api-view-model-transformer>`;
+      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}`;
   }
 
   static get properties() {
@@ -53,7 +52,11 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
   }
 
   get _transformer() {
-    return this.shadowRoot.querySelector('api-view-model-transformer');
+    if (!this.__transformer) {
+      this.__transformer = document.createElement('api-view-model-transformer');
+    }
+    this.__transformer.amf = this.amf;
+    return this.__transformer;
   }
   /**
    * Computed value of server definition from the AMF model.
@@ -434,6 +437,15 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
       this.setAttribute('aria-hidden', 'true');
     }
   }
+
+  disconnectedCallback() {
+    if (super.disconnectedCallback) {
+      super.disconnectedCallback();
+    }
+    if (this.__transformer) {
+      this.__transformer = null;
+    }
+  }
   /**
    * Registers an event handler for given type
    * @param {String} eventType Event type (name)
@@ -525,7 +537,6 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
         }
       }
     }
-    this._transformer.amf = this.amf;
     let model = this._transformer.computeViewModel(variables);
     if (model && model.length) {
       model = Array.from(model);
@@ -553,7 +564,6 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
         return apiParameters;
       }
     }
-    this._transformer.amf = this.amf;
     let model = this._transformer.computeViewModel(params);
     if (!model) {
       model = [];
@@ -598,7 +608,6 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (!params) {
       return [];
     }
-    this._transformer.amf = this.amf;
     let data = this._transformer.computeViewModel(params);
     if (data && data.length) {
       data = Array.from(data);

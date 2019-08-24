@@ -1,4 +1,4 @@
-import { fixture, assert, nextFrame } from '@open-wc/testing';
+import { fixture, assert, nextFrame, html } from '@open-wc/testing';
 import sinon from 'sinon/pkg/sinon-esm.js';
 import { AmfLoader } from './amf-loader.js';
 import '@api-components/raml-aware/raml-aware.js';
@@ -20,6 +20,13 @@ describe('<api-url-data-model>', function() {
       <raml-aware scope="test-api"></raml-aware>
       </div>`
     ));
+  }
+
+  async function modelFixture(amf, selected, apiUri) {
+    return (await fixture(html`<api-url-data-model
+      .amf="${amf}"
+      .apiUri="${apiUri}"
+      .selected="${selected}"></api-url-data-model>`));
   }
 
   describe('amf setter / getter', () => {
@@ -657,6 +664,12 @@ describe('<api-url-data-model>', function() {
           });
           assert.equal(element.apiParameters[0].name, 'instance');
         });
+
+        it('renders element with attributes values', async () => {
+          const element = await modelFixture(amf, methodId);
+          assert.typeOf(element.apiParameters, 'array');
+          assert.lengthOf(element.apiParameters, 1);
+        });
       });
 
       describe('apiUri setter', () => {
@@ -664,6 +677,7 @@ describe('<api-url-data-model>', function() {
         let amf;
         let endpointId;
         let methodId;
+        const apiUri = 'https://other.domain.com/endpoint';
 
         before(async () => {
           amf = await AmfLoader.load(setupItem[1]);
@@ -689,12 +703,18 @@ describe('<api-url-data-model>', function() {
         });
 
         it('changes apiBaseUri when apiUri property change', () => {
-          element.apiUri = 'https://other.domain.com/endpoint';
-          assert.equal(element.apiBaseUri, 'https://other.domain.com/endpoint');
+          element.apiUri = apiUri;
+          assert.equal(element.apiBaseUri, apiUri);
         });
 
         it('changes endpointUri when apiUri property change', () => {
-          element.apiUri = 'https://other.domain.com/endpoint';
+          element.apiUri = apiUri;
+          assert.equal(element.endpointUri, 'https://other.domain.com/endpoint/test-parameters/{feature}');
+        });
+
+        it('renders element with attributes values', async () => {
+          const element = await modelFixture(amf, methodId, apiUri);
+          assert.equal(element.apiBaseUri, apiUri);
           assert.equal(element.endpointUri, 'https://other.domain.com/endpoint/test-parameters/{feature}');
         });
       });
