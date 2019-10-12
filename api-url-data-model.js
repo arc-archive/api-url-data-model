@@ -478,7 +478,7 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (model instanceof Array) {
       model = model[0];
     }
-    if (!model || !this._hasType(model, this.ns.raml.vocabularies.document + 'Document')) {
+    if (!model || !this._hasType(model, this.ns.aml.vocabularies.document.Document)) {
       return;
     }
     const server = this._computeServer(model);
@@ -530,7 +530,7 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     }
     if (version) {
       for (let i = variables.length - 1; i >=0; i--) {
-        const name = this._getValue(variables[i], this.ns.schema.schemaName);
+        const name = this._getValue(variables[i], this.ns.aml.vocabularies.core.name);
         if (name === 'version') {
           variables.splice(i, 1);
           break;
@@ -586,7 +586,7 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (!request) {
       return;
     }
-    const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'uriParameter');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.uriParameter);
     const params = this._ensureArray(request[key]);
     return params && params.length ? params : undefined;
   }
@@ -622,7 +622,7 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
    * @return {String}
    */
   _computeEndpointPath(endpoint) {
-    return this._getValue(endpoint, this.ns.raml.vocabularies.http + 'path');
+    return this._getValue(endpoint, this.ns.raml.vocabularies.apiContract.path);
   }
   /**
    * Computes value of endpoint model.
@@ -645,7 +645,7 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (amf instanceof Array) {
       amf = amf[0];
     }
-    if (this._hasType(amf, this.ns.raml.vocabularies.http + 'EndPoint')) {
+    if (this._hasType(amf, this.ns.raml.vocabularies.apiContract.EndPoint)) {
       this._endpoint = amf;
       return;
     }
@@ -678,13 +678,13 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (amf instanceof Array) {
       amf = amf[0];
     }
-    if (this._hasType(amf, this.ns.raml.vocabularies.document + 'Document')) {
+    if (this._hasType(amf, this.ns.aml.vocabularies.document.Document)) {
       const webApi = this._computeWebApi(amf);
       const model = this._computeMethodModel(webApi, selected);
       this._method = model;
       return;
     }
-    const key = this._getAmfKey(this.ns.w3.hydra.supportedOperation);
+    const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
     const methods = this._ensureArray(amf[key]);
     if (!methods) {
       this._method = undefined;
@@ -692,6 +692,7 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     }
     for (let i = 0; i < methods.length; i++) {
       if (methods[i]['@id'] === selected) {
+
         this._method = methods[i];
         return;
       }

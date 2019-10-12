@@ -1,5 +1,5 @@
 import { fixture, assert, nextFrame, html } from '@open-wc/testing';
-import sinon from 'sinon/pkg/sinon-esm.js';
+import * as sinon from 'sinon/pkg/sinon-esm.js';
 import { AmfLoader } from './amf-loader.js';
 import '@api-components/raml-aware/raml-aware.js';
 import '../api-url-data-model.js';
@@ -585,7 +585,7 @@ describe('<api-url-data-model>', function() {
         });
 
         it('server is computed', () => {
-          const key = element._getAmfKey(element.ns.raml.vocabularies.http + 'Server');
+          const key = element._getAmfKey(element.ns.aml.vocabularies.apiContract.Server);
           assert.typeOf(element.server, 'object');
           assert.equal(element.server['@type'][0], key);
         });
@@ -821,7 +821,7 @@ describe('<api-url-data-model>', function() {
         });
 
         it('method is computed', () => {
-          const key = element._getAmfKey(element.ns.w3.hydra.core + 'Operation');
+          const key = element._getAmfKey(element.ns.aml.vocabularies.apiContract.Operation);
           element.selected = methodId;
           assert.typeOf(element.method, 'object');
           assert.equal(element.method['@type'][0], key);
@@ -919,7 +919,7 @@ describe('<api-url-data-model>', function() {
         });
 
         it('server is computed', () => {
-          const key = element._getAmfKey(element.ns.raml.vocabularies.http + 'Server');
+          const key = element._getAmfKey(element.ns.aml.vocabularies.apiContract.Server);
           assert.typeOf(element.server, 'object');
           assert.equal(element.server['@type'][0], key);
         });

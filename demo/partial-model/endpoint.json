@@ -1,22 +1,22 @@
 {
     "@id": "#68",
-    "@type": "http:EndPoint",
-    "http:path": "/api/user",
-    "hydra:supportedOperation": [
+    "@type": "apiContract:EndPoint",
+    "apiContract:path": "/api/user",
+    "apiContract:supportedOperation": [
         {
             "@id": "#138",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "schema-org:description": "Update a user in db",
             "schema-org:name": "Update a user",
             "hydra:method": "put",
             "hydra:returns": {
                 "@id": "#139",
-                "@type": "http:Response",
-                "http:payload": {
+                "@type": "apiContract:Response",
+                "apiContract:payload": {
                     "@id": "#140",
-                    "@type": "http:Payload",
-                    "http:mediaType": "application/json",
-                    "http:schema": {
+                    "@type": "apiContract:Payload",
+                    "core:mediaType": "application/json",
+                    "raml-shapes:schema": {
                         "@id": "#37"
                     }
                 },
@@ -26,7 +26,7 @@
         },
         {
             "@id": "#115",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "http://a.ml/vocabularies/security#security": {
                 "@id": "#137",
                 "@type": "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
@@ -55,15 +55,15 @@
             },
             "schema-org:description": "Create a user in db",
             "schema-org:name": "Create a user",
-            "hydra:expects": {
+            "apiContract:expects": {
                 "@id": "#116",
-                "@type": "http:Request",
-                "http:header": {
+                "@type": "apiContract:Request",
+                "apiContract:header": {
                     "@id": "#117",
-                    "@type": "http:Parameter",
-                    "http:binding": "header",
-                    "http:paramName": "Content-Type",
-                    "http:schema": {
+                    "@type": "apiContract:Parameter",
+                    "apiContract:binding": "header",
+                    "apiContract:paramName": "Content-Type",
+                    "raml-shapes:schema": {
                         "@id": "#118",
                         "@type": [
                             "doc:DomainElement",
@@ -71,11 +71,11 @@
                             "shacl:Shape",
                             "raml-shapes:ScalarShape"
                         ],
-                        "doc:examples": {
+                        "apiContract:examples": {
                             "@id": "#120",
                             "@type": [
                                 "doc:DomainElement",
-                                "doc:Example"
+                                "apiContract:Example"
                             ],
                             "doc:strict": true,
                             "doc:structuredValue": {
@@ -99,11 +99,11 @@
                     "schema-org:name": "Content-Type",
                     "hydra:required": true
                 },
-                "http:payload": {
+                "apiContract:payload": {
                     "@id": "#122",
-                    "@type": "http:Payload",
-                    "http:mediaType": "application/json",
-                    "http:schema": {
+                    "@type": "apiContract:Payload",
+                    "core:mediaType": "application/json",
+                    "raml-shapes:schema": {
                         "@id": "#123",
                         "@type": [
                             "raml-shapes:Shape",
@@ -125,11 +125,11 @@
                                         "shacl:Shape",
                                         "raml-shapes:ScalarShape"
                                     ],
-                                    "doc:examples": {
+                                    "apiContract:examples": {
                                         "@id": "#126",
                                         "@type": [
                                             "doc:DomainElement",
-                                            "doc:Example"
+                                            "apiContract:Example"
                                         ],
                                         "doc:strict": true,
                                         "doc:structuredValue": {
@@ -183,11 +183,11 @@
                                         "shacl:Shape",
                                         "raml-shapes:ScalarShape"
                                     ],
-                                    "doc:examples": {
+                                    "apiContract:examples": {
                                         "@id": "#130",
                                         "@type": [
                                             "doc:DomainElement",
-                                            "doc:Example"
+                                            "apiContract:Example"
                                         ],
                                         "doc:strict": true,
                                         "doc:structuredValue": {
@@ -227,12 +227,12 @@
             "hydra:method": "post",
             "hydra:returns": {
                 "@id": "#135",
-                "@type": "http:Response",
-                "http:payload": {
+                "@type": "apiContract:Response",
+                "apiContract:payload": {
                     "@id": "#136",
-                    "@type": "http:Payload",
-                    "http:mediaType": "application/json",
-                    "http:schema": {
+                    "@type": "apiContract:Payload",
+                    "core:mediaType": "application/json",
+                    "raml-shapes:schema": {
                         "@id": "#37"
                     }
                 },
@@ -242,7 +242,7 @@
         },
         {
             "@id": "#69",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "http://a.ml/vocabularies/security#security": {
                 "@id": "#114",
                 "@type": "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
@@ -309,16 +309,16 @@
             },
             "schema-org:description": "Get all users from db",
             "schema-org:name": "Get all users",
-            "hydra:expects": {
+            "apiContract:expects": {
                 "@id": "#70",
-                "@type": "http:Request",
-                "http:header": [
+                "@type": "apiContract:Request",
+                "apiContract:header": [
                     {
                         "@id": "#108",
-                        "@type": "http:Parameter",
-                        "http:binding": "header",
-                        "http:paramName": "Authorization",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "header",
+                        "apiContract:paramName": "Authorization",
+                        "raml-shapes:schema": {
                             "@id": "#109",
                             "@type": [
                                 "doc:DomainElement",
@@ -326,11 +326,11 @@
                                 "shacl:Shape",
                                 "raml-shapes:ScalarShape"
                             ],
-                            "doc:examples": {
+                            "apiContract:examples": {
                                 "@id": "#110",
                                 "@type": [
                                     "doc:DomainElement",
-                                    "doc:Example"
+                                    "apiContract:Example"
                                 ],
                                 "doc:strict": true,
                                 "doc:structuredValue": {
@@ -350,10 +350,10 @@
                     },
                     {
                         "@id": "#104",
-                        "@type": "http:Parameter",
-                        "http:binding": "header",
-                        "http:paramName": "Content-Type",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "header",
+                        "apiContract:paramName": "Content-Type",
+                        "raml-shapes:schema": {
                             "@id": "#105",
                             "@type": [
                                 "doc:DomainElement",
@@ -361,11 +361,11 @@
                                 "shacl:Shape",
                                 "raml-shapes:ScalarShape"
                             ],
-                            "doc:examples": {
+                            "apiContract:examples": {
                                 "@id": "#106",
                                 "@type": [
                                     "doc:DomainElement",
-                                    "doc:Example"
+                                    "apiContract:Example"
                                 ],
                                 "doc:strict": true,
                                 "doc:structuredValue": {
@@ -384,13 +384,13 @@
                         "hydra:required": true
                     }
                 ],
-                "http:parameter": [
+                "apiContract:parameter": [
                     {
                         "@id": "#71",
-                        "@type": "http:Parameter",
-                        "http:binding": "query",
-                        "http:paramName": "booleanParameter",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "query",
+                        "apiContract:paramName": "booleanParameter",
+                        "raml-shapes:schema": {
                             "@id": "#72",
                             "@type": [
                                 "doc:DomainElement",
@@ -408,10 +408,10 @@
                     },
                     {
                         "@id": "#82",
-                        "@type": "http:Parameter",
-                        "http:binding": "query",
-                        "http:paramName": "numberParameter",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "query",
+                        "apiContract:paramName": "numberParameter",
+                        "raml-shapes:schema": {
                             "@id": "#83",
                             "@type": [
                                 "doc:DomainElement",
@@ -429,10 +429,10 @@
                     },
                     {
                         "@id": "#76",
-                        "@type": "http:Parameter",
-                        "http:binding": "query",
-                        "http:paramName": "nestedArrayParameter",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "query",
+                        "apiContract:paramName": "nestedArrayParameter",
+                        "raml-shapes:schema": {
                             "@id": "#77",
                             "@type": [
                                 "doc:DomainElement",
@@ -471,10 +471,10 @@
                     },
                     {
                         "@id": "#84",
-                        "@type": "http:Parameter",
-                        "http:binding": "query",
-                        "http:paramName": "enumParemeter",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "query",
+                        "apiContract:paramName": "enumParemeter",
+                        "raml-shapes:schema": {
                             "@id": "#85",
                             "@type": [
                                 "doc:DomainElement",
@@ -511,10 +511,10 @@
                     },
                     {
                         "@id": "#73",
-                        "@type": "http:Parameter",
-                        "http:binding": "query",
-                        "http:paramName": "arrayParameter",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "query",
+                        "apiContract:paramName": "arrayParameter",
+                        "raml-shapes:schema": {
                             "@id": "#74",
                             "@type": [
                                 "doc:DomainElement",
@@ -542,10 +542,10 @@
                     },
                     {
                         "@id": "#91",
-                        "@type": "http:Parameter",
-                        "http:binding": "query",
-                        "http:paramName": "objectParameter",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "query",
+                        "apiContract:paramName": "objectParameter",
+                        "raml-shapes:schema": {
                             "@id": "#92",
                             "@type": [
                                 "doc:DomainElement",
@@ -648,10 +648,10 @@
                     },
                     {
                         "@id": "#80",
-                        "@type": "http:Parameter",
-                        "http:binding": "query",
-                        "http:paramName": "stringParameter",
-                        "http:schema": {
+                        "@type": "apiContract:Parameter",
+                        "apiContract:binding": "query",
+                        "apiContract:paramName": "stringParameter",
+                        "raml-shapes:schema": {
                             "@id": "#81",
                             "@type": [
                                 "doc:DomainElement",
@@ -672,12 +672,12 @@
             "hydra:method": "get",
             "hydra:returns": {
                 "@id": "#112",
-                "@type": "http:Response",
-                "http:payload": {
+                "@type": "apiContract:Response",
+                "apiContract:payload": {
                     "@id": "#113",
-                    "@type": "http:Payload",
-                    "http:mediaType": "application/json",
-                    "http:schema": {
+                    "@type": "apiContract:Payload",
+                    "core:mediaType": "application/json",
+                    "raml-shapes:schema": {
                         "@id": "#37",
                         "@type": [
                             "doc:DomainElement",
@@ -699,11 +699,11 @@
                                         "shacl:Shape",
                                         "shacl:NodeShape"
                                     ],
-                                    "doc:examples": {
+                                    "apiContract:examples": {
                                         "@id": "#17",
                                         "@type": [
                                             "doc:DomainElement",
-                                            "doc:Example"
+                                            "apiContract:Example"
                                         ],
                                         "doc:strict": true,
                                         "doc:structuredValue": {
@@ -901,6 +901,8 @@
         "schema-org": "http://schema.org/",
         "http": "http://a.ml/vocabularies/http#",
         "raml-shapes": "http://a.ml/vocabularies/shapes#",
-        "smap": "http://a.ml/vocabularies/document-source-maps"
+        "smap": "http://a.ml/vocabularies/document-source-maps",
+        "apiContract": "http://a.ml/vocabularies/apiContract#",
+        "core": "http://a.ml/vocabularies/core#"
     }
 }

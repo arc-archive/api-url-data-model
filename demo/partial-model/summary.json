@@ -62,7 +62,7 @@
   "doc:encodes": {
     "@id": "#150",
     "@type": [
-      "schema-org:WebAPI",
+      "apiContract:WebAPI",
       "doc:RootDomainElement"
     ],
     "amf://id#27": {
@@ -269,7 +269,7 @@
             "@id": "shacl:Shape"
           },
           {
-            "@id": "hydra:Operation"
+            "@id": "apiContract:Operation"
           },
           {
             "@id": "http:WebAPI"
@@ -621,14 +621,14 @@
         }
       }
     ],
-    "http:endpoint": [
+    "apiContract:EndPoint": [
       {
         "@id": "#200",
-        "@type": "http:EndPoint",
-        "http:path": "/user",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/user",
+        "apiContract:supportedOperation": {
           "@id": "#201",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#207",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -671,14 +671,14 @@
           ],
           "schema-org:description": "This can only be done by the logged in user.",
           "schema-org:name": "createUser",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#202",
             "@type": "http:Request",
-            "http:payload": {
+            "apiContract:payload": {
               "@id": "#203",
-              "@type": "http:Payload",
-              "http:mediaType": "application/json",
-              "http:schema": {
+              "@type": "apiContract:Payload",
+              "core:mediaType": "application/json",
+              "raml-shapes:schema": {
                 "@id": "#204",
                 "@type": [
                   "raml-shapes:Shape",
@@ -734,13 +734,13 @@
       },
       {
         "@id": "#361",
-        "@type": "http:EndPoint",
-        "http:parameter": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:parameter": {
           "@id": "#406",
           "@type": "http:Parameter",
-          "http:binding": "path",
-          "http:paramName": "petId",
-          "http:schema": {
+          "apiContract:binding": "path",
+          "apiContract:paramName": "petId",
+          "raml-shapes:schema": {
             "@id": "#407",
             "@type": [
               "doc:DomainElement",
@@ -759,11 +759,11 @@
           "schema-org:name": "petId",
           "hydra:required": true
         },
-        "http:path": "/pet/{petId}",
-        "hydra:supportedOperation": [
+        "apiContract:path": "/pet/{petId}",
+        "apiContract:supportedOperation": [
           {
             "@id": "#388",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#398",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -820,14 +820,14 @@
               }
             },
             "schema-org:name": "updatePetWithForm",
-            "hydra:expects": {
+            "apiContract:expects": {
               "@id": "#389",
               "@type": "http:Request",
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#390",
-                "@type": "http:Payload",
-                "http:mediaType": "multipart/form-data",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "multipart/form-data",
+                "raml-shapes:schema": {
                   "@id": "#391",
                   "@type": [
                     "doc:DomainElement",
@@ -894,12 +894,12 @@
               "@type": "http:Response",
               "schema-org:description": "Invalid input",
               "schema-org:name": "405",
-              "hydra:statusCode": "405"
+              "apiContract:statusCode": "405"
             }
           },
           {
             "@id": "#373",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#380",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -956,15 +956,15 @@
               }
             },
             "schema-org:name": "deletePet",
-            "hydra:expects": {
+            "apiContract:expects": {
               "@id": "#374",
               "@type": "http:Request",
               "http:header": {
                 "@id": "#375",
                 "@type": "http:Parameter",
-                "http:binding": "header",
-                "http:paramName": "api_key",
-                "http:schema": {
+                "apiContract:binding": "header",
+                "apiContract:paramName": "api_key",
+                "raml-shapes:schema": {
                   "@id": "#376",
                   "@type": [
                     "doc:DomainElement",
@@ -988,20 +988,20 @@
                 "@type": "http:Response",
                 "schema-org:description": "Invalid ID supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               },
               {
                 "@id": "#378",
                 "@type": "http:Response",
                 "schema-org:description": "Pet not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               }
             ]
           },
           {
             "@id": "#362",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#368",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -1047,29 +1047,29 @@
                 "@type": "http:Response",
                 "schema-org:description": "Invalid ID supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               },
               {
                 "@id": "#363",
                 "@type": "http:Response",
-                "http:payload": {
+                "apiContract:payload": {
                   "@id": "#364",
-                  "@type": "http:Payload",
-                  "http:mediaType": "application/xml",
-                  "http:schema": {
+                  "@type": "apiContract:Payload",
+                  "core:mediaType": "application/xml",
+                  "raml-shapes:schema": {
                     "@id": "#51"
                   }
                 },
                 "schema-org:description": "successful operation",
                 "schema-org:name": "200",
-                "hydra:statusCode": "200"
+                "apiContract:statusCode": "200"
               },
               {
                 "@id": "#366",
                 "@type": "http:Response",
                 "schema-org:description": "Pet not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               }
             ]
           }
@@ -1077,11 +1077,11 @@
       },
       {
         "@id": "#336",
-        "@type": "http:EndPoint",
-        "http:path": "/pet/findByStatus",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/pet/findByStatus",
+        "apiContract:supportedOperation": {
           "@id": "#337",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#353",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -1139,10 +1139,10 @@
           },
           "schema-org:description": "Multiple status values can be provided with comma separated strings",
           "schema-org:name": "findPetsByStatus",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#338",
             "@type": "http:Request",
-            "http:parameter": {
+            "apiContract:parameter": {
               "@id": "#339",
               "@type": "http:Parameter",
               "amf://id#23": {
@@ -1153,9 +1153,9 @@
               "doc:customDomainProperties": {
                 "@id": "#23"
               },
-              "http:binding": "query",
-              "http:paramName": "status",
-              "http:schema": {
+              "apiContract:binding": "query",
+              "apiContract:paramName": "status",
+              "raml-shapes:schema": {
                 "@id": "#340",
                 "@type": [
                   "doc:DomainElement",
@@ -1224,16 +1224,16 @@
               "@type": "http:Response",
               "schema-org:description": "Invalid status value",
               "schema-org:name": "400",
-              "hydra:statusCode": "400"
+              "apiContract:statusCode": "400"
             },
             {
               "@id": "#348",
               "@type": "http:Response",
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#349",
-                "@type": "http:Payload",
-                "http:mediaType": "application/xml",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "application/xml",
+                "raml-shapes:schema": {
                   "@id": "#350",
                   "@type": [
                     "doc:DomainElement",
@@ -1249,19 +1249,19 @@
               },
               "schema-org:description": "successful operation",
               "schema-org:name": "200",
-              "hydra:statusCode": "200"
+              "apiContract:statusCode": "200"
             }
           ]
         }
       },
       {
         "@id": "#303",
-        "@type": "http:EndPoint",
-        "http:path": "/pet",
-        "hydra:supportedOperation": [
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/pet",
+        "apiContract:supportedOperation": [
           {
             "@id": "#319",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#328",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -1318,14 +1318,14 @@
               }
             },
             "schema-org:name": "updatePet",
-            "hydra:expects": {
+            "apiContract:expects": {
               "@id": "#320",
               "@type": "http:Request",
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#321",
-                "@type": "http:Payload",
-                "http:mediaType": "application/json",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "application/json",
+                "raml-shapes:schema": {
                   "@id": "#322",
                   "@type": [
                     "raml-shapes:Shape",
@@ -1377,27 +1377,27 @@
                 "@type": "http:Response",
                 "schema-org:description": "Validation exception",
                 "schema-org:name": "405",
-                "hydra:statusCode": "405"
+                "apiContract:statusCode": "405"
               },
               {
                 "@id": "#324",
                 "@type": "http:Response",
                 "schema-org:description": "Invalid ID supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               },
               {
                 "@id": "#325",
                 "@type": "http:Response",
                 "schema-org:description": "Pet not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               }
             ]
           },
           {
             "@id": "#304",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#311",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -1454,14 +1454,14 @@
               }
             },
             "schema-org:name": "addPet",
-            "hydra:expects": {
+            "apiContract:expects": {
               "@id": "#305",
               "@type": "http:Request",
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#306",
-                "@type": "http:Payload",
-                "http:mediaType": "application/json",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "application/json",
+                "raml-shapes:schema": {
                   "@id": "#307",
                   "@type": [
                     "raml-shapes:Shape",
@@ -1512,18 +1512,18 @@
               "@type": "http:Response",
               "schema-org:description": "Invalid input",
               "schema-org:name": "405",
-              "hydra:statusCode": "405"
+              "apiContract:statusCode": "405"
             }
           }
         ]
       },
       {
         "@id": "#430",
-        "@type": "http:EndPoint",
-        "http:path": "/pet/findByTags",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/pet/findByTags",
+        "apiContract:supportedOperation": {
           "@id": "#431",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#25": {
             "@id": "#448",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -1571,7 +1571,7 @@
                 "shacl:name": "schema"
               },
               "http://www.w3.org/2000/01/rdf-schema#domain": {
-                "@id": "hydra:Operation"
+                "@id": "apiContract:Operation"
               }
             },
             {
@@ -1610,10 +1610,10 @@
           },
           "schema-org:description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
           "schema-org:name": "findPetsByTags",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#432",
             "@type": "http:Request",
-            "http:parameter": {
+            "apiContract:parameter": {
               "@id": "#433",
               "@type": "http:Parameter",
               "amf://id#23": {
@@ -1624,9 +1624,9 @@
               "doc:customDomainProperties": {
                 "@id": "#23"
               },
-              "http:binding": "query",
-              "http:paramName": "tags",
-              "http:schema": {
+              "apiContract:binding": "query",
+              "apiContract:paramName": "tags",
+              "raml-shapes:schema": {
                 "@id": "#434",
                 "@type": [
                   "doc:DomainElement",
@@ -1686,11 +1686,11 @@
             {
               "@id": "#438",
               "@type": "http:Response",
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#439",
-                "@type": "http:Payload",
-                "http:mediaType": "application/xml",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "application/xml",
+                "raml-shapes:schema": {
                   "@id": "#440",
                   "@type": [
                     "doc:DomainElement",
@@ -2028,25 +2028,25 @@
               },
               "schema-org:description": "successful operation",
               "schema-org:name": "200",
-              "hydra:statusCode": "200"
+              "apiContract:statusCode": "200"
             },
             {
               "@id": "#441",
               "@type": "http:Response",
               "schema-org:description": "Invalid tag value",
               "schema-org:name": "400",
-              "hydra:statusCode": "400"
+              "apiContract:statusCode": "400"
             }
           ]
         }
       },
       {
         "@id": "#283",
-        "@type": "http:EndPoint",
-        "http:path": "/user/login",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/user/login",
+        "apiContract:supportedOperation": {
           "@id": "#284",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#299",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2076,16 +2076,16 @@
             }
           ],
           "schema-org:name": "loginUser",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#285",
             "@type": "http:Request",
-            "http:parameter": [
+            "apiContract:parameter": [
               {
                 "@id": "#288",
                 "@type": "http:Parameter",
-                "http:binding": "query",
-                "http:paramName": "password",
-                "http:schema": {
+                "apiContract:binding": "query",
+                "apiContract:paramName": "password",
+                "raml-shapes:schema": {
                   "@id": "#289",
                   "@type": [
                     "doc:DomainElement",
@@ -2106,9 +2106,9 @@
               {
                 "@id": "#286",
                 "@type": "http:Parameter",
-                "http:binding": "query",
-                "http:paramName": "username",
-                "http:schema": {
+                "apiContract:binding": "query",
+                "apiContract:paramName": "username",
+                "raml-shapes:schema": {
                   "@id": "#287",
                   "@type": [
                     "doc:DomainElement",
@@ -2137,9 +2137,9 @@
                 {
                   "@id": "#293",
                   "@type": "http:Parameter",
-                  "http:binding": "header",
-                  "http:paramName": "X-Expires-After",
-                  "http:schema": {
+                  "apiContract:binding": "header",
+                  "apiContract:paramName": "X-Expires-After",
+                  "raml-shapes:schema": {
                     "@id": "#294",
                     "@type": [
                       "doc:DomainElement",
@@ -2161,9 +2161,9 @@
                 {
                   "@id": "#291",
                   "@type": "http:Parameter",
-                  "http:binding": "header",
-                  "http:paramName": "X-Rate-Limit",
-                  "http:schema": {
+                  "apiContract:binding": "header",
+                  "apiContract:paramName": "X-Rate-Limit",
+                  "raml-shapes:schema": {
                     "@id": "#292",
                     "@type": [
                       "doc:DomainElement",
@@ -2183,11 +2183,11 @@
                   "hydra:required": true
                 }
               ],
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#295",
-                "@type": "http:Payload",
-                "http:mediaType": "application/xml",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "application/xml",
+                "raml-shapes:schema": {
                   "@id": "#296",
                   "@type": [
                     "doc:DomainElement",
@@ -2203,27 +2203,27 @@
               },
               "schema-org:description": "successful operation",
               "schema-org:name": "200",
-              "hydra:statusCode": "200"
+              "apiContract:statusCode": "200"
             },
             {
               "@id": "#297",
               "@type": "http:Response",
               "schema-org:description": "Invalid username/password supplied",
               "schema-org:name": "400",
-              "hydra:statusCode": "400"
+              "apiContract:statusCode": "400"
             }
           ]
         }
       },
       {
         "@id": "#408",
-        "@type": "http:EndPoint",
-        "http:parameter": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:parameter": {
           "@id": "#428",
           "@type": "http:Parameter",
-          "http:binding": "path",
-          "http:paramName": "petId",
-          "http:schema": {
+          "apiContract:binding": "path",
+          "apiContract:paramName": "petId",
+          "raml-shapes:schema": {
             "@id": "#429",
             "@type": [
               "doc:DomainElement",
@@ -2242,10 +2242,10 @@
           "schema-org:name": "petId",
           "hydra:required": true
         },
-        "http:path": "/pet/{petId}/uploadImage",
-        "hydra:supportedOperation": {
+        "apiContract:path": "/pet/{petId}/uploadImage",
+        "apiContract:supportedOperation": {
           "@id": "#409",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#420",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2327,14 +2327,14 @@
             }
           },
           "schema-org:name": "uploadFile",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#410",
             "@type": "http:Request",
-            "http:payload": {
+            "apiContract:payload": {
               "@id": "#411",
-              "@type": "http:Payload",
-              "http:mediaType": "multipart/form-data",
-              "http:schema": {
+              "@type": "apiContract:Payload",
+              "core:mediaType": "multipart/form-data",
+              "raml-shapes:schema": {
                 "@id": "#412",
                 "@type": [
                   "doc:DomainElement",
@@ -2394,11 +2394,11 @@
           "hydra:returns": {
             "@id": "#417",
             "@type": "http:Response",
-            "http:payload": {
+            "apiContract:payload": {
               "@id": "#418",
-              "@type": "http:Payload",
-              "http:mediaType": "application/json",
-              "http:schema": {
+              "@type": "apiContract:Payload",
+              "core:mediaType": "application/json",
+              "raml-shapes:schema": {
                 "@id": "#135",
                 "@type": [
                   "doc:DomainElement",
@@ -2481,17 +2481,17 @@
             },
             "schema-org:description": "successful operation",
             "schema-org:name": "200",
-            "hydra:statusCode": "200"
+            "apiContract:statusCode": "200"
           }
         }
       },
       {
         "@id": "#152",
-        "@type": "http:EndPoint",
-        "http:path": "/store/order",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/store/order",
+        "apiContract:supportedOperation": {
           "@id": "#153",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#162",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2521,14 +2521,14 @@
             }
           ],
           "schema-org:name": "placeOrder",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#154",
             "@type": "http:Request",
-            "http:payload": {
+            "apiContract:payload": {
               "@id": "#155",
-              "@type": "http:Payload",
-              "http:mediaType": "application/json",
-              "http:schema": {
+              "@type": "apiContract:Payload",
+              "core:mediaType": "application/json",
+              "raml-shapes:schema": {
                 "@id": "#156",
                 "@type": [
                   "shacl:NodeShape",
@@ -2578,35 +2578,35 @@
             {
               "@id": "#158",
               "@type": "http:Response",
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#159",
-                "@type": "http:Payload",
-                "http:mediaType": "application/xml",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "application/xml",
+                "raml-shapes:schema": {
                   "@id": "#114"
                 }
               },
               "schema-org:description": "successful operation",
               "schema-org:name": "200",
-              "hydra:statusCode": "200"
+              "apiContract:statusCode": "200"
             },
             {
               "@id": "#160",
               "@type": "http:Response",
               "schema-org:description": "Invalid Order",
               "schema-org:name": "400",
-              "hydra:statusCode": "400"
+              "apiContract:statusCode": "400"
             }
           ]
         }
       },
       {
         "@id": "#273",
-        "@type": "http:EndPoint",
-        "http:path": "/user/logout",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/user/logout",
+        "apiContract:supportedOperation": {
           "@id": "#274",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#276",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2653,16 +2653,16 @@
       },
       {
         "@id": "#151",
-        "@type": "http:EndPoint",
-        "http:path": "/store"
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/store"
       },
       {
         "@id": "#260",
-        "@type": "http:EndPoint",
-        "http:path": "/user/createWithList",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/user/createWithList",
+        "apiContract:supportedOperation": {
           "@id": "#261",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#266",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2704,14 +2704,14 @@
             }
           ],
           "schema-org:name": "createUsersWithListInput",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#262",
             "@type": "http:Request",
-            "http:payload": {
+            "apiContract:payload": {
               "@id": "#263",
-              "@type": "http:Payload",
-              "http:mediaType": "application/json",
-              "http:schema": {
+              "@type": "apiContract:Payload",
+              "core:mediaType": "application/json",
+              "raml-shapes:schema": {
                 "@id": "#264",
                 "@type": [
                   "doc:DomainElement",
@@ -2740,13 +2740,13 @@
       },
       {
         "@id": "#214",
-        "@type": "http:EndPoint",
-        "http:parameter": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:parameter": {
           "@id": "#245",
           "@type": "http:Parameter",
-          "http:binding": "path",
-          "http:paramName": "username",
-          "http:schema": {
+          "apiContract:binding": "path",
+          "apiContract:paramName": "username",
+          "raml-shapes:schema": {
             "@id": "#246",
             "@type": [
               "doc:DomainElement",
@@ -2764,11 +2764,11 @@
           "schema-org:name": "username",
           "hydra:required": true
         },
-        "http:path": "/user/{username}",
-        "hydra:supportedOperation": [
+        "apiContract:path": "/user/{username}",
+        "apiContract:supportedOperation": [
           {
             "@id": "#235",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#241",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2803,37 +2803,37 @@
               {
                 "@id": "#236",
                 "@type": "http:Response",
-                "http:payload": {
+                "apiContract:payload": {
                   "@id": "#237",
-                  "@type": "http:Payload",
-                  "http:mediaType": "application/xml",
-                  "http:schema": {
+                  "@type": "apiContract:Payload",
+                  "core:mediaType": "application/xml",
+                  "raml-shapes:schema": {
                     "@id": "#91"
                   }
                 },
                 "schema-org:description": "successful operation",
                 "schema-org:name": "200",
-                "hydra:statusCode": "200"
+                "apiContract:statusCode": "200"
               },
               {
                 "@id": "#239",
                 "@type": "http:Response",
                 "schema-org:description": "User not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               },
               {
                 "@id": "#238",
                 "@type": "http:Response",
                 "schema-org:description": "Invalid username supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               }
             ]
           },
           {
             "@id": "#223",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#231",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2864,14 +2864,14 @@
             ],
             "schema-org:description": "This can only be done by the logged in user.",
             "schema-org:name": "updateUser",
-            "hydra:expects": {
+            "apiContract:expects": {
               "@id": "#224",
               "@type": "http:Request",
-              "http:payload": {
+              "apiContract:payload": {
                 "@id": "#225",
-                "@type": "http:Payload",
-                "http:mediaType": "application/json",
-                "http:schema": {
+                "@type": "apiContract:Payload",
+                "core:mediaType": "application/json",
+                "raml-shapes:schema": {
                   "@id": "#226",
                   "@type": [
                     "shacl:Shape",
@@ -2929,20 +2929,20 @@
                 "@type": "http:Response",
                 "schema-org:description": "User not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               },
               {
                 "@id": "#228",
                 "@type": "http:Response",
                 "schema-org:description": "Invalid user supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               }
             ]
           },
           {
             "@id": "#215",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#219",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -2980,14 +2980,14 @@
                 "@type": "http:Response",
                 "schema-org:description": "Invalid username supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               },
               {
                 "@id": "#217",
                 "@type": "http:Response",
                 "schema-org:description": "User not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               }
             ]
           }
@@ -2995,11 +2995,11 @@
       },
       {
         "@id": "#247",
-        "@type": "http:EndPoint",
-        "http:path": "/user/createWithArray",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/user/createWithArray",
+        "apiContract:supportedOperation": {
           "@id": "#248",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#253",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -3053,19 +3053,19 @@
                 "shacl:name": "schema"
               },
               "http://www.w3.org/2000/01/rdf-schema#domain": {
-                "@id": "hydra:Operation"
+                "@id": "apiContract:Operation"
               }
             }
           ],
           "schema-org:name": "createUsersWithArrayInput",
-          "hydra:expects": {
+          "apiContract:expects": {
             "@id": "#249",
             "@type": "http:Request",
-            "http:payload": {
+            "apiContract:payload": {
               "@id": "#250",
-              "@type": "http:Payload",
-              "http:mediaType": "application/json",
-              "http:schema": {
+              "@type": "apiContract:Payload",
+              "core:mediaType": "application/json",
+              "raml-shapes:schema": {
                 "@id": "#251",
                 "@type": [
                   "doc:DomainElement",
@@ -3311,11 +3311,11 @@
       },
       {
         "@id": "#187",
-        "@type": "http:EndPoint",
-        "http:path": "/store/inventory",
-        "hydra:supportedOperation": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:path": "/store/inventory",
+        "apiContract:supportedOperation": {
           "@id": "#188",
-          "@type": "hydra:Operation",
+          "@type": "apiContract:Operation",
           "amf://id#3": {
             "@id": "#195",
             "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -3354,9 +3354,9 @@
               "http:header": {
                 "@id": "#148",
                 "@type": "http:Parameter",
-                "http:binding": "header",
-                "http:paramName": "api_key",
-                "http:schema": {
+                "apiContract:binding": "header",
+                "apiContract:paramName": "api_key",
+                "raml-shapes:schema": {
                   "@id": "#149",
                   "@type": [
                     "doc:DomainElement",
@@ -3382,11 +3382,11 @@
           "hydra:returns": {
             "@id": "#189",
             "@type": "http:Response",
-            "http:payload": {
+            "apiContract:payload": {
               "@id": "#190",
-              "@type": "http:Payload",
-              "http:mediaType": "application/json",
-              "http:schema": {
+              "@type": "apiContract:Payload",
+              "core:mediaType": "application/json",
+              "raml-shapes:schema": {
                 "@id": "#191",
                 "@type": [
                   "doc:DomainElement",
@@ -3424,19 +3424,19 @@
             },
             "schema-org:description": "successful operation",
             "schema-org:name": "200",
-            "hydra:statusCode": "200"
+            "apiContract:statusCode": "200"
           }
         }
       },
       {
         "@id": "#166",
-        "@type": "http:EndPoint",
-        "http:parameter": {
+        "@type": "apiContract:EndPoint",
+        "apiContract:parameter": {
           "@id": "#185",
           "@type": "http:Parameter",
-          "http:binding": "path",
-          "http:paramName": "orderId",
-          "http:schema": {
+          "apiContract:binding": "path",
+          "apiContract:paramName": "orderId",
+          "raml-shapes:schema": {
             "@id": "#186",
             "@type": [
               "doc:DomainElement",
@@ -3456,11 +3456,11 @@
           "schema-org:name": "orderId",
           "hydra:required": true
         },
-        "http:path": "/store/order/{orderId}",
-        "hydra:supportedOperation": [
+        "apiContract:path": "/store/order/{orderId}",
+        "apiContract:supportedOperation": [
           {
             "@id": "#177",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#181",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -3498,20 +3498,20 @@
                 "@type": "http:Response",
                 "schema-org:description": "Order not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               },
               {
                 "@id": "#178",
                 "@type": "http:Response",
                 "schema-org:description": "Invalid ID supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               }
             ]
           },
           {
             "@id": "#167",
-            "@type": "hydra:Operation",
+            "@type": "apiContract:Operation",
             "amf://id#3": {
               "@id": "#173",
               "@type": "http://a.ml/vocabularies/data#Scalar",
@@ -3562,7 +3562,7 @@
                   }
                 },
                 "http://www.w3.org/2000/01/rdf-schema#domain": {
-                  "@id": "hydra:Operation"
+                  "@id": "apiContract:Operation"
                 }
               },
               {
@@ -3586,7 +3586,7 @@
                   "shacl:name": "schema"
                 },
                 "http://www.w3.org/2000/01/rdf-schema#domain": {
-                  "@id": "hydra:Operation"
+                  "@id": "apiContract:Operation"
                 }
               }
             ],
@@ -3599,23 +3599,23 @@
                 "@type": "http:Response",
                 "schema-org:description": "Order not found",
                 "schema-org:name": "404",
-                "hydra:statusCode": "404"
+                "apiContract:statusCode": "404"
               },
               {
                 "@id": "#170",
                 "@type": "http:Response",
                 "schema-org:description": "Invalid ID supplied",
                 "schema-org:name": "400",
-                "hydra:statusCode": "400"
+                "apiContract:statusCode": "400"
               },
               {
                 "@id": "#168",
                 "@type": "http:Response",
-                "http:payload": {
+                "apiContract:payload": {
                   "@id": "#169",
-                  "@type": "http:Payload",
-                  "http:mediaType": "application/xml",
-                  "http:schema": {
+                  "@type": "apiContract:Payload",
+                  "core:mediaType": "application/xml",
+                  "raml-shapes:schema": {
                     "@id": "#114",
                     "@type": [
                       "raml-shapes:Shape",
@@ -3800,22 +3800,22 @@
                 },
                 "schema-org:description": "successful operation",
                 "schema-org:name": "200",
-                "hydra:statusCode": "200"
+                "apiContract:statusCode": "200"
               }
             ]
           }
         ]
       }
     ],
-    "http:scheme": "HTTP",
-    "http:server": {
+    "apiContract:scheme": "HTTP",
+    "apiContract:server": {
       "@id": "#453",
-      "@type": "http:Server",
-      "http:url": "http://petstore.swagger.io/v2"
+      "@type": "apiContract:server",
+      "core:urlTemplate": "http://petstore.swagger.io/v2"
     },
     "schema-org:description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
     "schema-org:name": "Swagger Petstore",
-    "schema-org:version": "V1"
+    "core:version": "V1"
   },
   "@context": {
     "@base": "amf://id",
@@ -3825,6 +3825,8 @@
     "schema-org": "http://schema.org/",
     "http": "http://a.ml/vocabularies/http#",
     "raml-shapes": "http://a.ml/vocabularies/shapes#",
-    "smap": "http://a.ml/vocabularies/document-source-maps"
+    "smap": "http://a.ml/vocabularies/document-source-maps",
+    "apiContract": "http://a.ml/vocabularies/apiContract#",
+    "core": "http://a.ml/vocabularies/core#"
   }
 }
