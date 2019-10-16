@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-url-data-model",
   "description": "An element to generate view model for api-url-editor and api-url-params-editor elements from AMF model",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "license": "Apache-2.0",
   "main": "api-url-data-model.js",
   "keywords": [
@@ -28,8 +28,8 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@api-components/amf-helper-mixin": "^4.0.10",
-    "@api-components/api-view-model-transformer": "^4.0.0",
+    "@api-components/amf-helper-mixin": "^4.0.14",
+    "@api-components/api-view-model-transformer": "^4.0.1",
     "@api-components/raml-aware": "^3.0.0",
     "lit-element": "^2.2.1"
   },
@@ -42,12 +42,12 @@
     "@api-components/api-navigation": "^4.0.0",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "@open-wc/testing": "^2.3.4",
-    "@open-wc/testing-karma": "^3.1.38",
+    "@open-wc/testing": "^2.3.5",
+    "@open-wc/testing-karma": "^3.1.40",
     "@polymer/gen-typescript-declarations": "^1.6.2",
     "deepmerge": "^4.1.1",
-    "es-dev-server": "^1.18.3",
-    "husky": "^3.0.0",
+    "es-dev-server": "^1.18.4",
+    "husky": "^3.0.9",
     "karma": "^4.3.0",
     "lint-staged": "^9.4.2",
     "lit-element": "^2.2.1",

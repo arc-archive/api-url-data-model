@@ -6,6 +6,15 @@ import '../api-url-data-model.js';
 class ApiDemo extends ApiDemoPageBase {
   constructor() {
     super();
+    this.initObservableProperties([
+      'hasData',
+      'apiBasePrams',
+      'endpointUri',
+      'apiBaseUri',
+      'pathModel',
+      'queryModel',
+      'selectedShape',
+    ]);
     this._apiBasePramsHandler = this._apiBasePramsHandler.bind(this);
     this._endpointUriHandler = this._endpointUriHandler.bind(this);
     this._apiBaseUriHandler = this._apiBaseUriHandler.bind(this);
@@ -13,62 +22,6 @@ class ApiDemo extends ApiDemoPageBase {
     this._queryModelHandler = this._queryModelHandler.bind(this);
 
     this.endpointsOpened = true;
-  }
-
-  get hasData() {
-    return this._hasData;
-  }
-
-  set hasData(value) {
-    this._setObservableProperty('hasData', value);
-  }
-
-  get apiBasePrams() {
-    return this._apiBasePrams;
-  }
-
-  set apiBasePrams(value) {
-    this._setObservableProperty('apiBasePrams', value);
-  }
-
-  get endpointUri() {
-    return this._endpointUri;
-  }
-
-  set endpointUri(value) {
-    this._setObservableProperty('endpointUri', value);
-  }
-
-  get apiBaseUri() {
-    return this._apiBaseUri;
-  }
-
-  set apiBaseUri(value) {
-    this._setObservableProperty('apiBaseUri', value);
-  }
-
-  get pathModel() {
-    return this._pathModel;
-  }
-
-  set pathModel(value) {
-    this._setObservableProperty('pathModel', value);
-  }
-
-  get queryModel() {
-    return this._queryModel;
-  }
-
-  set queryModel(value) {
-    this._setObservableProperty('queryModel', value);
-  }
-
-  get selectedShape() {
-    return this._selectedShape;
-  }
-
-  set selectedShape(value) {
-    this._setObservableProperty('selectedShape', value);
   }
 
   _navChanged(e) {
@@ -86,14 +39,15 @@ class ApiDemo extends ApiDemoPageBase {
   }
 
   _apiListTemplate() {
-    return html`
-    <paper-item data-src="demo-api.json">ARC demo api</paper-item>
-    <paper-item data-src="demo-api-compact.json">ARC demo api - compact model</paper-item>
-    <paper-item data-src="loan-microservice.json">Loan microservice api</paper-item>
-    <paper-item data-src="loan-microservice-compact.json">Loan microservice api - compact model</paper-item>
-    <paper-item data-src="petstore.json">Petstore api</paper-item>
-    <paper-item data-src="petstore-compact.json">Petstore - compact model</paper-item>
-    `;
+    return [
+      ['APIC-298', 'OAS param names'],
+      ['demo-api', 'ARC demo api'],
+      ['loan-microservice', 'Loan microservice (OAS)'],
+      ['petstore', 'Petstore (OAS)'],
+    ].map(([file, label]) => html`
+    <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
+    <paper-item data-src="${file}.json">${label}</paper-item>
+    `);
   }
 
   _apiBasePramsHandler(e) {
