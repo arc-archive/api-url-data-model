@@ -20,13 +20,13 @@ import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixi
  * @memberof ApiElements
  */
 class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
-  static get styles() {
+  get styles() {
     return css`:host {display: none !important;}`;
   }
 
   render() {
     const { aware } = this;
-    return html`
+    return html`<style>${this.styles}</style>
     ${aware ?
       html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}`;
   }
