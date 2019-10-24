@@ -40,10 +40,11 @@ class ApiDemo extends ApiDemoPageBase {
 
   _apiListTemplate() {
     return [
-      ['APIC-298', 'OAS param names'],
       ['demo-api', 'ARC demo api'],
       ['loan-microservice', 'Loan microservice (OAS)'],
       ['petstore', 'Petstore (OAS)'],
+      ['APIC-298', 'OAS param names'],
+      ['APIC-289', 'OAS param names (2)'],
     ].map(([file, label]) => html`
     <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
     <paper-item data-src="${file}.json">${label}</paper-item>
