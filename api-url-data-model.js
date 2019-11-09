@@ -704,5 +704,11 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     const { value } = e.detail;
     this.amf = value;
   }
+  /**
+   * Clears the cache in the view model transformer.
+   */
+  clearCache() {
+    this._transformer.clearCache();
+  }
 }
 window.customElements.define('api-url-data-model', ApiUrlDataModel);
