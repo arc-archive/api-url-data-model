@@ -580,7 +580,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(45,14)-(48,15)]"
+"@value": "[(45,25)-(48,15)]"
 }
 ]
 },
@@ -616,7 +616,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(45,14)-(48,15)]"
+"@value": "[(45,25)-(48,15)]"
 }
 ]
 },
@@ -1282,7 +1282,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(87,14)-(90,15)]"
+"@value": "[(87,30)-(90,15)]"
 }
 ]
 },
@@ -1318,7 +1318,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(87,14)-(90,15)]"
+"@value": "[(87,30)-(90,15)]"
 }
 ]
 },
@@ -2207,7 +2207,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(130,14)-(133,15)]"
+"@value": "[(130,32)-(133,15)]"
 }
 ]
 },
@@ -2243,7 +2243,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(130,14)-(133,15)]"
+"@value": "[(130,32)-(133,15)]"
 }
 ]
 },
@@ -3137,7 +3137,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(173,14)-(176,15)]"
+"@value": "[(173,32)-(176,15)]"
 }
 ]
 },
@@ -3173,7 +3173,7 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(173,14)-(176,15)]"
+"@value": "[(173,32)-(176,15)]"
 }
 ]
 },

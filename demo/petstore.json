@@ -3309,7 +3309,7 @@
 }
 ],
 "amf://id#69": {
-"http://a.ml/vocabularies/core#name": [
+"http://a.ml/vocabularies/core#extensionName": [
 {
 "@value": "amf-hostTempLabel"
 }
@@ -3359,7 +3359,7 @@
 ]
 },
 "amf://id#72": {
-"http://a.ml/vocabularies/core#name": [
+"http://a.ml/vocabularies/core#extensionName": [
 {
 "@value": "amf-basePathTempLabel"
 }
