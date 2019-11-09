@@ -231,3 +231,18 @@
 
 
 
+## 4.0.3 (2019-11-09)
+
+
+### Bug Fixes
+
+* fixes APIC-298 - property name from OAS model ([a3bdbc0](https://github.com/advanced-rest-client/api-url-data-model/commit/a3bdbc002a03e0e2a99ad0955951e5cd00e00154))
+* fixing element initialization with set values ([9b13648](https://github.com/advanced-rest-client/api-url-data-model/commit/9b136487a9c67597a108dc6bd217ef22d4c3c45e))
+
+
+### Features
+
+* adding `clearCache()` method ([bc15f02](https://github.com/advanced-rest-client/api-url-data-model/commit/bc15f029d4720bb1f23e0d6902e878888e1afc9d))
+
+
+
