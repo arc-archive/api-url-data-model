@@ -1141,6 +1141,48 @@ describe('<api-url-data-model>', function() {
     });
   });
 
+  describe('clearCache()', () => {
+    let element;
+    let amf;
+    let endpointId;
+    let methodId;
+
+    before(async () => {
+      amf = await AmfLoader.load();
+    });
+
+    beforeEach(async () => {
+      element = await basicFixture();
+      element.amf = amf;
+      const webApi = element._computeWebApi(amf);
+      const endpoint = element._computeEndpointByPath(webApi, '/people');
+      endpointId = endpoint['@id'];
+      const method = element._computeOperations(webApi, endpointId)[0];
+      methodId = method['@id'];
+    });
+
+    it('respects cached values', () => {
+      element.selected = methodId;
+      const result = element.queryModel;
+      const value = 'test-value';
+      result[0].value = value;
+      element.selected = null;
+      element.selected = methodId;
+      assert.equal(element.queryModel[0].value, value);
+    });
+
+    it('clears the cache', () => {
+      element.selected = methodId;
+      const result = element.queryModel;
+      const value = 'test-value';
+      result[0].value = value;
+      element.clearCache();
+      element.selected = null;
+      element.selected = methodId;
+      assert.isUndefined(element.queryModel[0].value);
+    });
+  });
+
   describe('onapiparameters', () => {
     let element;
     beforeEach(async () => {

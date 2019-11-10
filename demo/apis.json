@@ -2,5 +2,6 @@
   "demo-api/demo-api.raml": "RAML 1.0",
   "loan-ms/loan-microservice.json": ["OAS 2.0", "application/json"],
   "petstore/petstore.json": ["OAS 2.0", "application/json"],
-  "APIC-298/APIC-298.json": ["OAS 2.0", "application/json"]
+  "APIC-298/APIC-298.json": ["OAS 2.0", "application/json"],
+  "APIC-289/APIC-289.yaml": ["OAS 2.0", "application/yaml"]
 }
