@@ -45,6 +45,7 @@ class ApiDemo extends ApiDemoPageBase {
       ['petstore', 'Petstore (OAS)'],
       ['APIC-298', 'OAS param names'],
       ['APIC-289', 'OAS param names (2)'],
+      ['SE-12752', 'Query string support'],
     ].map(([file, label]) => html`
     <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
     <paper-item data-src="${file}.json">${label}</paper-item>

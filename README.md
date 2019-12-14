@@ -179,6 +179,11 @@ class SampleElement extends PolymerElement {
 customElements.define('sample-element', SampleElement);
 ```
 
+## Known issues
+
+The element does not produce model for unions and arrays for RAML's `queryString`
+property. This may be supported in the future.
+
 ## Development
 
 ```sh
