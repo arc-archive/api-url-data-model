@@ -6,7 +6,7 @@ const createBaseConfig = require('./karma.conf.js');
 module.exports = (config) => {
   const slConfig = merge(slSettings(config), {
     sauceLabs: {
-      testName: 'api-resource-example-document',
+      testName: 'api-url-data-model',
     },
   });
   slConfig.browsers = [
@@ -17,6 +17,11 @@ module.exports = (config) => {
     'SL_Safari',
     'SL_EDGE'
   ];
+  slConfig.client = {
+    mocha: {
+      timeout: 5000
+    }
+  };
   config.set(merge(createBaseConfig(config), slConfig));
   return config;
 };
