@@ -1,13 +1,11 @@
 import { html } from 'lit-html';
-import { ApiDemoPageBase } from '@advanced-rest-client/arc-demo-helper/ApiDemoPage.js';
-import '@api-components/api-navigation/api-navigation.js';
+import { ApiDemoPage } from '@advanced-rest-client/arc-demo-helper';
 import '../api-url-data-model.js';
 
-class ApiDemo extends ApiDemoPageBase {
+class ApiDemo extends ApiDemoPage {
   constructor() {
     super();
     this.initObservableProperties([
-      'hasData',
       'apiBasePrams',
       'endpointUri',
       'apiBaseUri',
@@ -15,6 +13,7 @@ class ApiDemo extends ApiDemoPageBase {
       'queryModel',
       'selectedShape',
     ]);
+    this.componentName = 'api-url-data-model';
     this._apiBasePramsHandler = this._apiBasePramsHandler.bind(this);
     this._endpointUriHandler = this._endpointUriHandler.bind(this);
     this._apiBaseUriHandler = this._apiBaseUriHandler.bind(this);
@@ -47,8 +46,8 @@ class ApiDemo extends ApiDemoPageBase {
       ['APIC-289', 'OAS param names (2)'],
       ['SE-12752', 'Query string support'],
     ].map(([file, label]) => html`
-    <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
-    <paper-item data-src="${file}.json">${label}</paper-item>
+    <anypoint-item data-src="${file}-compact.json">${label} - compact model</anypoint-item>
+    <anypoint-item data-src="${file}.json">${label}</anypoint-item>
     `);
   }
 
@@ -81,10 +80,8 @@ class ApiDemo extends ApiDemoPageBase {
 
   contentTemplate() {
     return html`
-    <demo-element id="helper" .amf="${this.amf}"></demo-element>
-    <raml-aware .api="${this.amf}" scope="api-console"></raml-aware>
     <api-url-data-model
-      aware="api-console"
+      .amf="${this.amf}"
       @apiparameters-changed="${this._apiBasePramsHandler}"
       @endpointuri-changed="${this._endpointUriHandler}"
       @apibaseuri-changed="${this._apiBaseUriHandler}"
