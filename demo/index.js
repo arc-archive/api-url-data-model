@@ -1,5 +1,6 @@
 import { html } from 'lit-html';
 import { ApiDemoPage } from '@advanced-rest-client/arc-demo-helper';
+import '@api-components/api-server-selector/api-server-selector.js';
 import '../api-url-data-model.js';
 
 class ApiDemo extends ApiDemoPage {
@@ -12,6 +13,10 @@ class ApiDemo extends ApiDemoPage {
       'pathModel',
       'queryModel',
       'selectedShape',
+      'serverUri',
+      'serverType',
+      'allowCustomServers',
+      'server',
     ]);
     this.componentName = 'api-url-data-model';
     this._apiBasePramsHandler = this._apiBasePramsHandler.bind(this);
@@ -19,13 +24,19 @@ class ApiDemo extends ApiDemoPage {
     this._apiBaseUriHandler = this._apiBaseUriHandler.bind(this);
     this._pathModelHandler = this._pathModelHandler.bind(this);
     this._queryModelHandler = this._queryModelHandler.bind(this);
+    this._serverChangeHandler = this._serverChangeHandler.bind(this);
 
     this.endpointsOpened = true;
+    this.serverUri = undefined;
+    this.serverType = undefined;
+    this.allowCustomServers = false;
   }
 
   _navChanged(e) {
-    const { selected, type } = e.detail;
+    const { selected, type, endpointId } = e.detail;
     if (type === 'method') {
+      this.methodId = selected;
+      this.endpointId = endpointId;
       this.setData(selected);
     } else {
       this.hasData = false;
@@ -40,6 +51,7 @@ class ApiDemo extends ApiDemoPage {
   _apiListTemplate() {
     return [
       ['demo-api', 'ARC demo api'],
+      ['multi-server', 'Multiple servers'],
       ['loan-microservice', 'Loan microservice (OAS)'],
       ['petstore', 'Petstore (OAS)'],
       ['APIC-298', 'OAS param names'],
@@ -78,16 +90,47 @@ class ApiDemo extends ApiDemoPage {
     return JSON.stringify(apiPrams, null, 1);
   }
 
+  _serverChangeHandler(e) {
+    const { value, type } = e.detail;
+    this.serverType = type;
+    this.serverUri = value;
+    this.server = this._findServerByValue(value);
+  }
+
+  /**
+   * @param {String} value Server's base URI
+   * @return {Object|undefined} An element associated with the base URI or
+   * undefined if not found.
+   */
+  _findServerByValue(value) {
+    const { methodId, endpointId } = this;
+    const servers = this._getServers({ endpointId, methodId });
+    return servers.find((server) => this._getServerUri(server) === value);
+  }
+
+  /**
+   * @param {Object} server Server definition.
+   * @return {String|undefined} Value for server's base URI
+   */
+  _getServerUri(server) {
+    const key = this._getAmfKey(this.ns.aml.vocabularies.core.urlTemplate);
+    return this._getValue(server, key);
+  }
+
   contentTemplate() {
+    const { server } = this;
     return html`
+    ${this._serverSelectorTemplate()}
     <api-url-data-model
       .amf="${this.amf}"
+      .server="${server}"
+      .selected="${this.selectedShape}"
       @apiparameters-changed="${this._apiBasePramsHandler}"
       @endpointuri-changed="${this._endpointUriHandler}"
       @apibaseuri-changed="${this._apiBaseUriHandler}"
       @pathmodel-changed="${this._pathModelHandler}"
       @querymodel-changed="${this._queryModelHandler}"
-      .selected="${this.selectedShape}"></api-url-data-model>
+      ></api-url-data-model>
     ${this.hasData ?
       html`<section class="content">
         <div class="log card">
@@ -101,6 +144,21 @@ class ApiDemo extends ApiDemoPage {
       </section>` :
       html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
     `;
+  }
+
+  _serverSelectorTemplate() {
+    const { amf, serverUri, serverType, allowCustomServers } = this;
+    return html`
+    <api-server-selector
+      ?allowCustom="${allowCustomServers}"
+      .amf="${amf}"
+      .value="${serverUri}"
+      .type="${serverType}"
+      autoselect
+      @apiserverchanged="${this._serverChangeHandler}"
+    >
+      <slot name="custom-base-uri" slot="custom-base-uri"></slot>
+    </api-server-selector>`;
   }
 }
 const instance = new ApiDemo();

@@ -5,8 +5,10 @@ import '@api-components/raml-aware/raml-aware.js';
 import '../api-url-data-model.js';
 
 describe('<api-url-data-model>', function() {
-  async function basicFixture(amf) {
-    return (await fixture(html`<api-url-data-model .amf="${amf}"></api-url-data-model>`));
+  async function basicFixture(amf, server) {
+    return (await fixture(html`<api-url-data-model
+      .amf="${amf}"
+      .server="${server}"></api-url-data-model>`));
   }
   async function baseUriFixture() {
     return (await fixture(`<api-url-data-model apiuri="https://test.domain.com/api/"></api-url-data-model>`));
@@ -22,11 +24,19 @@ describe('<api-url-data-model>', function() {
     ));
   }
 
-  async function modelFixture(amf, selected, apiUri) {
+  /**
+   * @param {Object=} amf
+   * @param {String=} methodId
+   * @param {String=} apiUri
+   * @param {Object=} server
+   * @return {Promise}
+   */
+  async function modelFixture({amf, methodId, apiUri, server}) {
     return (await fixture(html`<api-url-data-model
       .amf="${amf}"
+      .server="${server}"
       .apiUri="${apiUri}"
-      .selected="${selected}"></api-url-data-model>`));
+      .selected="${methodId}"></api-url-data-model>`));
   }
 
   describe('#amf', () => {
@@ -88,16 +98,6 @@ describe('<api-url-data-model>', function() {
 
     beforeEach(async () => {
       element = await basicFixture(amf);
-    });
-
-    it('sets server from the amf model', () => {
-      assert.typeOf(element.server, 'object');
-    });
-
-    it('resets the server when passing undefined', () => {
-      element.autoServer = true;
-      element.server = undefined;
-      assert.typeOf(element.server, 'object');
     });
 
     it('sets _server value', () => {
@@ -575,19 +575,19 @@ describe('<api-url-data-model>', function() {
         let amf;
         let endpointId;
         let methodId;
+        let server;
 
         before(async () => {
           amf = await AmfLoader.load(compact);
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
-          const webApi = element._computeWebApi(amf);
-          const endpoint = element._computeEndpointByPath(webApi, '/test-parameters/{feature}');
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/test-parameters/{feature}');
           endpointId = endpoint['@id'];
-          const method = element._computeOperations(webApi, endpointId)[0];
+          const method = AmfLoader.lookupOperation(amf, '/test-parameters/{feature}', 'get');
           methodId = method['@id'];
+          server = AmfLoader.lookupServers(amf, endpointId, methodId)[0];
+          element = await basicFixture(amf, server);
         });
 
         it('Computes apiBaseUri', () => {
@@ -644,6 +644,7 @@ describe('<api-url-data-model>', function() {
           await nextFrame();
           element.selected = methodId;
           element.amf = amf;
+          element.server = server;
           assert.typeOf(element.queryModel, 'array');
           assert.lengthOf(element.queryModel, 3);
           element.queryModel.forEach((item) => {
@@ -659,6 +660,7 @@ describe('<api-url-data-model>', function() {
           await nextFrame();
           element.selected = methodId;
           element.amf = amf;
+          element.server = server;
           assert.typeOf(element.pathModel, 'array');
           assert.lengthOf(element.pathModel, 2);
           element.pathModel.forEach((item) => {
@@ -673,6 +675,7 @@ describe('<api-url-data-model>', function() {
           await nextFrame();
           element.selected = methodId;
           element.amf = amf;
+          element.server = server;
           assert.typeOf(element.apiParameters, 'array');
           assert.lengthOf(element.apiParameters, 1);
           element.apiParameters.forEach((item) => {
@@ -682,7 +685,7 @@ describe('<api-url-data-model>', function() {
         });
 
         it('renders element with attributes values', async () => {
-          const element = await modelFixture(amf, methodId);
+          const element = await modelFixture({amf, methodId, server});
           assert.typeOf(element.apiParameters, 'array');
           assert.lengthOf(element.apiParameters, 1);
         });
@@ -729,7 +732,7 @@ describe('<api-url-data-model>', function() {
         });
 
         it('renders element with attributes values', async () => {
-          const element = await modelFixture(amf, methodId, apiUri);
+          const element = await modelFixture({amf, methodId, apiUri});
           assert.equal(element.apiBaseUri, apiUri);
           assert.equal(element.endpointUri, 'https://other.domain.com/endpoint/test-parameters/{feature}');
         });
@@ -738,6 +741,7 @@ describe('<api-url-data-model>', function() {
       describe('Endpoint only computations', () => {
         let element;
         let amf;
+        let server
 
         before(async () => {
           amf = await AmfLoader.load(compact);
@@ -745,11 +749,10 @@ describe('<api-url-data-model>', function() {
 
         let endpointId;
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
-          const webApi = element._computeWebApi(amf);
-          const endpoint = element._computeEndpointByPath(webApi, '/test-parameters/{feature}');
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/test-parameters/{feature}');
           endpointId = endpoint['@id'];
+          server = AmfLoader.lookupServers(amf, endpointId)[0];
+          element = await basicFixture(amf, server);
         });
 
         it('Computes endpointUri for an endpoint', () => {
@@ -794,6 +797,7 @@ describe('<api-url-data-model>', function() {
       describe('Method computations', () => {
         let element;
         let amf;
+        let server;
 
         before(async () => {
           amf = await AmfLoader.load(compact);
@@ -802,13 +806,12 @@ describe('<api-url-data-model>', function() {
         let endpointId;
         let methodId;
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
-          const webApi = element._computeWebApi(amf);
-          const endpoint = element._computeEndpointByPath(webApi, '/test-parameters/{feature}');
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/test-parameters/{feature}');
           endpointId = endpoint['@id'];
-          const method = element._computeOperations(webApi, endpointId)[0];
+          const method = AmfLoader.lookupOperation(amf, '/test-parameters/{feature}', 'get');
           methodId = method['@id'];
+          server = AmfLoader.lookupServers(amf, endpointId, methodId)[0];
+          element = await basicFixture(amf, server);
         });
 
         it('Computes endpointUri for an endpoint', () => {
@@ -908,19 +911,19 @@ describe('<api-url-data-model>', function() {
         let amf;
         let endpointId;
         let methodId;
+        let server;
 
         before(async () => {
           amf = await AmfLoader.load(compact, file);
         });
 
         beforeEach(async () => {
-          element = await basicFixture();
-          element.amf = amf;
-          const webApi = element._computeWebApi(amf);
-          const endpoint = element._computeEndpointByPath(webApi, '/pets/{id}');
+          const endpoint = AmfLoader.lookupEndpoint(amf, '/pets/{id}');
           endpointId = endpoint['@id'];
-          const method = element._computeOperations(webApi, endpointId)[0];
+          const method = AmfLoader.lookupOperation(amf, '/pets/{id}', 'get');
           methodId = method['@id'];
+          server = AmfLoader.lookupServers(amf, endpointId, methodId)[0];
+          element = await basicFixture(amf, server);
         });
 
         it('Computes apiBaseUri', () => {
@@ -1154,6 +1157,43 @@ describe('<api-url-data-model>', function() {
       aware.api = amf;
       assert.typeOf(element.amf, 'array', 'element has amf set');
       assert.isTrue(element.amf === amf, 'amf value is the model');
+    });
+  });
+
+  describe('multi server', () => {
+    let amf;
+    let endpointId;
+    let methodId;
+    let servers;
+
+    before(async () => {
+      amf = await AmfLoader.load(true, 'multi-server');
+    });
+
+    beforeEach(async () => {
+      const endpoint = AmfLoader.lookupEndpoint(amf, '/default');
+      endpointId = endpoint['@id'];
+      const method = AmfLoader.lookupOperation(amf, '/default', 'get');
+      methodId = method['@id'];
+      servers = AmfLoader.lookupServers(amf, endpointId, methodId);
+    });
+
+    it('computes values for a server', async () => {
+      const element = await modelFixture({amf, methodId, server: servers[0]})
+      assert.equal(element.endpointUri, 'https://{customerId}.saas-app.com:{port}/v2/default');
+      assert.lengthOf(element.apiParameters, 2, 'has 2 api parameters')
+      assert.lengthOf(element.pathModel, 2, 'has 2 path parameters')
+      assert.lengthOf(element.queryModel, 0, 'has no query parameters')
+    });
+
+    it('changes a server', async () => {
+      const element = await modelFixture({amf, methodId, server: servers[0]})
+      element.server = servers[1];
+      await nextFrame();
+      assert.equal(element.endpointUri, 'https://{region}.api.cognitive.microsoft.com/default');
+      assert.lengthOf(element.apiParameters, 1, 'has 1 api parameter')
+      assert.lengthOf(element.pathModel, 1, 'has 1 path parameter')
+      assert.lengthOf(element.queryModel, 0, 'has no query parameters')
     });
   });
 

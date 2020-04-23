@@ -78,10 +78,6 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (value === old) {
       return;
     }
-    if (!value && this.autoServer && this.amf) {
-      // computes the default value
-      value = this._computeServer(this.amf);
-    }
     this._server = value;
     this._apiParameters = this._computeApiParameters(value, this.version);
     this._apiBaseUri = this._computeApiBaseUri(value, this.version, this.protocols, this.apiUri);
@@ -491,10 +487,8 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (!model || !this._hasType(model, this.ns.aml.vocabularies.document.Document)) {
       return;
     }
-    const server = this._computeServer(model);
     const version = this._computeApiVersion(model);
     const protocols = this._computeProtocols(model);
-    this.server = server;
     this.protocols = protocols;
     this.version = version;
   }

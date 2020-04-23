@@ -36,6 +36,11 @@ AmfLoader.load = async function(compact, fileName) {
   });
 };
 
+AmfLoader.lookupServers = function(model, endpointId, methodId) {
+  helper.amf = model;
+  return helper._getServers({ endpointId, methodId });
+};
+
 AmfLoader.lookupEndpoint = function(model, endpoint) {
   helper.amf = model;
   const webApi = helper._computeWebApi(model);
