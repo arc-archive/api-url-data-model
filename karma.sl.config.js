@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const merge = require('deepmerge');
-const slSettings = require('@advanced-rest-client/testing-karma-sl/sl-settings.js');
+const { slSettings } = require('@advanced-rest-client/testing-karma-sl');
 const createBaseConfig = require('./karma.conf.js');
 
 module.exports = (config) => {
@@ -8,20 +8,20 @@ module.exports = (config) => {
     sauceLabs: {
       testName: 'api-url-data-model',
     },
-  });
-  slConfig.browsers = [
-    'SL_Chrome',
-    'SL_Chrome-1',
-    'SL_Firefox',
-    'SL_Firefox-1',
-    'SL_Safari',
-    'SL_EDGE'
-  ];
-  slConfig.client = {
-    mocha: {
-      timeout: 5000
+    client: {
+      mocha: {
+        timeout: 15000
+      }
     }
-  };
+  });
+  // slConfig.browsers = [
+  //   'SL_Chrome',
+  //   'SL_Chrome-1',
+  //   'SL_Firefox',
+  //   'SL_Firefox-1',
+  //   'SL_Safari',
+  //   'SL_EDGE'
+  // ];
   config.set(merge(createBaseConfig(config), slConfig));
   return config;
 };
