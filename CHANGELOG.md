@@ -462,3 +462,35 @@
  [a38f3a3](https://github.com/advanced-rest-client/api-url-data-model/commit/a38f3a36916145bff84934a33524c06c66ee9d3a) by Pawel Psztyc
 
 
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/advanced-rest-client/api-url-data-model/compare/4.0.5...4.1.1) (2020-04-23)
+
+### Build
+
+* bumping version [7b9e3f2](https://github.com/advanced-rest-client/api-url-data-model/commit/7b9e3f27ab3c54dc669f6fac3b96d368ad9833bb) by Pawel
+* bumping version [c0e2f09](https://github.com/advanced-rest-client/api-url-data-model/commit/c0e2f0908fb2e32f7dbea7c55f97b8a52e04a9ac) by Pawel
+
+
+### Continuous integration
+
+* updating travis configuration [3e264c2](https://github.com/advanced-rest-client/api-url-data-model/commit/3e264c27150ccbbedf4bc28840fe9b14ccff9feb) by Pawel
+
+
+### Update
+
+* adding server reset when passing undefined [a0e499d](https://github.com/advanced-rest-client/api-url-data-model/commit/a0e499dcff56f333beb8324729d6023cfab0f2c1) by Pawel
+* updating demo page [7d0b57c](https://github.com/advanced-rest-client/api-url-data-model/commit/7d0b57ca1525cf6844089d8cfa743cf4f7d8cc40) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [454741d](https://github.com/advanced-rest-client/api-url-data-model/commit/454741db6b1fe937d6c74f8055a92270e9d2e2c6) by Ci agent
+* upgrading demo page [1b1738b](https://github.com/advanced-rest-client/api-url-data-model/commit/1b1738b0d20e618d360f63db4923b7da90a16b6c) by Pawel
+* moving sources to the src/ folder [000a426](https://github.com/advanced-rest-client/api-url-data-model/commit/000a4263c95a4d5e45be49bbbc2b76845911cd7f) by Pawel
+* updating types and fixing some linter errors [af5706b](https://github.com/advanced-rest-client/api-url-data-model/commit/af5706b36e037716127a47b4fda2d05545f203fa) by Pawel
+* adding types configuration [7ce2f29](https://github.com/advanced-rest-client/api-url-data-model/commit/7ce2f297ab78c17ea9e98242e1d240f6d2759161) by Pawel
+* updating package meta [dc98505](https://github.com/advanced-rest-client/api-url-data-model/commit/dc98505e36bdb01db67f562e422026a205a82ab9) by Pawel
+* upgrading dependencies [38fca29](https://github.com/advanced-rest-client/api-url-data-model/commit/38fca2903afcda51bd0316b79b9873e9430d0dc6) by Pawel
+
+
+### Testing
+
+* updating tests configuration for SL [53c39e5](https://github.com/advanced-rest-client/api-url-data-model/commit/53c39e5a8fc81df162353a6f046ae45b89fc8bd3) by Pawel
+
+
