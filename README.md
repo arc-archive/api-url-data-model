@@ -17,17 +17,14 @@ or HTTP method.
 
 The component computes all required values from AMF's WebApi model.
 
-```html
-<api-url-data-model></api-url-data-model>
-```
 
 ```javascript
 const elm = document.querySelector('api-url-data-model');
 const model = await downloadApiModel();
 elm.amf = model;
 elm.selected = '#123'; // Selected node ID, must be method's ID.
+elm.server = computeCurrentServer(model, selected);
 
-console.log(elm.server); // server definition
 console.log(elm.apiParameters); // API base path parameters
 console.log(elm.endpointUri); // API base path parameters
 console.log(elm.apiBaseUri); // Computed value of base URI for the API.
@@ -35,7 +32,7 @@ console.log(elm.pathModel); // Endpoint's URI variables (including base URI's va
 console.log(elm.queryModel); // Method's query parameters
 ```
 
-When using partial query model the `server`, `protocols`, and `version`
+When using partial query model the `protocols` and `version`
 model must be set manually as partial model won't have this information.
 
 After reseting the model to full AMF WebApi model the values are updated.
@@ -46,7 +43,7 @@ const summaryModel = await downloadPartialApiModelSummary();
 const endpointModel = await downloadPartialApiModelEndpoint();
 elm.amf = endpointModel;
 elm.selected = '#123'; // Selected node ID, must be method ID that is in endpoint definition.
-elm.server = elm._computeServer(summaryModel); // This is element's inherited method
+elm.server = elm.computeCurrentServer(summaryModel); // This is element's inherited method
 elm.version = conputeApiVersion(summaryModel); // Compute version from `server` model.
 elm.protocols = ['http', 'https']; // This is encoded in AMF model.
 
@@ -66,10 +63,18 @@ to include updated API base uri.
 element.apiUri = 'https://proxy.domain.com';
 ```
 
-## Version compatibility
+## AMF version compatibility
 
 This version only works with AMF model version 2 (AMF parser >= 4.0.0).
 For compatibility with previous model version use `3.x.x` version of the component.
+
+## Breaking changes
+
+### OAS 3 - server required
+
+Version 5 of the component supports OAS 3 which can define multiple servers on an operation, endpoint, or the root of the API.
+Because of that the element does not computes server for current selection. Instead it expect the server object to be passed as
+a property.
 
 ## Usage
 
