@@ -48,12 +48,6 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
        * data models for.
        */
       selected: { type: String },
-
-      /**
-       * When set, automaticallt resets the server when to default one when an
-       * undefined value is passed to it.
-       */
-      autoServer: { type: Boolean },
     };
   }
 
