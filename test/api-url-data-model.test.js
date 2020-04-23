@@ -95,6 +95,7 @@ describe('<api-url-data-model>', function() {
     });
 
     it('resets the server when passing undefined', () => {
+      element.autoServer = true;
       element.server = undefined;
       assert.typeOf(element.server, 'object');
     });

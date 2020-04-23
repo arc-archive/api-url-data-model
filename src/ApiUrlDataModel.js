@@ -47,7 +47,13 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
        * The `@id` property of selected endpoint and method to compute
        * data models for.
        */
-      selected: { type: String }
+      selected: { type: String },
+
+      /**
+       * When set, automaticallt resets the server when to default one when an
+       * undefined value is passed to it.
+       */
+      autoServer: { type: Boolean },
     };
   }
 
@@ -72,7 +78,7 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (value === old) {
       return;
     }
-    if (!value && this.amf) {
+    if (!value && this.autoServer && this.amf) {
       // computes the default value
       value = this._computeServer(this.amf);
     }
