@@ -5,10 +5,10 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   api-url-data-model.js
+ *   index.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 
-import {ApiUrlDataModel} from './src/ApiUrlDataModel.js';
+export {ApiUrlDataModel} from './src/ApiUrlDataModel.js';
