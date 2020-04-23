@@ -16,8 +16,8 @@ import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixi
  *
  * @customElement
  * @demo demo/index.html
- * @appliesMixin AmfHelperMixin
- * @memberof ApiElements
+ * @mixes AmfHelperMixin
+ * @extends LitElement
  */
 class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
   get styles() {
@@ -345,84 +345,84 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     }));
   }
   /**
-   * @return {Function} Previously registered handler for `apiparameters-changed` event
+   * @return {EventListener} Previously registered handler for `apiparameters-changed` event
    */
   get onapiparameters() {
     return this['_onapiparameters-changed'];
   }
   /**
    * Registers a callback function for `apiparameters-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onapiparameters(value) {
     this._registerCallback('apiparameters-changed', value);
   }
   /**
-   * @return {Function} Previously registered handler for `apibaseuri-changed` event
+   * @return {EventListener} Previously registered handler for `apibaseuri-changed` event
    */
   get onapibaseuri() {
     return this['_onapibaseuri-changed'];
   }
   /**
    * Registers a callback function for `apibaseuri-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onapibaseuri(value) {
     this._registerCallback('apibaseuri-changed', value);
   }
   /**
-   * @return {Function} Previously registered handler for `querymodel-changed` event
+   * @return {EventListener} Previously registered handler for `querymodel-changed` event
    */
   get onquerymodel() {
     return this['_onquerymodel-changed'];
   }
   /**
    * Registers a callback function for `querymodel-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onquerymodel(value) {
     this._registerCallback('querymodel-changed', value);
   }
   /**
-   * @return {Function} Previously registered handler for `pathmodel-changed` event
+   * @return {EventListener} Previously registered handler for `pathmodel-changed` event
    */
   get onpathmodel() {
     return this['_onpathmodel-changed'];
   }
   /**
    * Registers a callback function for `pathmodel-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onpathmodel(value) {
     this._registerCallback('pathmodel-changed', value);
   }
   /**
-   * @return {Function} Previously registered handler for `endpointuri-changed` event
+   * @return {EventListener} Previously registered handler for `endpointuri-changed` event
    */
   get onendpointuri() {
     return this['_onendpointuri-changed'];
   }
   /**
    * Registers a callback function for `endpointuri-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onendpointuri(value) {
     this._registerCallback('endpointuri-changed', value);
   }
   /**
-   * @return {Function} Previously registered handler for `endpointpath-changed` event
+   * @return {EventListener} Previously registered handler for `endpointpath-changed` event
    */
   get onendpointpath() {
     return this['_onendpointpath-changed'];
   }
   /**
    * Registers a callback function for `endpointpath-changed` event
-   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * @param {EventListener} value A callback to register. Pass `null` or `undefined`
    * to clear the listener.
    */
   set onendpointpath(value) {
@@ -449,7 +449,7 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
   /**
    * Registers an event handler for given type
    * @param {String} eventType Event type (name)
-   * @param {Function} value The handler to register
+   * @param {EventListener} value The handler to register
    */
   _registerCallback(eventType, value) {
     const key = `_on${eventType}`;
@@ -658,9 +658,6 @@ class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
    * This tries endpoint first and then method.
    *
    * The operation result is set on `_endpoint` property.
-   *
-   * @param {Object} api WebApi or EndPoint AMF shape.
-   * @param {String} id Endpoint/method selection
    */
   _computeModelEndpointModel() {
     const { selected } = this;
