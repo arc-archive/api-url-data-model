@@ -494,3 +494,32 @@
 * updating tests configuration for SL [53c39e5](https://github.com/advanced-rest-client/api-url-data-model/commit/53c39e5a8fc81df162353a6f046ae45b89fc8bd3) by Pawel
 
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/advanced-rest-client/api-url-data-model/compare/4.1.0...5.0.0) (2020-04-23)
+
+## Build
+
+* bumping major version [8b620dc](https://github.com/advanced-rest-client/api-url-data-model/commit/8b620dc50ef2dc065b3895072986b27b9c1cb744) by Pawel
+* bumping version [7b9e3f2](https://github.com/advanced-rest-client/api-url-data-model/commit/7b9e3f27ab3c54dc669f6fac3b96d368ad9833bb) by Pawel
+
+
+## Update
+
+* removing auto server proeprty [08434e2](https://github.com/advanced-rest-client/api-url-data-model/commit/08434e2a3e944ae202cfdb2fc3aa47eaf4b2c54b) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [e8d1a0f](https://github.com/advanced-rest-client/api-url-data-model/commit/e8d1a0fb47383952888fb86f5901e7ca13eda64f) by Ci agent
+* adding server reset when passing undefined [a0e499d](https://github.com/advanced-rest-client/api-url-data-model/commit/a0e499dcff56f333beb8324729d6023cfab0f2c1) by Pawel
+* updating demo page [7d0b57c](https://github.com/advanced-rest-client/api-url-data-model/commit/7d0b57ca1525cf6844089d8cfa743cf4f7d8cc40) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [454741d](https://github.com/advanced-rest-client/api-url-data-model/commit/454741db6b1fe937d6c74f8055a92270e9d2e2c6) by Ci agent
+
+
+## Documentation
+
+* updating readme file [8eb3e61](https://github.com/advanced-rest-client/api-url-data-model/commit/8eb3e617023b497204b982f9bea4429ffae54d3c) by Pawel
+
+
+## Features
+
+* adding support for OAS3 multi servers [1b3dd2c](https://github.com/advanced-rest-client/api-url-data-model/commit/1b3dd2c7a118d9eda24bd3882292bcfb533ddece) by Pawel
+* adding `autoServer` property [08d0d02](https://github.com/advanced-rest-client/api-url-data-model/commit/08d0d02c4c6dfe84ca2151d47f8d11ade606a08a) by Pawel
+
+
