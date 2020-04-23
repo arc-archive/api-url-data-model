@@ -1,12 +1,12 @@
 import { fixture, assert, nextFrame, html } from '@open-wc/testing';
-import * as sinon from 'sinon/pkg/sinon-esm.js';
+import * as sinon from 'sinon';
 import { AmfLoader } from './amf-loader.js';
 import '@api-components/raml-aware/raml-aware.js';
 import '../api-url-data-model.js';
 
 describe('<api-url-data-model>', function() {
-  async function basicFixture() {
-    return (await fixture(`<api-url-data-model></api-url-data-model>`));
+  async function basicFixture(amf) {
+    return (await fixture(html`<api-url-data-model .amf="${amf}"></api-url-data-model>`));
   }
   async function baseUriFixture() {
     return (await fixture(`<api-url-data-model apiuri="https://test.domain.com/api/"></api-url-data-model>`));
@@ -29,7 +29,7 @@ describe('<api-url-data-model>', function() {
       .selected="${selected}"></api-url-data-model>`));
   }
 
-  describe('amf setter / getter', () => {
+  describe('#amf', () => {
     let element;
     beforeEach(async () => {
       element = await basicFixture();
@@ -78,10 +78,25 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('server setter / getter', () => {
+  describe('#server', () => {
     let element;
+    let amf;
+
+    before(async () => {
+      amf = await AmfLoader.load(true);
+    });
+
     beforeEach(async () => {
-      element = await basicFixture();
+      element = await basicFixture(amf);
+    });
+
+    it('sets server from the amf model', () => {
+      assert.typeOf(element.server, 'object');
+    });
+
+    it('resets the server when passing undefined', () => {
+      element.server = undefined;
+      assert.typeOf(element.server, 'object');
     });
 
     it('sets _server value', () => {
@@ -140,7 +155,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('protocols setter / getter', () => {
+  describe('#protocols', () => {
     const value = ['https', 'custom'];
     let element;
     beforeEach(async () => {
@@ -177,7 +192,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('version setter / getter', () => {
+  describe('#version', () => {
     const value = 'v1.0.0-test';
     let element;
     beforeEach(async () => {
@@ -240,7 +255,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('selected setter / getter', () => {
+  describe('#selected', () => {
     const value = 'x-test';
     let element;
     beforeEach(async () => {
@@ -279,7 +294,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('apiUri setter / getter', () => {
+  describe('#apiUri', () => {
     const value = 'https://x-domain';
     let element;
     beforeEach(async () => {
@@ -332,7 +347,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('_apiParameters setter / getter', () => {
+  describe('#_apiParameters', () => {
     const value = [];
     let element;
     beforeEach(async () => {
@@ -377,7 +392,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('_apiBaseUri setter / getter', () => {
+  describe('#_apiBaseUri', () => {
     const value = 'https://base.domain.com';
     let element;
     beforeEach(async () => {
@@ -411,7 +426,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('_queryModel setter / getter', () => {
+  describe('#_queryModel', () => {
     const value = [{}];
     let element;
     beforeEach(async () => {
@@ -445,7 +460,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('_pathModel setter / getter', () => {
+  describe('#_pathModel', () => {
     const value = [{}];
     let element;
     beforeEach(async () => {
@@ -479,7 +494,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('_endpointUri setter / getter', () => {
+  describe('#_endpointUri', () => {
     const value = 'endpoint-url';
     let element;
     beforeEach(async () => {
@@ -513,7 +528,7 @@ describe('<api-url-data-model>', function() {
     });
   });
 
-  describe('_endpointPath setter / getter', () => {
+  describe('#_endpointPath', () => {
     const value = 'endpoint-path';
     let element;
     beforeEach(async () => {
@@ -550,8 +565,8 @@ describe('<api-url-data-model>', function() {
   [
     ['Full data model', false],
     ['Compact data model', true]
-  ].forEach((setupItem) => {
-    describe(setupItem[0], () => {
+  ].forEach(([label, compact]) => {
+    describe(`${label}`, () => {
       const API_HOST = 'http://api.{instance}.domain.com:8254/v1';
 
       describe('Base computations', () => {
@@ -561,7 +576,7 @@ describe('<api-url-data-model>', function() {
         let methodId;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(compact);
         });
 
         beforeEach(async () => {
@@ -680,7 +695,7 @@ describe('<api-url-data-model>', function() {
         const apiUri = 'https://other.domain.com/endpoint';
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(compact);
         });
 
         beforeEach(async () => {
@@ -724,7 +739,7 @@ describe('<api-url-data-model>', function() {
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(compact);
         });
 
         let endpointId;
@@ -780,7 +795,7 @@ describe('<api-url-data-model>', function() {
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(compact);
         });
 
         let endpointId;
@@ -840,7 +855,7 @@ describe('<api-url-data-model>', function() {
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1]);
+          amf = await AmfLoader.load(compact);
         });
 
         beforeEach(async () => {
@@ -885,8 +900,8 @@ describe('<api-url-data-model>', function() {
   [
     ['full data model', false, 'petstore'],
     ['compact data model', true, 'petstore']
-  ].forEach((setupItem) => {
-    describe('OAS ' + setupItem[0], () => {
+  ].forEach(([label, compact, file]) => {
+    describe('OAS ' + label, () => {
       describe('Base computations', () => {
         let element;
         let amf;
@@ -894,7 +909,7 @@ describe('<api-url-data-model>', function() {
         let methodId;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], setupItem[2]);
+          amf = await AmfLoader.load(compact, file);
         });
 
         beforeEach(async () => {
@@ -1003,7 +1018,7 @@ describe('<api-url-data-model>', function() {
         let amf;
 
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], setupItem[2]);
+          amf = await AmfLoader.load(compact, file);
         });
 
         let webApi;
@@ -1044,7 +1059,7 @@ describe('<api-url-data-model>', function() {
         let element;
         let amf;
         before(async () => {
-          amf = await AmfLoader.load(setupItem[1], setupItem[2]);
+          amf = await AmfLoader.load(compact, file);
         });
 
         let webApi;

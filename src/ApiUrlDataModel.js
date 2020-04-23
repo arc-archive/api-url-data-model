@@ -72,6 +72,10 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (value === old) {
       return;
     }
+    if (!value && this.amf) {
+      // computes the default value
+      value = this._computeServer(this.amf);
+    }
     this._server = value;
     this._apiParameters = this._computeApiParameters(value, this.version);
     this._apiBaseUri = this._computeApiBaseUri(value, this.version, this.protocols, this.apiUri);
