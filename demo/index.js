@@ -83,13 +83,6 @@ class ApiDemo extends ApiDemoPage {
     this.queryModel = e.target.queryModel;
   }
 
-  _computeApiParams(apiPrams) {
-    if (!apiPrams) {
-      return 'none';
-    }
-    return JSON.stringify(apiPrams, null, 1);
-  }
-
   _serverChangeHandler(e) {
     const { value, type } = e.detail;
     this.serverType = type;
@@ -114,7 +107,7 @@ class ApiDemo extends ApiDemoPage {
    */
   _getServerUri(server) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.core.urlTemplate);
-    return this._getValue(server, key);
+    return /** @type string */ (this._getValue(server, key));
   }
 
   contentTemplate() {
@@ -133,13 +126,22 @@ class ApiDemo extends ApiDemoPage {
       ></api-url-data-model>
     ${this.hasData ?
       html`<section class="content">
-        <div class="log card">
+        <div class="log">
           <h3>Output</h3>
-          <output><label>Base URI: </label>${this.apiBaseUri}</output>
+          <output><label>Current API base URI: </label>${this.apiBaseUri}</output>
           <output><label>Endpoint URI: </label>${this.endpointUri}</output>
-          <output><label>API base parameters:<br></label>${this._computeApiParams(this.apiParameters)}</output>
-          <output><label>Selected path view model:<br></label>${this._computeApiParams(this.pathModel)}</output>
-          <output><label>Selected path query model:<br></label>${this._computeApiParams(this.queryModel)}</output>
+          <output>
+            <label>API base parameters</label>
+            ${this._paramsList(this.apiParameters)}
+          </output>
+          <output>
+            <label>Selected path view model</label>
+            ${this._paramsList(this.pathModel)}
+          </output>
+          <output>
+            <label>Selected path query model</label>
+            ${this._paramsList(this.queryModel)}
+          </output>
         </div>
       </section>` :
       html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
@@ -159,6 +161,22 @@ class ApiDemo extends ApiDemoPage {
     >
       <slot name="custom-base-uri" slot="custom-base-uri"></slot>
     </api-server-selector>`;
+  }
+
+  _paramsList(model) {
+    if (!model || !model.length) {
+      return html`<i>Nothing to render here, yet.</i>`;
+    }
+    return model.map((item) => this._paramItem(item));
+  }
+
+  _paramItem(model) {
+    const { name } = model;
+    return html`
+    <details>
+      <summary>${name}</summary>
+      <div class="formatted">${JSON.stringify(model, null, 1)}</div>
+    </details>`;
   }
 }
 const instance = new ApiDemo();

@@ -1,7 +1,10 @@
-import { LitElement, html, css } from 'lit-element';
-import '@api-components/raml-aware/raml-aware.js';
-import '@api-components/api-view-model-transformer/api-view-model-transformer.js';
+import { LitElement } from 'lit-element';
+import { ApiViewModel } from '@api-components/api-view-model-transformer';
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+
+/** @typedef {import('@api-components/api-view-model-transformer/src/ApiViewModel').ModelItem} ModelItem */
+
+
 /**
  * `api-url-data-model`
  * An element to generate view model for api-url-editor and api-url-params-editor
@@ -14,31 +17,13 @@ import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixi
  *
  * After reseting the model to full AMF WebApi model the values are updated.
  *
- * @customElement
  * @demo demo/index.html
  * @mixes AmfHelperMixin
  * @extends LitElement
  */
 export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
-  get styles() {
-    return css`:host {display: none !important;}`;
-  }
-
-  render() {
-    const { aware } = this;
-    return html`<style>${this.styles}</style>
-    ${aware ?
-      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}`;
-  }
-
   static get properties() {
     return {
-      /**
-       * Name of the scope to use with `raml-aware`.
-       * If this element is used with other aware elements, it updates
-       * `webApi` when aware value change.
-       */
-      aware: { type: String },
       /**
        * A value to override API's base URI.
        */
@@ -51,13 +36,6 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     };
   }
 
-  get _transformer() {
-    if (!this.__transformer) {
-      this.__transformer = document.createElement('api-view-model-transformer');
-    }
-    this.__transformer.amf = this.amf;
-    return this.__transformer;
-  }
   /**
    * Computed value of server definition from the AMF model.
    *
@@ -438,14 +416,6 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     }
   }
 
-  disconnectedCallback() {
-    if (super.disconnectedCallback) {
-      super.disconnectedCallback();
-    }
-    if (this.__transformer) {
-      this.__transformer = null;
-    }
-  }
   /**
    * Registers an event handler for given type
    * @param {String} eventType Event type (name)
@@ -516,7 +486,7 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
    * @param {Object} server The `http://raml.org/vocabularies/http#server`
    * object
    * @param {?String} version API version number
-   * @return {Array<Object>} A view model.
+   * @return {Array<ModelItem>} A view model.
    */
   _computeApiParameters(server, version) {
     if (!server) {
@@ -535,7 +505,8 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
         }
       }
     }
-    let model = this._transformer.computeViewModel(variables);
+    const gen = new ApiViewModel({ amf: this.amf });
+    let model = gen.computeViewModel(variables);
     if (model && model.length) {
       model = Array.from(model);
     } else {
@@ -562,7 +533,8 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
         return apiParameters;
       }
     }
-    let model = this._transformer.computeViewModel(params);
+    const gen = new ApiViewModel({ amf: this.amf });
+    let model = gen.computeViewModel(params);
     if (!model) {
       model = [];
     }
@@ -606,7 +578,8 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
     if (!params) {
       return [];
     }
-    let data = this._transformer.computeViewModel(params);
+    const gen = new ApiViewModel({ amf: this.amf });
+    let data = gen.computeViewModel(params);
     if (data && data.length) {
       data = Array.from(data);
     } else {
@@ -730,6 +703,8 @@ export class ApiUrlDataModel extends AmfHelperMixin(LitElement) {
    * Clears the cache in the view model transformer.
    */
   clearCache() {
-    this._transformer.clearCache();
+    // @todo(Pawel): This should be a static property
+    const gen = new ApiViewModel({ amf: this.amf });
+    gen.clearCache();
   }
 }

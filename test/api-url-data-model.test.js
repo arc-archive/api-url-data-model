@@ -16,13 +16,6 @@ describe('<api-url-data-model>', function() {
   async function otherFixture() {
     return (await fixture(`<api-url-data-model></api-url-data-model>`));
   }
-  async function awareFixture() {
-    return (await fixture(`<div>
-      <api-url-data-model aware="test-api"></api-url-data-model>
-      <raml-aware scope="test-api"></raml-aware>
-      </div>`
-    ));
-  }
 
   /**
    * @param {Object=} amf
@@ -1135,28 +1128,6 @@ describe('<api-url-data-model>', function() {
       const summary = await AmfLoader.load(false, 'partial-model/summary');
       element.server = element._computeServer(summary);
       assert.equal(element.endpointUri, 'http://petstore.swagger.io/v2/api/user');
-    });
-  });
-
-  describe('raml-aware', () => {
-    let element;
-    let aware;
-    beforeEach(async () => {
-      const region = await awareFixture();
-      element = region.querySelector('api-url-data-model');
-      aware = region.querySelector('raml-aware');
-    });
-
-    it('renders raml-aware', () => {
-      const node = element.shadowRoot.querySelector('raml-aware');
-      assert.ok(node);
-    });
-
-    it('sets model from aware', async () => {
-      const amf = await AmfLoader.load();
-      aware.api = amf;
-      assert.typeOf(element.amf, 'array', 'element has amf set');
-      assert.isTrue(element.amf === amf, 'amf value is the model');
     });
   });
 

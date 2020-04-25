@@ -27,9 +27,8 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@api-components/amf-helper-mixin": "^4.0.26",
-    "@api-components/api-view-model-transformer": "^4.0.3",
-    "@api-components/raml-aware": "^3.0.0",
+    "@api-components/amf-helper-mixin": "^4.1.1",
+    "@api-components/api-view-model-transformer": "^4.1.0",
     "lit-element": "^2.3.1"
   },
   "devDependencies": {
