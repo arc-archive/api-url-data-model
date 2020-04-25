@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-url-data-model",
   "description": "An element to generate view model for api-url-editor and api-url-params-editor elements from AMF model",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "license": "Apache-2.0",
   "main": "api-url-data-model.js",
   "module": "index.js",
