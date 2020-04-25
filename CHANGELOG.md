@@ -523,3 +523,31 @@
 * adding `autoServer` property [08d0d02](https://github.com/advanced-rest-client/api-url-data-model/commit/08d0d02c4c6dfe84ca2151d47f8d11ade606a08a) by Pawel
 
 
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/advanced-rest-client/api-url-data-model/compare/4.1.1...5.0.1) (2020-04-25)
+
+### Build
+
+* bumping version [8da2900](https://github.com/advanced-rest-client/api-url-data-model/commit/8da2900ca85e3ab66b1ba00b912684ea250315d8) by Pawel
+* bumping major version [8b620dc](https://github.com/advanced-rest-client/api-url-data-model/commit/8b620dc50ef2dc065b3895072986b27b9c1cb744) by Pawel
+
+
+### Update
+
+* upgrading view generator [d43e389](https://github.com/advanced-rest-client/api-url-data-model/commit/d43e3892c5882c9dfcb486c91c15b273e2dc4913) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [518fc4b](https://github.com/advanced-rest-client/api-url-data-model/commit/518fc4bc270b61e29ea95702878045ed1e44193e) by Ci agent
+* removing auto server proeprty [08434e2](https://github.com/advanced-rest-client/api-url-data-model/commit/08434e2a3e944ae202cfdb2fc3aa47eaf4b2c54b) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [e8d1a0f](https://github.com/advanced-rest-client/api-url-data-model/commit/e8d1a0fb47383952888fb86f5901e7ca13eda64f) by Ci agent
+
+
+### Documentation
+
+* updating readme file [8eb3e61](https://github.com/advanced-rest-client/api-url-data-model/commit/8eb3e617023b497204b982f9bea4429ffae54d3c) by Pawel
+
+
+### Features
+
+* adding support for OAS3 multi servers [1b3dd2c](https://github.com/advanced-rest-client/api-url-data-model/commit/1b3dd2c7a118d9eda24bd3882292bcfb533ddece) by Pawel
+* adding `autoServer` property [08d0d02](https://github.com/advanced-rest-client/api-url-data-model/commit/08d0d02c4c6dfe84ca2151d47f8d11ade606a08a) by Pawel
+
+
