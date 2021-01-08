@@ -4,6 +4,11 @@
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/api-url-data-model)
 
+## Deprecation notice
+
+This element is moved to `api-url` repository and `@api-components/api-url` package. This element will be deprecated and archived once the migration finish.
+
+
 ## &lt;api-url-data-model&gt;
 
 An element to generate view model for `api-url-editor` and `api-url-params-editor`
